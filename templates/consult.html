@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+
+/* HERO SECTION */
+.consult-hero {
+    position: relative;
+}
+
+.consult-hero img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 80px;
+    right: 80px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 400px;
+}
+
+.hero-overlay h2 {
+    font-weight: 700;
+}
+
+.consult-btn {
+    background: #1f4df0;
+    color: white;
+    padding: 14px 35px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 15px;
+}
+
+.consult-btn:hover {
+    background: #163bc4;
+    color: white;
+}
+
+/* BLUE STRIP */
+.blue-strip {
+    background: #1746d0;
+    color: white;
+    padding: 20px 0;
+    font-weight: 600;
+}
+
+.blue-strip .col {
+    text-align: center;
+}
+
+/* ICON SECTION */
+.icon-section {
+    padding: 50px 0;
+    text-align: center;
+}
+
+.icon-circle {
+    width: 110px;
+    height: 110px;
+    background: #c7e3f3;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    font-size: 40px;
+}
+
+/* GREEN CTA */
+.green-section {
+    background: #8be28b;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.green-section h3 {
+    font-weight: 600;
+}
+
+/* DOCTOR CARDS */
+.doctor-section {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.doctor-card {
+    background: white;
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.doctor-card:hover {
+    transform: translateY(-8px);
+}
+
+.doctor-img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 3px solid #1f4df0;
+}
+
+@media(max-width:768px){
+    .hero-overlay{
+        position: static;
+        margin: 20px;
+    }
+}
+
+</style>
+
+<!-- HERO SECTION -->
+<div class="consult-hero">
+    <img src="{% static 'images/vet-hero.jpg' %}" alt="Vet">
+
+    <div class="hero-overlay">
+        <h2>Instant and complete vet care</h2>
+        <p>Wherever you are</p>
+        <p>At only ₹299, get end-to-end support from our vets</p>
+
+        <a href="#" class="consult-btn">Consult Now</a>
+    </div>
+</div>
+
+<!-- BLUE STRIP -->
+<div class="blue-strip">
+    <div class="container">
+        <div class="row">
+            <div class="col">✔ Verified Doctors</div>
+            <div class="col">✔ Free follow-up</div>
+            <div class="col">✔ Medicine delivery</div>
+        </div>
+    </div>
+</div>
+
+<!-- ICON SECTION -->
+<div class="icon-section container">
+    <div class="row g-4">
+
+        <div class="col-md-2 col-4">
+            <div class="icon-circle">💊</div>
+        </div>
+
+        <div class="col-md-2 col-4">
+            <div class="icon-circle">🐶</div>
+        </div>
+
+        <div class="col-md-2 col-4">
+            <div class="icon-circle">🐾</div>
+        </div>
+
+        <div class="col-md-2 col-4">
+            <div class="icon-circle">👂</div>
+        </div>
+
+        <div class="col-md-2 col-4">
+            <div class="icon-circle">👁</div>
+        </div>
+
+        <div class="col-md-2 col-4">
+            <div class="icon-circle">⏱</div>
+        </div>
+
+    </div>
+</div>
+
+<!-- GREEN CTA SECTION -->
+<div class="green-section">
+    <div class="container">
+        <h3>Get Stress-Free Pet Care from the comfort of your home</h3>
+        <a href="#" class="consult-btn mt-3">Consult Now</a>
+    </div>
+</div>
+
+<!-- DOCTOR SECTION -->
+<div class="doctor-section container">
+
+    <h2 class="mb-5">Access our expert vets from anywhere</h2>
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <div class="doctor-card">
+                <img src="{% static 'images/doc1.jpg' %}" class="doctor-img">
+                <h5>Dr. Ashitha Suresh</h5>
+                <p>Gynaecology & Obstetrics | 8+ Years</p>
+                <p>Veterinarian, MVSc PhD</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="doctor-card">
+                <img src="{% static 'images/doc2.jpg' %}" class="doctor-img">
+                <h5>Dr. Rashmi S</h5>
+                <p>Gynaecology & Obstetrics | 6+ Years</p>
+                <p>MVSc PhD</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="doctor-card">
+                <img src="{% static 'images/doc3.jpg' %}" class="doctor-img">
+                <h5>Dr. Anu GS</h5>
+                <p>General Medicine | 3+ Years</p>
+                <p>Associate Veterinarian, MVSc</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

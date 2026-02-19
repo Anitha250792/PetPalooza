@@ -1,0 +1,793 @@
+/* Home Page */
+.hero-full-img {
+    width: 100%;
+    height: auto;   /* remove fixed height */
+    display: block;
+}
+
+/* Full width fix */
+.carousel,
+.carousel-inner,
+.carousel-item {
+    width: 100%;
+    
+}
+
+/* Remove white gaps */
+body {
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-img {
+        height: 260px;
+    }
+}
+
+/* ================= SHOP BY PET ================= */
+
+.shop-by-pet-section {
+    padding: 80px 0;
+    background: #f3f3f3;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 50px;
+}
+
+/* Slider Wrapper */
+.pet-slider-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Horizontal scroll container */
+.pet-slider {
+    display: flex;
+    gap: 40px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 20px 0;
+}
+
+/* Hide scrollbar */
+.pet-slider::-webkit-scrollbar {
+    display: none;
+}
+
+/* Card */
+.pet-card {
+    min-width: 220px;
+    text-align: center;
+    cursor: pointer;
+}
+
+/* Rounded Green Box */
+.pet-img-box {
+    background: #8BE28B;
+    border-radius: 80px;
+    height: 230px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s ease;
+}
+
+.pet-img-box img {
+    width: 140px;
+    transition: 0.3s ease;
+}
+
+.pet-card p {
+    margin-top: 20px;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+/* Hover Effect */
+.pet-card:hover .pet-img-box {
+    transform: translateY(-10px);
+}
+
+.pet-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Arrow Buttons */
+.slider-btn {
+    position: absolute;
+    background: #1e40af;
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 22px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.left-btn {
+    left: -25px;
+}
+
+.right-btn {
+    right: -25px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    .pet-img-box {
+        height: 180px;
+    }
+
+    .pet-img-box img {
+        width: 100px;
+    }
+
+    .section-title {
+        font-size: 28px;
+    }
+
+    .slider-btn {
+        display: none;
+    }
+}
+/* Make slider draggable feel */
+.pet-slider {
+    cursor: grab;
+}
+
+.pet-slider.dragging {
+    cursor: grabbing;
+    user-select: none;
+}
+
+/* ===== TOP RATED SECTION ===== */
+
+.top-rated-section {
+    padding: 10px 5%;
+    background: #f4f4f4;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 50px;
+}
+
+/* Layout */
+.top-rated-wrapper {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+/* ===== LEFT BANNER ===== */
+.calm-banner {
+    width: 30%;
+}
+
+.calm-banner img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.banner-text {
+    margin-top: 15px;
+}
+
+.banner-text h3 {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.banner-text p {
+    font-size: 16px;
+    color: #555;
+}
+
+/* ===== RIGHT PRODUCTS ===== */
+.products-area {
+    width: 70%;
+    position: relative;
+}
+
+.products-slider {
+    display: flex;
+    gap: 25px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    cursor: grab;
+}
+
+.products-slider::-webkit-scrollbar {
+    display: none;
+}
+
+/* Product Card */
+.product-card {
+    min-width: 230px;
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    text-align: left;
+    transition: 0.3s;
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+}
+
+.product-card h5 {
+    font-size: 16px;
+    margin: 15px 0 10px;
+}
+
+.stars {
+    color: gold;
+    font-size: 18px;
+}
+
+.price {
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+/* Hover Effect */
+.product-card:hover {
+    transform: translateY(-6px);
+}
+
+/* ===== ARROWS ===== */
+.product-arrow {
+    position: absolute;
+    top: 45%;
+    transform: translateY(-50%);
+    background: #1e40af;
+    color: white;
+    border: none;
+    font-size: 24px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.left-arrow {
+    left: -20px;
+}
+
+.right-arrow {
+    right: -20px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 992px) {
+    .top-rated-wrapper {
+        flex-direction: column;
+    }
+
+    .calm-banner,
+    .products-area {
+        width: 100%;
+    }
+}
+
+/* ================= AUTOSHIP SECTION ================= */
+
+.autoship-section {
+    padding: 40px 0;
+}
+
+.autoship-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1E4ED8;
+    border-radius: 30px;
+    overflow: hidden;
+    color: #fff;
+}
+
+/* LEFT SIDE */
+.autoship-left {
+    padding: 60px;
+    width: 55%;
+}
+
+.autoship-left h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.autoship-left p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.autoship-btn {
+    background: #E5E5E5;
+    color: #000;
+    border: none;
+    padding: 18px 40px;
+    font-size: 18px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* RIGHT SIDE */
+.autoship-right {
+    position: relative;
+    width: 45%;
+}
+
+.autoship-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* SAVE BADGE */
+.save-badge {
+    position: absolute;
+    top: 50%;
+    left: -60px;
+    transform: translateY(-50%);
+    background: #E5E5E5;
+    color: #000;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 22px;
+    text-align: center;
+}
+
+
+
+/* ================= GREEN OFFER SECTION ================= */
+
+.green-offer-section {
+    margin-top: 40px;
+}
+
+.green-offer-container {
+    background: #8EE28B;
+    border-radius: 30px;
+    padding: 40px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.green-offer-text {
+    width: 50%;
+}
+
+.green-offer-text h3 {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.green-offer-img img {
+    width: 160px;
+}
+
+.shop-now-btn {
+    background: #1E4ED8;
+    color: #fff;
+    border: 3px solid #000;
+    padding: 18px 50px;
+    border-radius: 40px;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+@media (max-width: 992px) {
+
+    .autoship-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .autoship-left,
+    .autoship-right {
+        width: 100%;
+    }
+
+    .save-badge {
+        left: 50%;
+        transform: translate(-50%, -50%);
+        top: 20%;
+    }
+
+    .green-offer-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .green-offer-text,
+    .green-offer-btn {
+        width: 100%;
+    }
+}
+
+/* ================= PET SERVICES SECTION ================= */
+
+.pet-services-section {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.services-header h2 {
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.services-header p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 50px;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+}
+
+/* CARD */
+.service-card {
+    text-align: center;
+}
+
+/* IMAGE WRAPPER */
+.service-img {
+    position: relative;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.service-img img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 25px;
+}
+
+/* BLUE LABEL */
+.service-label {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: #1E4ED8;
+    color: #fff;
+    font-weight: 600;
+    padding: 18px 0;
+    font-size: 20px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+/* DESCRIPTION */
+.service-desc {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #333;
+}
+
+@media (max-width: 1200px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .services-header h2 {
+        font-size: 30px;
+    }
+
+    .service-img img {
+        height: 220px;
+    }
+}
+/* ========================================= */
+/* ========== GLOBAL ANIMATIONS =========== */
+/* ========================================= */
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Apply soft reveal */
+.shop-by-pet-section,
+.top-rated-section,
+.autoship-section,
+.green-offer-section,
+.pet-services-section {
+    animation: fadeUp 0.8s ease forwards;
+}
+
+/* ========================================= */
+/* ========== HERO ANIMATION ============== */
+/* ========================================= */
+
+.hero-full-img {
+    animation: fadeIn 1.2s ease-in-out;
+}
+
+/* ========================================= */
+/* ========== SHOP BY PET ================ */
+/* ========================================= */
+
+.pet-card {
+    transition: all 0.3s ease;
+}
+
+.pet-card:hover {
+    transform: translateY(-10px) scale(1.02);
+}
+
+.pet-img-box {
+    transition: all 0.4s ease;
+}
+
+.pet-img-box:hover {
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+/* Slider smooth scroll */
+.pet-slider {
+    scroll-behavior: smooth;
+    transition: transform 0.3s ease;
+}
+
+/* ========================================= */
+/* ========== TOP RATED PRODUCTS ========== */
+/* ========================================= */
+
+.product-card {
+    transition: all 0.4s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+}
+
+/* Arrows hover */
+.product-arrow:hover {
+    background: #162c8f;
+    transform: scale(1.1);
+}
+
+/* ========================================= */
+/* ========== AUTOSHIP SECTION ============ */
+/* ========================================= */
+
+.autoship-container {
+    transition: all 0.5s ease;
+}
+
+.autoship-btn {
+    transition: all 0.3s ease;
+}
+
+.autoship-btn:hover {
+    background: #ffffff;
+    transform: scale(1.05);
+}
+
+/* Save badge pulse effect */
+@keyframes pulse {
+    0% { transform: translateY(-50%) scale(1); }
+    50% { transform: translateY(-50%) scale(1.08); }
+    100% { transform: translateY(-50%) scale(1); }
+}
+
+.save-badge {
+    animation: pulse 2s infinite ease-in-out;
+}
+
+/* ========================================= */
+/* ========== GREEN OFFER SECTION ========= */
+/* ========================================= */
+
+.green-offer-container {
+    transition: all 0.4s ease;
+}
+
+.shop-now-btn {
+    transition: all 0.3s ease;
+}
+
+.shop-now-btn:hover {
+    background: #162c8f;
+    transform: scale(1.05);
+}
+
+/* ========================================= */
+/* ========== PET SERVICES ================ */
+/* ========================================= */
+
+.service-card {
+    transition: all 0.4s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+}
+
+.service-img img {
+    transition: transform 0.4s ease;
+}
+
+.service-card:hover .service-img img {
+    transform: scale(1.05);
+}
+
+/* ========================================= */
+/* ========== EXTRA RESPONSIVE ============ */
+/* ========================================= */
+
+/* Large tablets */
+@media (max-width: 1024px) {
+
+    .section-title {
+        font-size: 32px;
+    }
+
+    .autoship-left h2 {
+        font-size: 26px;
+    }
+
+    .autoship-left p {
+        font-size: 16px;
+    }
+
+    .green-offer-text h3 {
+        font-size: 22px;
+    }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+
+    .shop-by-pet-section {
+        padding: 50px 20px;
+    }
+
+    .section-title {
+        font-size: 28px;
+        margin-bottom: 30px;
+    }
+
+    .pet-card {
+        min-width: 180px;
+    }
+
+    .pet-img-box {
+        height: 160px;
+    }
+
+    .pet-img-box img {
+        width: 90px;
+    }
+
+    .product-card {
+        min-width: 200px;
+    }
+
+    .autoship-left {
+        padding: 30px;
+    }
+
+    .autoship-left h2 {
+        font-size: 22px;
+    }
+
+    .autoship-btn {
+        padding: 14px 30px;
+        font-size: 16px;
+    }
+
+    .save-badge {
+        width: 110px;
+        height: 110px;
+        font-size: 18px;
+    }
+
+    .green-offer-container {
+        padding: 30px;
+    }
+
+    .shop-now-btn {
+        padding: 14px 30px;
+        font-size: 16px;
+    }
+
+    .services-header h2 {
+        font-size: 26px;
+    }
+
+    .services-header p {
+        font-size: 15px;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+
+    .section-title {
+        font-size: 22px;
+    }
+
+    .pet-card p {
+        font-size: 16px;
+    }
+
+    .product-card {
+        padding: 15px;
+    }
+
+    .product-card h5 {
+        font-size: 14px;
+    }
+
+    .service-label {
+        font-size: 16px;
+        padding: 12px 0;
+    }
+
+    .service-img img {
+        height: 180px;
+    }
+}

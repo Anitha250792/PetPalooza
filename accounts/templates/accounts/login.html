@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-5 account-section">
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-section">
+        <a href="/">Home</a> /
+        <span>Log in</span>
+    </div>
+     {% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-info">
+        {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+
+    <h2 class="mb-4">Account</h2>
+
+    <!-- GREEN HEADER STRIP -->
+    <div class="row text-center customer-strip">
+        <div class="col-md-6">
+            <h5 class="mb-0">Returning Customer</h5>
+        </div>
+        <div class="col-md-6">
+            <h5 class="mb-0">New Customer</h5>
+        </div>
+    </div>
+
+    <!-- CONTENT SECTION -->
+    <div class="row account-content">
+
+        <!-- LOGIN SIDE -->
+        <div class="col-md-6 p-4">
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label>Email*</label>
+                    <input type="text"
+                           name="username"
+                           class="form-control">
+                </div>
+
+                <div class="mb-3 position-relative">
+    <label>Password*</label>
+    <input type="password"
+           name="password"
+           id="loginPassword"
+           class="form-control">
+
+    <span class="toggle-password"
+          onclick="togglePassword('loginPassword', this)">
+        <i class="bi bi-eye"></i>
+    </span>
+</div>
+
+
+                <button type="submit"
+                        name="login_btn"
+                        class="btn btn-primary px-4">
+                    Log in
+                </button>
+
+                <p class="mt-3 small">Forget your password?</p>
+
+            </form>
+
+        </div>
+
+        <!-- REGISTER SIDE -->
+        <div class="col-md-6 p-4 register-side text-center d-flex flex-column justify-content-center">
+
+            <p>
+                Register with us for a faster checkout,
+                to track the status of your order and more.
+            </p>
+
+            <button class="btn btn-primary mt-3"
+                    data-bs-toggle="modal"
+                    data-bs-target="#registerModal">
+                Create an account
+            </button>
+
+        </div>
+
+    </div>
+</div>
+
+
+<!-- ================= REGISTER MODAL ================= -->
+
+<div class="modal fade" id="registerModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content register-modal">
+
+            <!-- Green Decorative Top -->
+            <div class="register-top">
+                <button type="button"
+                        class="btn-close close-btn"
+                        data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body p-4">
+
+                <h5 class="text-center mb-4">
+                    Sign up for a free account at Petpalooza.
+                </h5>
+
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label>First Name</label>
+                        <input type="text"
+                               name="first_name"
+                               class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Last Name</label>
+                        <input type="text"
+                               name="last_name"
+                               class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Email</label>
+                        <input type="email"
+                               name="email"
+                               class="form-control">
+                    </div>
+
+                    <div class="mb-4 position-relative">
+    <label>Password</label>
+    <input type="password"
+           name="password"
+           id="registerPassword"
+           class="form-control">
+
+    <span class="toggle-password"
+          onclick="togglePassword('registerPassword', this)">
+        <i class="bi bi-eye"></i>
+    </span>
+</div>
+
+
+                    <button type="submit"
+                            name="register_btn"
+                            class="btn btn-primary w-100">
+                        Create an account
+                    </button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

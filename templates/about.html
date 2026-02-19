@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+/* ================= HERO SECTION ================= */
+.hero-section {
+    position: relative;
+}
+
+.hero-section img {
+    width: 100%;
+    height: 800px;
+    object-fit: cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 900px;
+}
+
+.hero-overlay h2 {
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+/* ================= GREEN SECTION ================= */
+.green-section {
+    background: #8BE28B;
+    padding: 70px 80px;
+    text-align: center;
+}
+
+.green-section h3 {
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.green-section p {
+    max-width: 1100px;
+    margin: auto;
+    font-size: 17px;
+}
+
+/* ================= CARDS SECTION ================= */
+.info-card {
+    border: 2px solid #ddd;
+    border-radius: 30px;
+    padding: 25px;
+    text-align: center;
+    transition: 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.info-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+.blue-btn {
+    background: #1f4df0;
+    color: white;
+    padding: 12px 35px;
+    border-radius: 30px;
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+}
+
+.blue-btn:hover {
+    background: #163bc4;
+    color: white;
+}
+
+/* ================= BOTTOM SECTION ================= */
+.bottom-section {
+    margin-top: 80px;
+}
+
+.bottom-left {
+    background: #8BE28B;
+    padding: 60px;
+}
+
+.bottom-left h4 {
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.bottom-left p {
+    font-size: 16px;
+}
+
+.bottom-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width: 992px){
+    .hero-overlay {
+        padding: 20px;
+    }
+
+    .green-section {
+        padding: 40px 20px;
+    }
+
+    .bottom-left {
+        padding: 40px 20px;
+    }
+}
+</style>
+
+<!-- ================= HERO SECTION ================= -->
+<div class="hero-section">
+    <img src="{% static 'images/about-hero.png' %}">
+    <div class="hero-overlay">
+        <h2>Our Mission</h2>
+        <p>
+            Every day with every connection, Petpalooza passionate associates help bring pet parents
+            closer to their pets so they can live more fulfilled lives.
+        </p>
+    </div>
+</div>
+
+<!-- ================= GREEN TEXT SECTION ================= -->
+<div class="green-section">
+    <h3>ANYTHING for PETS®</h3>
+    <p>
+        We love pets, and we believe loving pets makes us better people. That’s one of the many reasons
+        we do Anything for Pets – because they will do anything for us.
+        Anything for Pets is our commitment to pet parents. As a leader in pet care,
+        we focus on bringing pet parents closer to their pets through innovative products,
+        services and experiences.
+    </p>
+</div>
+
+<!-- ================= 3 CARDS SECTION ================= -->
+<div class="container mt-5">
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <div class="info-card">
+                <img src="{% static 'images/story.png' %}">
+                <a href="#" class="blue-btn">Our story</a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="info-card">
+                <img src="{% static 'images/media.png' %}">
+                <a href="#" class="blue-btn">Media resources</a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="info-card">
+                <img src="{% static 'images/charity.png' %}">
+                <a href="#" class="blue-btn">Charities</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ================= BOTTOM SPLIT SECTION ================= -->
+<div class="container bottom-section">
+    <div class="row">
+
+        <div class="col-lg-6 bottom-left">
+            <h4>10 Reasons to Love #LifeAtPetpalooza</h4>
+            <p>
+                Since 2020, we've committed over $250 million to increased wages and benefits
+                to ensure the health, safety and well-being of associates.
+                Our associates come because they love pets — and stay because they
+                feel supported in building a future here.
+            </p>
+        </div>
+
+        <div class="col-lg-6 bottom-right">
+            <img src="{% static 'images/about-bottom.png' %}">
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

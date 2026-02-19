@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🐾 PetPalooza</title>
+
+    <!-- Bootstrap -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- Google Font - Inter -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+
+{% include 'navbar.html' %}
+
+<div class="container mt-4">
+    {% block content %}{% endblock %}
+</div>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+{% include 'footer.html' %}
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* =========================
+       PASSWORD TOGGLE
+    ========================== */
+    window.togglePassword = function(fieldId, element) {
+        const passwordField = document.getElementById(fieldId);
+        const icon = element.querySelector("i");
+
+        if (!passwordField) return;
+
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            icon.classList.remove("bi-eye");
+            icon.classList.add("bi-eye-slash");
+        } else {
+            passwordField.type = "password";
+            icon.classList.remove("bi-eye-slash");
+            icon.classList.add("bi-eye");
+        }
+    };
+
+
+    /* =========================
+       SHOP BY PET SLIDER
+    ========================== */
+    const petSlider = document.getElementById("petSlider");
+
+    if (petSlider) {
+
+        let isDraggingPet = false;
+        let startXPet;
+        let scrollLeftPet;
+
+        window.scrollPets = function(direction) {
+            petSlider.scrollLeft += direction * 300;
+        };
+
+        petSlider.addEventListener("mousedown", (e) => {
+            isDraggingPet = true;
+            startXPet = e.pageX - petSlider.offsetLeft;
+            scrollLeftPet = petSlider.scrollLeft;
+        });
+
+        petSlider.addEventListener("mouseup", () => {
+            isDraggingPet = false;
+        });
+
+        petSlider.addEventListener("mouseleave", () => {
+            isDraggingPet = false;
+        });
+
+        petSlider.addEventListener("mousemove", (e) => {
+            if (!isDraggingPet) return;
+            e.preventDefault();
+            const x = e.pageX - petSlider.offsetLeft;
+            const walk = (x - startXPet) * 2;
+            petSlider.scrollLeft = scrollLeftPet - walk;
+        });
+
+        // Touch Support
+        petSlider.addEventListener("touchstart", (e) => {
+            startXPet = e.touches[0].pageX;
+            scrollLeftPet = petSlider.scrollLeft;
+        });
+
+        petSlider.addEventListener("touchmove", (e) => {
+            const x = e.touches[0].pageX;
+            const walk = (x - startXPet) * 2;
+            petSlider.scrollLeft = scrollLeftPet - walk;
+        });
+    }
+
+
+    /* =========================
+       TOP RATED PRODUCTS SLIDER
+    ========================== */
+    const productSlider = document.getElementById("productSlider");
+    const leftBtn = document.querySelector(".left-arrow");
+    const rightBtn = document.querySelector(".right-arrow");
+
+    if (productSlider) {
+
+        let isDraggingProduct = false;
+        let startXProduct;
+        let scrollLeftProduct;
+
+        if (rightBtn) {
+            rightBtn.addEventListener("click", () => {
+                productSlider.scrollBy({ left: 300, behavior: "smooth" });
+            });
+        }
+
+        if (leftBtn) {
+            leftBtn.addEventListener("click", () => {
+                productSlider.scrollBy({ left: -300, behavior: "smooth" });
+            });
+        }
+
+        productSlider.addEventListener("mousedown", (e) => {
+            isDraggingProduct = true;
+            startXProduct = e.pageX - productSlider.offsetLeft;
+            scrollLeftProduct = productSlider.scrollLeft;
+        });
+
+        productSlider.addEventListener("mouseup", () => {
+            isDraggingProduct = false;
+        });
+
+        productSlider.addEventListener("mouseleave", () => {
+            isDraggingProduct = false;
+        });
+
+        productSlider.addEventListener("mousemove", (e) => {
+            if (!isDraggingProduct) return;
+            e.preventDefault();
+            const x = e.pageX - productSlider.offsetLeft;
+            const walk = (x - startXProduct) * 2;
+            productSlider.scrollLeft = scrollLeftProduct - walk;
+        });
+    }
+
+});
+</script>
+
+</body>
+</html>

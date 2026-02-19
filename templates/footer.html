@@ -1,0 +1,103 @@
+{% load static %}
+
+<footer class="footer-section">
+    <div class="container footer-container">
+
+        <!-- ===== LOGO ROW ===== -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <a class="navbar-brand" href="{% url 'home' %}">
+    <img src="{% static 'images/logo.png' %}" height="100">
+</a>
+
+            </div>
+        </div>
+
+        <!-- ===== HEADINGS ROW ===== -->
+        <div class="row footer-headings">
+
+            <div class="col-md-2">
+                <h5 class="footer-title">PetPalooza</h5>
+            </div>
+
+            <div class="col-md-2">
+                <h5 class="footer-title">Categories</h5>
+            </div>
+
+            <div class="col-md-2">
+                <h5 class="footer-title">Support</h5>
+            </div>
+
+            <div class="col-md-3 d-flex align-items-center gap-3">
+                <h5 class="footer-title mb-0">Follow</h5>
+
+                <div class="social-icons">
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                    <a href="#"><i class="bi bi-youtube"></i></a>
+                    <a href="#"><i class="bi bi-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <h5 class="footer-title">For Subscribe,</h5>
+            </div>
+
+        </div>
+
+        <!-- ===== CONTENT ROW ===== -->
+        <div class="row footer-content mt-4">
+
+            <div class="col-md-2">
+                <ul class="footer-list">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-2">
+                <ul class="footer-list">
+                    <li><a href="#">Dog</a></li>
+                    <li><a href="#">Cat</a></li>
+                    <li><a href="#">Fish</a></li>
+                    <li><a href="#">Rats</a></li>
+                    <li><a href="#">Rabbits</a></li>
+                    <li><a href="#">Hamsters</a></li>
+                    <li><a href="#">Guinea pigs</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-2">
+                <ul class="footer-list">
+                    <li><a href="#">Privacy policy</a></li>
+                    <li><a href="#">Refund & returns policy</a></li>
+                    <li><a href="#">Shipping policy</a></li>
+                    <li><a href="#">Terms & conditions</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-3">
+                <div class="contact-section">
+                    <h6 class="contact-title">Get in Touch</h6>
+                    <p>Call: +91-1234567890</p>
+                    <p>Email: support@petpalooza.com</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <input type="email"
+                       class="subscribe-input"
+                       placeholder="Email">
+
+                <button class="subscribe-button mt-2">
+                    Subscribe Now
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+</footer>

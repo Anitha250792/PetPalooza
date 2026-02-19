@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+.cart-box {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* Quantity Controls */
+.qty-wrapper {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.qty-btn {
+    width: 35px;
+    height: 35px;
+    border: none;
+    background: #f5f5f5;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.qty-btn:hover {
+    background: #1f4df0;
+    color: white;
+}
+
+.qty-number {
+    width: 40px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Delete Button */
+.delete-btn {
+    background: #ff4d4d;
+    color: white;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    border: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.delete-btn:hover {
+    background: #cc0000;
+    transform: scale(1.1);
+}
+
+/* Checkout Button */
+.checkout-btn {
+    background: linear-gradient(135deg, #1f4df0, #163bc4);
+    color: white;
+    width: 100%;
+    font-weight: 600;
+    padding: 14px;
+    border-radius: 40px;
+    border: none;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 20px;        /* space above */
+    margin-bottom: 25px;     /* space below */
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.checkout-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(31,77,240,0.35);
+}
+
+/* Payment Icons */
+.payment-icons img {
+    height: 42px;
+    margin-right: 15px;
+    transition: 0.3s;
+}
+
+.payment-icons img:hover {
+    transform: scale(1.1);
+}
+
+/* Table Styling */
+table th {
+    font-weight: 600;
+    border-bottom: 2px solid #ddd;
+}
+
+table td {
+    vertical-align: middle;
+}
+</style>
+
+<div class="container mt-5">
+<div class="row">
+
+<!-- LEFT SIDE -->
+<div class="col-md-8">
+<div class="cart-box">
+
+<h5>Your order qualifies for free shipping!</h5>
+<hr>
+
+<table class="table align-middle">
+<thead>
+<tr>
+<th>Remove</th>
+<th>Product</th>
+<th>Price</th>
+<th>Quantity</th>
+<th>Sub Total</th>
+</tr>
+</thead>
+<tbody>
+
+{% for item in items %}
+<tr>
+<td>
+<a href="{% url 'remove_item' item.id %}">
+    <button class="delete-btn">×</button>
+</a>
+</td>
+
+
+<td>
+<img src="{{ item.product.image.url }}" height="60">
+{{ item.product.name }}
+</td>
+
+<td>₹{{ item.product.price }}</td>
+
+<td>
+<div class="qty-wrapper">
+    <a href="{% url 'decrease_quantity' item.id %}" class="qty-btn">-</a>
+    <div class="qty-number">{{ item.quantity }}</div>
+    <a href="{% url 'increase_quantity' item.id %}" class="qty-btn">+</a>
+</div>
+</td>
+
+
+<td>₹{{ item.subtotal }}</td>
+</tr>
+{% empty %}
+<tr>
+<td colspan="5">Your cart is empty.</td>
+</tr>
+{% endfor %}
+
+</tbody>
+</table>
+
+</div>
+</div>
+
+<!-- RIGHT SIDE TOTALS -->
+<div class="col-md-4">
+
+<div class="cart-box">
+
+<h3>Cart Totals</h3>
+<hr>
+
+<p>Sub total: ₹{{ subtotal }}</p>
+<p>Shipping: ₹{{ shipping }}</p>
+<hr>
+<h5>Total: ₹{{ total }}</h5>
+
+<a href="{% url 'checkout' %}" class="checkout-btn mt-3">
+    Proceed to Checkout
+</a>
+
+
+<h5 class="mt-4">Payment methods</h5>
+
+<div class="payment-icons mt-3">
+<img src="https://img.icons8.com/color/48/google-pay.png">
+<img src="https://img.icons8.com/color/48/paypal.png">
+<img src="https://img.icons8.com/color/48/mastercard-logo.png">
+<img src="https://img.icons8.com/color/48/visa.png">
+<img src="https://img.icons8.com/color/48/apple-pay.png">
+</div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+{% endblock %}

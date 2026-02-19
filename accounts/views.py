@@ -1,0 +1,65 @@
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from .forms import RegisterForm, LoginForm
+from django.contrib.auth.models import User
+from .forms import ContactForm
+
+def login_view(request):
+
+    if request.method == "POST":
+
+        # LOGIN PROCESS
+        if "login_btn" in request.POST:
+            username = request.POST.get("username")
+            password = request.POST.get("password")
+
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect("/")  # redirect to home
+            else:
+                messages.error(request, "Invalid email or password")
+
+        # REGISTER PROCESS
+        if "register_btn" in request.POST:
+            first_name = request.POST.get("first_name")
+            last_name = request.POST.get("last_name")
+            email = request.POST.get("email")
+            password = request.POST.get("password")
+
+            if User.objects.filter(username=email).exists():
+                messages.error(request, "Email already exists")
+            else:
+                user = User.objects.create_user(
+                    username=email,
+                    email=email,
+                    password=password,
+                    first_name=first_name,
+                    last_name=last_name
+                )
+                messages.success(request, "Account created successfully!")
+                return redirect("/")
+
+    return render(request, "accounts/login.html")
+
+
+def logout_view(request):
+    logout(request)
+    return redirect("/")
+
+def home_view(request):
+    return render(request, "home.html")
+
+def contact_view(request):
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your message has been sent successfully!")
+            return redirect('contact')
+    else:
+        form = ContactForm()
+
+    return render(request, 'contact.html', {'form': form})

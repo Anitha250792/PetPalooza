@@ -1,0 +1,329 @@
+{% load static %}
+
+<!-- TOP BAR -->
+<div class="top-bar">
+    <div class="container d-flex justify-content-between">
+        <div>
+            📞 +91-1234567890
+            &nbsp;&nbsp;
+            ✉ support@petpalooza.com
+        </div>
+    </div>
+</div>
+
+<!-- MAIN NAVBAR -->
+<nav class="navbar navbar-expand-lg main-navbar">
+    <div class="container">
+
+        <!-- LOGO -->
+        <a class="navbar-brand" href="{% url 'home' %}">
+    <img src="{% static 'images/logo.png' %}" height="100">
+</a>
+
+        <!-- SEARCH -->
+        <form class="d-flex search-bar mx-auto">
+            <input class="form-control"
+                   type="search"
+                   placeholder="Search for products">
+        </form>
+
+        <!-- RIGHT MENU -->
+        <div class="d-flex align-items-center gap-3">
+
+            <a href="{% url 'home' %}" class="nav-link-custom">Home</a>
+            <a href="{% url 'about' %}" class="nav-link-custom">About</a>
+            <a href="{% url 'contact' %}" class="nav-link-custom">Contact</a>
+
+            <!-- LOGIN ICON -->
+            <a href="{% url 'login' %}" class="nav-icon">
+                <i class="bi bi-person"></i> Log In
+            </a>
+
+            <!-- CART ICON -->
+            <a href="{% url 'cart_page' %}" class="nav-icon position-relative">
+                <i class="bi bi-cart"></i>
+                <span class="cart-badge">
+    {{ cart_count }}
+</span>
+
+            </a>
+
+        </div>
+    </div>
+</nav>
+
+<!-- CATEGORY MENU -->
+<!-- CATEGORY MENU -->
+<div class="category-menu">
+    <div class="container">
+        <ul class="navbar-nav d-flex flex-row justify-content-center gap-4">
+
+            <!-- ================= DOG ================= -->
+            <li class="nav-item dropdown position-static">
+                <a class="nav-link text-white" href="{% url 'dog' %}">
+                    Dog
+                </a>
+
+                <div class="dropdown-menu mega-menu w-100 p-4">
+                    <div class="container">
+                        <div class="row">
+
+                            <!-- Column 1 -->
+                            <div class="col-md-2">
+                                <h6 class="mega-title">Dry & wet food</h6>
+                                <a class="dropdown-item" href="#">Dry Dog Food</a>
+                                <a class="dropdown-item" href="#">Wet Dog Food</a>
+                                <a class="dropdown-item" href="#">Veg Dog Food</a>
+                                <a class="dropdown-item" href="#">Grain Free Dog Food</a>
+                                <a class="dropdown-item" href="#">Human Grade Food</a>
+                                <a class="dropdown-item" href="#">Low Grain Dog Food</a>
+                                <a class="dropdown-item" href="#">Prescription Dog Food</a>
+                                <a class="dropdown-item" href="#">Puppy Food</a>
+                            </div>
+
+                            <!-- Column 2 -->
+                            <div class="col-md-2">
+                                <h6 class="mega-title">Clothing</h6>
+                                <a class="dropdown-item" href="#">T-shirts</a>
+                                <a class="dropdown-item" href="#">Raincoat</a>
+                                <a class="dropdown-item" href="#">Sweaters</a>
+                                <a class="dropdown-item" href="#">Special Occasion Wear</a>
+                                <a class="dropdown-item" href="#">Hoodies & Sweatshirts</a>
+                                <a class="dropdown-item" href="#">Jackets</a>
+                                <a class="dropdown-item" href="#">Socks</a>
+                                <a class="dropdown-item" href="#">Dresses</a>
+                                <a class="dropdown-item" href="#">Shoes</a>
+                                <a class="dropdown-item" href="#">Bandana</a>
+                            </div>
+
+                            <!-- Column 3 -->
+                            <div class="col-md-2">
+                                <h6 class="mega-title">Dog toys</h6>
+                                <a class="dropdown-item" href="#">Rope Toys</a>
+                                <a class="dropdown-item" href="#">Tough Chew Toys</a>
+                                <a class="dropdown-item" href="#">Chew Toys</a>
+                                <a class="dropdown-item" href="#">Plush Toys</a>
+                                <a class="dropdown-item" href="#">Interactive Toys</a>
+                                <a class="dropdown-item" href="#">Squeaky Toys</a>
+                                <a class="dropdown-item" href="#">Ball Toys</a>
+                                <a class="dropdown-item" href="#">Fetch Toys</a>
+                            </div>
+
+                            <!-- Column 4 -->
+                            <div class="col-md-3">
+                                <h6 class="mega-title">Health care</h6>
+                                <a class="dropdown-item" href="#">Skin Care</a>
+                                <a class="dropdown-item" href="#">Eye Care</a>
+                                <a class="dropdown-item" href="#">Digestion And Immunity</a>
+                                <a class="dropdown-item" href="#">Hip And Joint Care</a>
+                                <a class="dropdown-item" href="#">Dental Care</a>
+                                <a class="dropdown-item" href="#">Calcium Supplements</a>
+                                <a class="dropdown-item" href="#">Ear Care</a>
+                                <a class="dropdown-item" href="#">Deworming</a>
+                                <a class="dropdown-item" href="#">Tick And Flea Solutions</a>
+                                <a class="dropdown-item" href="#">Antibiotics</a>
+                            </div>
+
+                            <!-- Column 5 -->
+                            <div class="col-md-3">
+                                <h6 class="mega-title">Dog beds & mats</h6>
+                                <a class="dropdown-item" href="#">Dog Beds</a>
+                                <a class="dropdown-item" href="#">Dog Cushions</a>
+                                <a class="dropdown-item" href="#">Dog Blankets</a>
+                                <a class="dropdown-item" href="#">Dog Mats</a>
+                                <a class="dropdown-item" href="#">Wooden Furniture</a>
+                                <a class="dropdown-item" href="#">Dog Tents</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+
+            <!-- ================= CAT ================= -->
+            <li class="nav-item dropdown position-static">
+                <a class="nav-link text-white" href="{% url 'cat' %}">
+                    Cat
+                </a>
+
+                <div class="dropdown-menu mega-menu w-100 p-4">
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                <h6 class="mega-title">Dry & wet food</h6>
+                                <a class="dropdown-item" href="#">Kitten Food</a>
+                                <a class="dropdown-item" href="#">Canned Cat Food</a>
+                                <a class="dropdown-item" href="#">Dry Cat Food</a>
+                                <a class="dropdown-item" href="#">Gravy Cat Food</a>
+                                <a class="dropdown-item" href="#">Prescription Cat Food</a>
+                                <a class="dropdown-item" href="#">Grain Free Cat Food</a>
+                            </div>
+
+                            <div class="col-md-2">
+                                <h6 class="mega-title">Creamy & natural treats</h6>
+                                <a class="dropdown-item" href="#">Creamy Cat Treats</a>
+                                <a class="dropdown-item" href="#">Natural Cat Treats</a>
+                            </div>
+
+                            <div class="col-md-2">
+                                <h6 class="mega-title">Cat toys</h6>
+                                <a class="dropdown-item" href="#">Cat Interactive Toys</a>
+                                <a class="dropdown-item" href="#">Catnip</a>
+                                <a class="dropdown-item" href="#">Plush Toy</a>
+                            </div>
+
+                            <div class="col-md-3">
+                                <h6 class="mega-title">Grooming</h6>
+                                <a class="dropdown-item" href="#">Brushes And Combs</a>
+                                <a class="dropdown-item" href="#">Cat Shampoos And Conditioners</a>
+                                <a class="dropdown-item" href="#">Paw And Nail Care</a>
+                                <a class="dropdown-item" href="#">Trimmers And Tools</a>
+                                <a class="dropdown-item" href="#">Waterless Care</a>
+                                <a class="dropdown-item" href="#">Bathing Supplies</a>
+                            </div>
+
+                            <div class="col-md-2">
+                                <h6 class="mega-title">Cleaning & odor control</h6>
+                                <a class="dropdown-item" href="#">Wipes And Stain Removers</a>
+                                <a class="dropdown-item" href="#">Diapers And Lint Rollers</a>
+                                <a class="dropdown-item" href="#">Cat Deodorizers</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+
+            <!-- ================= SMALL PETS ================= -->
+            <li class="nav-item dropdown position-static">
+                <a class="nav-link text-white" href="{% url 'smallpets' %}">
+                    Small Pets
+                </a>
+
+                <div class="dropdown-menu mega-menu w-100 p-4">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h6 class="mega-title">Small Pets</h6>
+                                <a class="dropdown-item" href="#">Hamsters</a>
+                                <a class="dropdown-item" href="#">Guinea Pigs</a>
+                                <a class="dropdown-item" href="#">Rabbits</a>
+                                <a class="dropdown-item" href="#">Rats</a>
+                                <a class="dropdown-item" href="#">Fish</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+
+            <!-- ================= PET SERVICES ================= -->
+            <li class="nav-item dropdown position-static">
+                <a class="nav-link text-white" href="{% url 'services' %}">
+                    Pet Services
+                </a>
+
+                <div class="dropdown-menu mega-menu w-100 p-4">
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                <h6 class="mega-title">Pet Services</h6>
+                                <a class="dropdown-item" href="#">Grooming Salon</a>
+                                <a class="dropdown-item" href="#">Training Classes</a>
+                                <a class="dropdown-item" href="#">Pet Hostel Boarding</a>
+                                <a class="dropdown-item" href="#">Doggie Day Camp</a>
+                                <a class="dropdown-item" href="#">Veterinary Care</a>
+                            </div>
+
+                            <div class="col-md-2">
+                                <h6 class="mega-title">Adoption</h6>
+                                <a class="dropdown-item" href="#">Pet Adoption</a>
+                                <a class="dropdown-item" href="#">Petpalooza Charities</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+
+            <!-- ================= SHOP BY BRAND ================= -->
+            <li class="nav-item dropdown position-static">
+                <a class="nav-link text-white" href="{% url 'brands' %}">
+                    Shop by Brand
+                </a>
+
+                <div class="dropdown-menu mega-menu w-100 p-4">
+                    <div class="container">
+                        <div class="row text-center">
+
+                            <div class="col-md-2 mb-4">
+                                <img src="{% static 'images/pedigree.png' %}" class="brand-img">
+                            </div>
+
+                            <div class="col-md-2 mb-4">
+                                <img src="{% static 'images/royalcanin.png' %}" class="brand-img">
+                            </div>
+
+                            <div class="col-md-2 mb-4">
+                                <img src="{% static 'images/whiskas.png' %}" class="brand-img">
+                            </div>
+
+                            <div class="col-md-2 mb-4">
+                                <img src="{% static 'images/brunoswild.png' %}" class="brand-img">
+                            </div>
+
+                            <div class="col-md-2 mb-4">
+                                <img src="{% static 'images/sheba.png' %}" class="brand-img">
+                            </div>
+
+                            <div class="col-md-2 mb-4">
+                                <img src="{% static 'images/farmina.png' %}" class="brand-img">
+                            </div>
+
+                            <div class="col-md-2 mb-4">
+                                <img src="{% static 'images/lozalo.png' %}" class="brand-img">
+                            </div>
+
+                            <div class="col-md-2 mb-4">
+                                <img src="{% static 'images/meo.png' %}" class="brand-img">
+                            </div>
+
+                            <div class="col-md-2 mb-4">
+                                <img src="{% static 'images/orijen.png' %}" class="brand-img">
+                            </div>
+
+                            <div class="col-md-2 mb-4">
+                                <img src="{% static 'images/toptail.png' %}" class="brand-img">
+                            </div>
+
+                            <div class="col-md-2 mb-4">
+                                <img src="{% static 'images/bellotta.png' %}" class="brand-img">
+                            </div>
+
+                            <div class="col-md-2 mb-4">
+                                <img src="{% static 'images/drools.png' %}" class="brand-img">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+
+            <!-- NORMAL LINKS -->
+            <li class="nav-item">
+                <a class="nav-link text-white" href="#">Shop by Breed</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-white" href="#">Consult a Vet</a>
+            </li>
+
+        </ul>
+    </div>
+</div>
