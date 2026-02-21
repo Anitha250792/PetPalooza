@@ -1,0 +1,353 @@
+[
+{
+  "model": "cart.product",
+  "pk": 1,
+  "fields": {
+    "name": "Turkey, Chickpea & Sweet Potato",
+    "price": "1899.00",
+    "image": "products/DogFood_Small_92921_TurkeyQuinoa_ProductImages-01-1200x1200.png",
+    "weight": "2 kg",
+    "category": "Dog",
+    "rating": "4.0",
+    "review_count": 1
+  }
+},
+{
+  "model": "cart.product",
+  "pk": 2,
+  "fields": {
+    "name": "Cuddle Adult Dog Wet Foods",
+    "price": "40.00",
+    "image": "products/image_13.png",
+    "weight": "100 gm",
+    "category": "Dog",
+    "rating": "4.0",
+    "review_count": 2
+  }
+},
+{
+  "model": "cart.product",
+  "pk": 3,
+  "fields": {
+    "name": "Kennel Kitchen Dry Dog Food Chicken Recipe",
+    "price": "399.00",
+    "image": "products/shopping_1.png",
+    "weight": "2 kg",
+    "category": "Dog",
+    "rating": "4.0",
+    "review_count": 3
+  }
+},
+{
+  "model": "cart.product",
+  "pk": 4,
+  "fields": {
+    "name": "Drools Dog Spike Hard Ball Toy 3",
+    "price": "16.00",
+    "image": "products/image_14.png",
+    "weight": "3 inch",
+    "category": "Dog",
+    "rating": "4.0",
+    "review_count": 3
+  }
+},
+{
+  "model": "cart.product",
+  "pk": 5,
+  "fields": {
+    "name": "Drools Puppy Dog Food Chicken and Egg Flavor",
+    "price": "250.00",
+    "image": "products/puppy-1.2kg-1.png",
+    "weight": "1.2 kg",
+    "category": "Dog",
+    "rating": "4.0",
+    "review_count": 1
+  }
+},
+{
+  "model": "cart.product",
+  "pk": 6,
+  "fields": {
+    "name": "Pedigree Adult & Puppy Dry Dog Food 100% Vegetarian",
+    "price": "334.00",
+    "image": "products/shopping.png",
+    "weight": "1 kg",
+    "category": "Dog",
+    "rating": "4.0",
+    "review_count": 4
+  }
+},
+{
+  "model": "cart.product",
+  "pk": 7,
+  "fields": {
+    "name": "Canine Creek Real Chicken in Gravy",
+    "price": "1305.00",
+    "image": "products/image_17.png",
+    "weight": "150 gm",
+    "category": "Dog",
+    "rating": "4.0",
+    "review_count": 5
+  }
+},
+{
+  "model": "cart.product",
+  "pk": 8,
+  "fields": {
+    "name": "Himalaya Digestive Stimulant Digyton Drops for Dogs and Cats",
+    "price": "165.00",
+    "image": "products/image_16.png",
+    "weight": "100 ml",
+    "category": "Dog",
+    "rating": "4.0",
+    "review_count": 4
+  }
+},
+{
+  "model": "cart.product",
+  "pk": 9,
+  "fields": {
+    "name": "Pedigree Pro Adult Small Breed Healthy Food for Puppies",
+    "price": "1100.00",
+    "image": "products/image_15.png",
+    "weight": "3 kg",
+    "category": "Dog",
+    "rating": "4.0",
+    "review_count": 3
+  }
+},
+{
+  "model": "cart.product",
+  "pk": 10,
+  "fields": {
+    "name": "Catit Freeze - Dried Cat Treats Duck Liver & Chicken Liver",
+    "price": "499.00",
+    "image": "products/image_6.png",
+    "weight": "284 gm",
+    "category": "Cat",
+    "rating": "5.0",
+    "review_count": 4
+  }
+},
+{
+  "model": "cart.product",
+  "pk": 11,
+  "fields": {
+    "name": "Nutrience Grain Free Sub Zero Treats - Freeze Dried Chicken",
+    "price": "490.00",
+    "image": "products/image_24.png",
+    "weight": "30gm",
+    "category": "Cat",
+    "rating": "3.0",
+    "review_count": 3
+  }
+},
+{
+  "model": "cart.product",
+  "pk": 12,
+  "fields": {
+    "name": "Mega Cat Combo Treat, Play & Pamper!",
+    "price": "1549.00",
+    "image": "products/image_23.png",
+    "weight": "2 kg",
+    "category": "Cat",
+    "rating": "5.0",
+    "review_count": 2
+  }
+},
+{
+  "model": "cart.product",
+  "pk": 13,
+  "fields": {
+    "name": "Sheba Maguro & Bream Wet Cat Food packs",
+    "price": "590.00",
+    "image": "products/image_5.png",
+    "weight": "35gm",
+    "category": "Cat",
+    "rating": "4.0",
+    "review_count": 3
+  }
+},
+{
+  "model": "cart.product",
+  "pk": 14,
+  "fields": {
+    "name": "Catit Pixi Fountain,Mint Green",
+    "price": "2459.00",
+    "image": "products/image_21.png",
+    "weight": "2.5 kg",
+    "category": "Cat",
+    "rating": "4.0",
+    "review_count": 3
+  }
+},
+{
+  "model": "cart.product",
+  "pk": 15,
+  "fields": {
+    "name": "Me - O Delite Cat Food Tuna With Cheese In Gravy Cat Food",
+    "price": "700.00",
+    "image": "products/image_19.png",
+    "weight": "70 gm",
+    "category": "Cat",
+    "rating": "4.0",
+    "review_count": 5
+  }
+},
+{
+  "model": "cart.product",
+  "pk": 16,
+  "fields": {
+    "name": "Royal Canin Kitten Gravy Wet Food",
+    "price": "115.00",
+    "image": "products/image_18.png",
+    "weight": "85 gm",
+    "category": "Cat",
+    "rating": "5.0",
+    "review_count": 6
+  }
+},
+{
+  "model": "cart.product",
+  "pk": 17,
+  "fields": {
+    "name": "Whiskas Chicken in Gravy Meal Kitten wet Food",
+    "price": "599.00",
+    "image": "products/image_22.png",
+    "weight": "85 gm",
+    "category": "Cat",
+    "rating": "5.0",
+    "review_count": 3
+  }
+},
+{
+  "model": "cart.product",
+  "pk": 18,
+  "fields": {
+    "name": "Catit Groovy Fish Contain 2 Bags",
+    "price": "1349.00",
+    "image": "products/image_20.png",
+    "weight": "2 kg",
+    "category": "Cat",
+    "rating": "4.0",
+    "review_count": 3
+  }
+},
+{
+  "model": "cart.product",
+  "pk": 19,
+  "fields": {
+    "name": "Chipsi Classic Small Animal Litter",
+    "price": "349.00",
+    "image": "products/image_32.png",
+    "weight": "1 kg",
+    "category": "Smallpets",
+    "rating": "3.0",
+    "review_count": 6
+  }
+},
+{
+  "model": "cart.product",
+  "pk": 20,
+  "fields": {
+    "name": "Trixie Pico Transport Box for Small Animals",
+    "price": "1350.00",
+    "image": "products/image_31.png",
+    "weight": "Small Size",
+    "category": "Smallpets",
+    "rating": "5.0",
+    "review_count": 10
+  }
+},
+{
+  "model": "cart.product",
+  "pk": 21,
+  "fields": {
+    "name": "Vitapol Economic Food for Rabbits",
+    "price": "590.00",
+    "image": "products/image_27.png",
+    "weight": "1.2 kg",
+    "category": "Smallpets",
+    "rating": "4.0",
+    "review_count": 4
+  }
+},
+{
+  "model": "cart.product",
+  "pk": 22,
+  "fields": {
+    "name": "Vitapol Economic Food Cocktail",
+    "price": "580.00",
+    "image": "products/image_28.png",
+    "weight": "1.2 kg",
+    "category": "Smallpets",
+    "rating": "5.0",
+    "review_count": 2
+  }
+},
+{
+  "model": "cart.product",
+  "pk": 23,
+  "fields": {
+    "name": "Me- O Delite Cat Food Tuna with Cheese Gravy Cat Wed Food",
+    "price": "380.00",
+    "image": "products/image_26.png",
+    "weight": "397 gm",
+    "category": "Smallpets",
+    "rating": "4.0",
+    "review_count": 9
+  }
+},
+{
+  "model": "cart.product",
+  "pk": 24,
+  "fields": {
+    "name": "Trixie Water Bottle for Guinea Pigs & Hamsters",
+    "price": "239.00",
+    "image": "products/image_25.png",
+    "weight": "250 gm",
+    "category": "Smallpets",
+    "rating": "5.0",
+    "review_count": 6
+  }
+},
+{
+  "model": "cart.product",
+  "pk": 25,
+  "fields": {
+    "name": "Chipsi Sunshine Hay for Small Pets",
+    "price": "480.00",
+    "image": "products/image_33.png",
+    "weight": "1 kg",
+    "category": "Smallpets",
+    "rating": "5.0",
+    "review_count": 10
+  }
+},
+{
+  "model": "cart.product",
+  "pk": 26,
+  "fields": {
+    "name": "Vitapol Economic Food for Pigs",
+    "price": "520.00",
+    "image": "products/image_30.png",
+    "weight": "1.2 kg",
+    "category": "Smallpets",
+    "rating": "3.0",
+    "review_count": 7
+  }
+},
+{
+  "model": "cart.product",
+  "pk": 27,
+  "fields": {
+    "name": "Vitapol Economic Food for Hamster",
+    "price": "480.00",
+    "image": "products/image_27_mp3Ediz.png",
+    "weight": "1.2 kg",
+    "category": "Smallpets",
+    "rating": "4.0",
+    "review_count": 8
+  }
+}
+]
