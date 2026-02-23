@@ -388,16 +388,27 @@ window.location.href =
         "order_id": "{{ razorpay_order_id }}",
         "handler": function (response){
 
-            Swal.fire({
-                icon: 'success',
-                title: 'Payment Successful!',
-                text: 'Your order has been placed successfully.',
-                confirmButtonColor: '#1f4df0'
-            }).then(() => {
-                window.location.href = "/cart/thankyou/";
-            });
+    var form = document.createElement("form");
+    form.method = "POST";
+    form.action = "{% url 'payment_success' %}";
 
-        },
+    var csrf = document.createElement("input");
+    csrf.type = "hidden";
+    csrf.name = "csrfmiddlewaretoken";
+    csrf.value = "{{ csrf_token }}";
+    form.appendChild(csrf);
+
+    for (var key in response) {
+        var hiddenField = document.createElement("input");
+        hiddenField.type = "hidden";
+        hiddenField.name = key;
+        hiddenField.value = response[key];
+        form.appendChild(hiddenField);
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+},
         "theme": {
             "color": "#1f4df0"
         }

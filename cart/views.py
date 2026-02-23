@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Cart, CartItem, Product
+from .models import Cart, CartItem, Product, Order
 import razorpay
 from django.conf import settings
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 
 def add_to_cart(request, product_id):
@@ -71,7 +72,7 @@ def cart_page(request):
         'total': total
     })
 
-def checkout_page(request):
+def checkout_view(request):
 
     if not request.user.is_authenticated:
         return redirect('login')
@@ -122,6 +123,47 @@ def thankyou(request):
         return render(request, "thankyou.html", context)
 
     return redirect("home")
+
+
+@csrf_exempt
+def payment_success(request):
+    if request.method == "POST":
+        data = request.POST
+
+        razorpay_order_id = data.get("razorpay_order_id")
+        razorpay_payment_id = data.get("razorpay_payment_id")
+        razorpay_signature = data.get("razorpay_signature")
+
+        print("Razorpay order id received:", razorpay_order_id)
+        print("Orders in DB:", list(Order.objects.values_list("razorpay_order_id", flat=True)))
+
+        order = Order.objects.filter(razorpay_order_id=razorpay_order_id).first()
+
+        if not order:
+         return JsonResponse({"error": "Order not found in database"})
+        client = razorpay.Client(
+            auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET)
+        )
+
+        try:
+            client.utility.verify_payment_signature({
+                'razorpay_order_id': razorpay_order_id,
+                'razorpay_payment_id': razorpay_payment_id,
+                'razorpay_signature': razorpay_signature
+            })
+
+            order.razorpay_payment_id = razorpay_payment_id
+            order.razorpay_signature = razorpay_signature
+            order.is_paid = True
+            order.save()
+
+            # Clear cart
+            CartItem.objects.filter(cart__user=request.user).delete()
+
+            return redirect("thankyou", order_id=order.id)
+
+        except:
+            return JsonResponse({"error": "Payment verification failed"})
 
 
 
