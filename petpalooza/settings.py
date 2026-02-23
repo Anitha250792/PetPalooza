@@ -1,5 +1,11 @@
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
+
+RAZORPAY_KEY_ID = os.getenv("rzp_live_SJUb0eFdoSvzSo")
+RAZORPAY_KEY_SECRET = os.getenv("aQ656XMu1Fh2hOHMqUcmlQ8L")
 import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent

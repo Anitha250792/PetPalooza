@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Cart, CartItem, Product
+import razorpay
+from django.conf import settings
+from django.http import JsonResponse
 
 
 def add_to_cart(request, product_id):
@@ -87,4 +90,28 @@ def checkout_page(request):
         "total": total,
     })
 
+def checkout_view(request):
+    items = ...
+    subtotal = ...
+    shipping = ...
+    total = subtotal + shipping
+
+    client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+
+    razorpay_order = client.order.create({
+        "amount": int(total * 100),  # amount in paisa
+        "currency": "INR",
+        "payment_capture": "1"
+    })
+
+    context = {
+        "items": items,
+        "subtotal": subtotal,
+        "shipping": shipping,
+        "total": total,
+        "razorpay_order_id": razorpay_order["id"],
+        "razorpay_key": settings.RAZORPAY_KEY_ID,
+    }
+
+    return render(request, "checkout.html", context)
    
