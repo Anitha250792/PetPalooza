@@ -88,23 +88,31 @@
 
             <div class="billing-row">
                 <span>Name</span>
-                <span>{{ order.name }}</span>
+                <span>{{ name }}
+{{ address }}
+{{ phone }}
+{{ email }}</span>
             </div>
 
             <div class="billing-row">
-                <span>Address</span>
-                <span>{{ order.address }}</span>
-            </div>
+    <span>Name</span>
+    <span>{{ name }}</span>
+</div>
 
-            <div class="billing-row">
-                <span>Phone</span>
-                <span>{{ order.phone }}</span>
-            </div>
+<div class="billing-row">
+    <span>Address</span>
+    <span>{{ address }}</span>
+</div>
 
-            <div class="billing-row">
-                <span>Email</span>
-                <span>{{ order.email }}</span>
-            </div>
+<div class="billing-row">
+    <span>Phone</span>
+    <span>{{ phone }}</span>
+</div>
+
+<div class="billing-row">
+    <span>Email</span>
+    <span>{{ email }}</span>
+</div>
         </div>
 
         <a href="{% url 'home' %}" class="back-btn">Back to Home</a>

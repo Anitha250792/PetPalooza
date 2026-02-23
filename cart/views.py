@@ -83,6 +83,10 @@ def checkout_page(request):
     shipping = 99 if subtotal > 0 else 0
     total = subtotal + shipping
 
+    print("KEY:", settings.RAZORPAY_KEY_ID)
+    print("SECRET:", settings.RAZORPAY_KEY_SECRET)
+
+
     # Create Razorpay order
     client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
 
@@ -101,32 +105,25 @@ def checkout_page(request):
         "razorpay_key": settings.RAZORPAY_KEY_ID,
     })
 
-def checkout_view(request):
-    items = ...
-    subtotal = ...
-    shipping = ...
-    total = subtotal + shipping
+def thankyou(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        address = request.POST.get("address")
+        phone = request.POST.get("phone")
+        email = request.POST.get("email")
 
-    client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+        context = {
+            "name": name,
+            "address": address,
+            "phone": phone,
+            "email": email,
+        }
 
-    razorpay_order = client.order.create({
-        "amount": int(total * 100),  # amount in paisa
-        "currency": "INR",
-        "payment_capture": "1"
-    })
+        return render(request, "thankyou.html", context)
 
-    context = {
-        "items": items,
-        "subtotal": subtotal,
-        "shipping": shipping,
-        "total": total,
-        "razorpay_order_id": razorpay_order["id"],
-        "razorpay_key": settings.RAZORPAY_KEY_ID,
-    }
+    return redirect("home")
 
-    return render(request, "checkout.html", context)
 
-def thankyou(request, order_id):
-    order = get_object_or_404(Order, id=order_id)
-    return render(request, "thankyou.html", {"order": order})
+
+
    
