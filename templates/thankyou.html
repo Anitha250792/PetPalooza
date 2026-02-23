@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+.thankyou-wrapper {
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+    background: #f6f7fb;
+}
+
+.thankyou-card {
+    background: #8BE28B;
+    padding: 50px 60px;
+    border-radius: 25px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    max-width: 650px;
+    width: 100%;
+}
+
+.thankyou-card h2 {
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.thankyou-card p {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+.billing-details {
+    margin-top: 30px;
+}
+
+.billing-details h5 {
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.billing-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.billing-row span:first-child {
+    font-weight: 600;
+}
+
+.back-btn {
+    display: block;
+    margin: 30px auto 0;
+    background: linear-gradient(135deg, #1f4df0, #163bc4);
+    color: white;
+    border: none;
+    padding: 12px 35px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    width: fit-content;
+}
+
+.back-btn:hover {
+    color: white;
+    transform: translateY(-2px);
+}
+</style>
+
+<div class="thankyou-wrapper">
+    <div class="thankyou-card">
+
+        <h2>Thank you for your purchase! 🎉</h2>
+
+        <p>
+            Your order will be processed within 24 hours during working days.
+            We will notify you by email once your order has been shipped.
+        </p>
+
+        <div class="billing-details">
+            <h5>Billing Address</h5>
+
+            <div class="billing-row">
+                <span>Name</span>
+                <span>{{ order.name }}</span>
+            </div>
+
+            <div class="billing-row">
+                <span>Address</span>
+                <span>{{ order.address }}</span>
+            </div>
+
+            <div class="billing-row">
+                <span>Phone</span>
+                <span>{{ order.phone }}</span>
+            </div>
+
+            <div class="billing-row">
+                <span>Email</span>
+                <span>{{ order.email }}</span>
+            </div>
+        </div>
+
+        <a href="{% url 'home' %}" class="back-btn">Back to Home</a>
+
+    </div>
+</div>
+
+{% endblock %}

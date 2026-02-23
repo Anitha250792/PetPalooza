@@ -114,4 +114,8 @@ def checkout_view(request):
     }
 
     return render(request, "checkout.html", context)
+
+def thankyou(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    return render(request, "thankyou.html", {"order": order})
    

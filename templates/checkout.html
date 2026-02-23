@@ -353,7 +353,7 @@ document.querySelector('.order-now-btn').addEventListener('click', function(e) {
         "order_id": "{{ razorpay_order_id }}",
         "handler": function (response){
             alert("Payment Successful!");
-            window.location.href = "/order-success/";
+            window.location.href = "/cart/thankyou/" + order_id + "/";
         },
         "theme": {
             "color": "#1f4df0"
