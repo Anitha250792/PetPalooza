@@ -328,19 +328,44 @@ body {
 </div>
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
+document.querySelectorAll('.payment-option').forEach(option => {
+    option.addEventListener('click', function() {
+        document.querySelectorAll('.payment-option').forEach(el => {
+            el.classList.remove('active');
+            el.querySelector('input').checked = false;
+        });
+
+        this.classList.add('active');
+        this.querySelector('input').checked = true;
+    });
+});
+
 document.querySelector('.order-now-btn').addEventListener('click', function(e) {
 
     let selectedPayment = document.querySelector('input[name="payment"]:checked');
 
     if (!selectedPayment) {
-        alert("Please select a payment method");
+        Swal.fire({
+            icon: 'warning',
+            title: 'Select Payment Method',
+            text: 'Please choose a payment method to continue.',
+            confirmButtonColor: '#1f4df0'
+        });
         return;
     }
 
     if (selectedPayment.value === "cod") {
-        alert("Order placed successfully with Cash on Delivery");
+        Swal.fire({
+            icon: 'success',
+            title: 'Order Placed!',
+            text: 'Cash on Delivery selected.',
+            confirmButtonColor: '#1f4df0'
+        }).then(() => {
+            window.location.href = "/cart/thankyou/1/";
+        });
         return;
     }
 
@@ -352,8 +377,16 @@ document.querySelector('.order-now-btn').addEventListener('click', function(e) {
         "description": "Order Payment",
         "order_id": "{{ razorpay_order_id }}",
         "handler": function (response){
-            alert("Payment Successful!");
-            window.location.href = "/cart/thankyou/" + order_id + "/";
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Payment Successful!',
+                text: 'Your order has been placed successfully.',
+                confirmButtonColor: '#1f4df0'
+            }).then(() => {
+                window.location.href = "/cart/thankyou/1/";
+            });
+
         },
         "theme": {
             "color": "#1f4df0"

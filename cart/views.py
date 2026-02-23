@@ -83,11 +83,22 @@ def checkout_page(request):
     shipping = 99 if subtotal > 0 else 0
     total = subtotal + shipping
 
+    # Create Razorpay order
+    client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+
+    razorpay_order = client.order.create({
+        "amount": int(total * 100),
+        "currency": "INR",
+        "payment_capture": "1"
+    })
+
     return render(request, "checkout.html", {
         "items": items,
         "subtotal": subtotal,
         "shipping": shipping,
         "total": total,
+        "razorpay_order_id": razorpay_order["id"],
+        "razorpay_key": settings.RAZORPAY_KEY_ID,
     })
 
 def checkout_view(request):
