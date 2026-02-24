@@ -52,14 +52,15 @@
 
             <!-- PET CARDS -->
             <div class="pet-slider" id="petSlider">
-    {% for pet in pets %}
-    <div class="pet-card">
-        <div class="pet-img-box">
-            <img src="{{ pet.image.url }}">
-        </div>
-        <p>{{ pet.name }}</p>
+
+    {% for pet in pet_categories %}
+<div class="pet-card">
+    <div class="pet-img-box">
+        <img src="{{ pet.image.url }}" alt="{{ pet.name }}">
     </div>
-    {% endfor %}
+    <p>{{ pet.name }}</p>
+</div>
+{% endfor %}
 </div>
             <!-- RIGHT ARROW -->
             <button class="slider-btn right-btn" onclick="scrollPets(1)">
@@ -213,20 +214,16 @@
         <div class="services-grid">
 
             <!-- CARD 1 -->
-            {% for service in services %}
+            {% for service in service_cards %}
 <div class="service-card">
     <div class="service-img">
-        <img src="{{ service.image.url }}">
+        <img src="{{ service.image.url }}" alt="{{ service.title }}">
         <div class="service-label">{{ service.title }}</div>
     </div>
     <div class="service-desc">
         <p>{{ service.description }}</p>
     </div>
-                <div class="service-desc">
-                    <p>New Camper Special<br>
-                    SAVE 50% on 1st day of play</p>
-                </div>
-            </div>
+</div>
 {% endfor %}
         </div>
 

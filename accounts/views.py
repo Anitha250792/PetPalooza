@@ -53,8 +53,15 @@ def logout_view(request):
 
 def home_view(request):
     hero_slides = HeroSlide.objects.filter(is_active=True)
+    pet_categories = PetCategory.objects.all()
+    promo_sections = PromoSection.objects.all()
+    service_cards = ServiceCard.objects.all()
+
     return render(request, "home.html", {
-        "hero_slides": hero_slides
+        "hero_slides": hero_slides,
+        "pet_categories": pet_categories,
+        "promo_sections": promo_sections,
+        "service_cards": service_cards,
     })
 
 def contact_view(request):
