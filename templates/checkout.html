@@ -333,7 +333,7 @@ body {
 
 <script>
 document.querySelectorAll('.payment-option').forEach(option => {
-    option.addEventListener('click', function() {
+    option.addEventListener('click', function () {
         document.querySelectorAll('.payment-option').forEach(el => {
             el.classList.remove('active');
             el.querySelector('input').checked = false;
@@ -344,7 +344,9 @@ document.querySelectorAll('.payment-option').forEach(option => {
     });
 });
 
-document.querySelector('.order-now-btn').addEventListener('click', function(e) {
+document.querySelector('.order-now-btn').addEventListener('click', function (e) {
+
+    e.preventDefault();
 
     let selectedPayment = document.querySelector('input[name="payment"]:checked');
 
@@ -358,64 +360,71 @@ document.querySelector('.order-now-btn').addEventListener('click', function(e) {
         return;
     }
 
-    if (selectedPayment.value === "cod") {
-        Swal.fire({
-            icon: 'success',
-            title: 'Order Placed!',
-            text: 'Cash on Delivery selected.',
-            confirmButtonColor: '#1f4df0'
-        }).then(() => {
-            let name = document.getElementById("name").value;
-let address = document.getElementById("address").value;
-let phone = document.getElementById("phone").value;
-let email = document.getElementById("email").value;
+    // Collect user details
+    let name = document.getElementById("name").value;
+    let address = document.getElementById("address").value;
+    let phone = document.getElementById("phone").value;
+    let email = document.getElementById("email").value;
 
-window.location.href =
-    "/cart/thankyou/?name=" + encodeURIComponent(name) +
-    "&address=" + encodeURIComponent(address) +
-    "&phone=" + encodeURIComponent(phone) +
-    "&email=" + encodeURIComponent(email);
+    if (!name || !address || !phone || !email) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Missing Details',
+            text: 'Please fill all billing details.',
         });
         return;
     }
 
     var options = {
-        "key": "{{ razorpay_key }}",
-        "amount": "{{ total|floatformat:2 }}" * 100,
-        "currency": "INR",
-        "name": "PetPalooza",
-        "description": "Order Payment",
-        "order_id": "{{ razorpay_order_id }}",
-        "handler": function (response){
+        key: "{{ razorpay_key }}",
+        amount: "{{ amount_paise }}",
+        currency: "INR",
+        name: "PetPalooza",
+        description: "Order Payment",
+        order_id: "{{ razorpay_order_id }}",
 
-    var form = document.createElement("form");
-    form.method = "POST";
-    form.action = "{% url 'payment_success' %}";
+        handler: function (response) {
 
-    var csrf = document.createElement("input");
-    csrf.type = "hidden";
-    csrf.name = "csrfmiddlewaretoken";
-    csrf.value = "{{ csrf_token }}";
-    form.appendChild(csrf);
+            var form = document.createElement("form");
+            form.method = "POST";
+            form.action = "{% url 'payment_success' %}";
 
-    for (var key in response) {
-        var hiddenField = document.createElement("input");
-        hiddenField.type = "hidden";
-        hiddenField.name = key;
-        hiddenField.value = response[key];
-        form.appendChild(hiddenField);
-    }
+            // Razorpay response fields
+            for (var key in response) {
+                var hiddenField = document.createElement("input");
+                hiddenField.type = "hidden";
+                hiddenField.name = key;
+                hiddenField.value = response[key];
+                form.appendChild(hiddenField);
+            }
 
-    document.body.appendChild(form);
-    form.submit();
-},
-        "theme": {
-            "color": "#1f4df0"
+            // Billing fields
+            var fields = {
+                name: name,
+                address: address,
+                phone: phone,
+                email: email
+            };
+
+            for (var key in fields) {
+                var input = document.createElement("input");
+                input.type = "hidden";
+                input.name = key;
+                input.value = fields[key];
+                form.appendChild(input);
+            }
+
+            document.body.appendChild(form);
+            form.submit();
+        },
+
+        theme: {
+            color: "#1f4df0"
         }
     };
 
-    var rzp1 = new Razorpay(options);
-    rzp1.open();
+    var rzp = new Razorpay(options);
+    rzp.open();
 });
 </script>
 {% endblock %}

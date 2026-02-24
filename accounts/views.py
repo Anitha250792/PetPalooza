@@ -4,6 +4,8 @@ from django.contrib import messages
 from .forms import RegisterForm, LoginForm
 from django.contrib.auth.models import User
 from .forms import ContactForm
+from core.models import HeroSlide, PetCategory, PromoSection, ServiceCard
+from cart.models import Product
 
 def login_view(request):
 
@@ -50,7 +52,19 @@ def logout_view(request):
     return redirect("/")
 
 def home_view(request):
-    return render(request, "home.html")
+    slides = HeroSlide.objects.all()
+    pets = PetCategory.objects.all()
+    promo = PromoSection.objects.first()
+    services = ServiceCard.objects.all()
+    top_products = Product.objects.all()[:6]  # or filter(category="Dog")
+
+    return render(request, "home.html", {
+        "slides": slides,
+        "pets": pets,
+        "promo": promo,
+        "services": services,
+        "top_products": top_products,
+    })
 
 def contact_view(request):
     if request.method == "POST":
