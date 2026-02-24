@@ -1,10 +1,38 @@
 
 from cart.models import Product
 from django.shortcuts import render
+from django.db.models import Q
 
 def dog(request):
-    products = Product.objects.filter(category="Dog")
-    return render(request, 'dog.html', {'products': products})
+    products = Product.objects.filter(category__iexact="dog")
+
+    # 🔎 FILTER BY MIN & MAX PRICE
+    min_price = request.GET.get("min_price")
+    max_price = request.GET.get("max_price")
+
+    if min_price:
+        products = products.filter(price__gte=min_price)
+
+    if max_price:
+        products = products.filter(price__lte=max_price)
+
+    # 🔽 SORTING
+    sort = request.GET.get("sort")
+
+    if sort == "low":
+        products = products.order_by("price")
+
+    elif sort == "high":
+        products = products.order_by("-price")
+
+    elif sort == "rating":
+        products = products.order_by("-rating")
+
+    context = {
+        "products": products
+    }
+
+    return render(request, "dog.html", context)
 
 def addtocart(request):
     return render(request, 'addtocart.html')

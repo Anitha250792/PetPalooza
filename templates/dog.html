@@ -114,80 +114,98 @@ body {
     }
 }
 </style>
-
 <div class="container mt-5">
 
-    <h2 class="fw-bold mb-4">Dog</h2>
+<div class="row">
 
-    {% if products %}
-    <div class="row g-4">
+    <!-- ================= LEFT SIDEBAR ================= -->
+    <div class="col-lg-3">
 
-        {% for product in products %}
-<div class="col-lg-4 col-md-6">
-    <div class="product-card text-center">
+        <!-- Filters -->
+        <div class="card p-3 mb-4">
+            <h5 class="fw-bold">Filters</h5>
 
-        {% if product.image %}
-            <img src="{{ product.image.url }}" class="product-img">
-        {% else %}
-            <img src="{% static 'images/default-product.png' %}" class="product-img">
-        {% endif %}
+            <form method="get">
 
-        <h5 class="product-title">
-            {{ product.name }}
-        </h5>
+                <label>Min Price</label>
+                <input type="number" name="min_price" class="form-control mb-2">
 
-        <div class="rating">
-            {% for i in "12345" %}
-                {% if forloop.counter <= product.rating %}
-                    ⭐
-                {% else %}
-                    ☆
-                {% endif %}
+                <label>Max Price</label>
+                <input type="number" name="max_price" class="form-control mb-3">
+
+                <button class="btn btn-primary w-100">Apply</button>
+
+            </form>
+        </div>
+
+        <!-- Left Promo Image 1 -->
+        <div class="mb-4">
+            <img src="{% static 'images/dog-promo1.png' %}" class="img-fluid rounded">
+        </div>
+
+        <!-- Left Promo Image 2 -->
+        <div>
+            <img src="{% static 'images/dog-promo2.png' %}" class="img-fluid rounded">
+        </div>
+
+    </div>
+
+
+    <!-- ================= RIGHT PRODUCTS ================= -->
+    <div class="col-lg-9">
+
+        <!-- Sort Dropdown -->
+        <div class="d-flex justify-content-end mb-4">
+            <form method="get">
+                <select name="sort" class="form-select w-auto" onchange="this.form.submit()">
+                    <option value="">Sort By</option>
+                    <option value="low">Price: Low to High</option>
+                    <option value="high">Price: High to Low</option>
+                    <option value="rating">Top Rated</option>
+                </select>
+            </form>
+        </div>
+
+
+        <!-- Product Grid -->
+        <div class="row g-4">
+
+            {% for product in products %}
+            <div class="col-lg-4 col-md-6">
+                <div class="product-card text-center">
+
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" class="product-img">
+                    {% endif %}
+
+                    <h5 class="product-title">{{ product.name }}</h5>
+
+                    <div class="rating">
+                        ⭐ {{ product.rating }}
+                        <span class="review-count">({{ product.review_count }})</span>
+                    </div>
+
+                    <div class="price">
+                        ₹ {{ product.price }}
+                    </div>
+
+                    <span class="weight-badge">
+                        {{ product.weight }}
+                    </span>
+
+                    <a href="{% url 'add_to_cart' product.id %}" class="add-btn">
+                        Add to Cart
+                    </a>
+
+                </div>
+            </div>
             {% endfor %}
-            <span class="review-count">({{ product.review_count }})</span>
+
         </div>
-
-        <div class="price">
-            ₹ {{ product.price }}
-        </div>
-
-        <span class="weight-badge">
-            {{ product.weight }}
-        </span>
-
-        <a href="{% url 'add_to_cart' product.id %}" class="add-btn">
-            Add to Cart
-        </a>
 
     </div>
+
 </div>
-{% endfor %}
-
-
-    </div>
-
-    {% else %}
-        <p>No products available.</p>
-    {% endif %}
-
-    <!-- Pagination (Static UI only) -->
-    <div class="text-center mt-5">
-        Page
-        <span class="btn btn-primary btn-sm">1</span>
-        <span class="btn btn-light btn-sm">2</span>
-        <span class="btn btn-light btn-sm">3</span>
-        <span class="btn btn-light btn-sm">4</span>
-        <span class="btn btn-light btn-sm">5</span>
-    </div>
-
-    <!-- Green Nutrition Banner -->
-    <div class="green-banner mt-5">
-        <h3>
-            A balanced dog diet should consist of protein, fats,
-            carbohydrates, vitamins, and minerals,
-            along with plenty of fresh water.
-        </h3>
-    </div>
 
 </div>
 
