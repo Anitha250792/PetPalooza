@@ -156,6 +156,3 @@ CSRF_TRUSTED_ORIGINS = [
     "https://*.onrender.com",
 ]
 
-if os.environ.get("RENDER"):
-    from django.core.management import call_command
-    call_command("migrate")
