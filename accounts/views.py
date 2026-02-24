@@ -52,29 +52,9 @@ def logout_view(request):
     return redirect("/")
 
 def home_view(request):
-
-    try:
-        user = User.objects.get(username="ani123@gmail.com")
-        user.set_password("Admin@123")   # new password
-        user.is_staff = True
-        user.is_superuser = True
-        user.save()
-    except:
-        pass
-
-    return render(request, "home.html")
-    slides = HeroSlide.objects.all()
-    pets = PetCategory.objects.all()
-    promo = PromoSection.objects.first()
-    services = ServiceCard.objects.all()
-    top_products = Product.objects.all()[:6]  # or filter(category="Dog")
-
+    hero_slides = HeroSlide.objects.filter(is_active=True)
     return render(request, "home.html", {
-        "slides": slides,
-        "pets": pets,
-        "promo": promo,
-        "services": services,
-        "top_products": top_products,
+        "hero_slides": hero_slides
     })
 
 def contact_view(request):
