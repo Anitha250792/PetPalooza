@@ -1,35 +1,31 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block extra_css %}
+
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 {% endblock %}
-
 {% block content %}
 
-<!-- ================= HERO CAROUSEL ================= -->
 <div id="heroCarousel"
      class="carousel slide carousel-fade"
      data-bs-ride="carousel"
      data-bs-interval="5000">
 
-    <div class="carousel-inner">
-        {% for slide in slides %}
-        <div class="carousel-item {% if forloop.first %}active{% endif %}">
-            <img src="{{ slide.image.url }}"
-                 class="d-block w-100 hero-img"
-                 alt="Hero Slide">
-        </div>
-        {% endfor %}
-    </div>
 
+     <div class="carousel-inner">
+    {% for slide in slides %}
+    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <img src="{{ slide.image.url }}" class="d-block w-100 hero-img">
+    </div>
+    {% endfor %}
+</div>
+
+
+    <!-- Indicators -->
     <div class="carousel-indicators custom-indicators">
-        {% for slide in slides %}
-        <button type="button"
-                data-bs-target="#heroCarousel"
-                data-bs-slide-to="{{ forloop.counter0 }}"
-                class="{% if forloop.first %}active{% endif %}">
-        </button>
-        {% endfor %}
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
     </div>
 
 </div>
@@ -38,114 +34,198 @@
 <!-- ================= SHOP BY PET ================= -->
 <section class="shop-by-pet-section">
     <div class="container">
+
         <h2 class="section-title">Shop by Pet</h2>
 
         <div class="pet-slider-wrapper">
-            <button class="slider-btn left-btn" onclick="scrollPets(-1)">&#10094;</button>
 
+            <!-- LEFT ARROW -->
+            <button class="slider-btn left-btn" onclick="scrollPets(-1)">
+                &#10094;
+            </button>
+
+            <!-- PET CARDS -->
             <div class="pet-slider" id="petSlider">
-                {% for pet in pets %}
-                <div class="pet-card">
-                    <div class="pet-img-box">
-                        <img src="{{ pet.image.url }}">
-                    </div>
-                    <p>{{ pet.name }}</p>
-                </div>
-                {% endfor %}
-            </div>
-
-            <button class="slider-btn right-btn" onclick="scrollPets(1)">&#10095;</button>
+    {% for pet in pets %}
+    <div class="pet-card">
+        <div class="pet-img-box">
+            <img src="{{ pet.image.url }}">
         </div>
+        <p>{{ pet.name }}</p>
+    </div>
+    {% endfor %}
+</div>
+            <!-- RIGHT ARROW -->
+            <button class="slider-btn right-btn" onclick="scrollPets(1)">
+                &#10095;
+            </button>
+
+        </div>
+
     </div>
 </section>
-
-
-<!-- ================= TOP RATED PRODUCTS ================= -->
 <section class="top-rated-section">
+
     <h2 class="section-title">Top Rated Calming Products</h2>
 
     <div class="top-rated-wrapper">
 
         <!-- LEFT BANNER -->
         <div class="calm-banner">
-            {% if promo %}
-                <img src="{{ promo.image.url }}" alt="Calm Banner">
-                <div class="banner-text">
-                    <h3>{{ promo.title }}</h3>
-                    <p>{{ promo.description }}</p>
-                </div>
-            {% endif %}
+            <img src="{% static 'images/calm-banner.png' %}" alt="Calm Banner">
+            <div class="banner-text">
+                <h3>Stress- Free Summer</h3>
+                <p>Keep your pup calm along all season</p>
+            </div>
         </div>
 
         <!-- RIGHT PRODUCTS -->
         <div class="products-area">
+
             <button class="product-arrow left-arrow">❮</button>
 
             <div class="products-slider" id="productSlider">
-                {% for product in top_products %}
+
+                <!-- PRODUCT CARD -->
                 <div class="product-card">
-                    <img src="{{ product.image.url }}">
-                    <h5>{{ product.name }}</h5>
+                    <img src="{% static 'images/product1.png' %}">
+                    <h5>Native Pet Calm Chews</h5>
                     <div class="stars">★★★★★</div>
-                    <p class="price">₹ {{ product.price }}</p>
+                    <p class="price">₹ 299</p>
                 </div>
-                {% endfor %}
+
+                <div class="product-card">
+                    <img src="{% static 'images/product2.png' %}">
+                    <h5>Zesty Paws Calming Bites</h5>
+                    <div class="stars">★★★★☆</div>
+                    <p class="price">₹ 309</p>
+                </div>
+
+                <div class="product-card">
+                    <img src="{% static 'images/product3.png' %}">
+                    <h5>VetIQ Calming - 60 Count</h5>
+                    <div class="stars">★★★★★</div>
+                    <p class="price">₹ 459</p>
+                </div>
+
+                <div class="product-card">
+                    <img src="{% static 'images/product4.png' %}">
+                    <h5>Pet Honesty Hemp Calming</h5>
+                    <div class="stars">★★★★☆</div>
+                    <p class="price">₹ 599</p>
+                </div>
+
+                <div class="product-card">
+                    <img src="{% static 'images/product5.png' %}">
+                    <h5>Zesty Paws Hemp Elements</h5>
+                    <div class="stars">★★★★☆</div>
+                    <p class="price">₹ 499</p>
+                </div>
+
+                <div class="product-card">
+                    <img src="{% static 'images/product6.png' %}">
+                    <h5>VetriScience Composure Calming Chews 45ct</h5>
+                    <div class="stars">★★★★☆</div>
+                    <p class="price">₹ 589</p>
+                </div>
+
             </div>
 
             <button class="product-arrow right-arrow">❯</button>
+
         </div>
 
     </div>
-</section>
 
+</section>
 
 <!-- ================= AUTOSHIP PROMO SECTION ================= -->
 <section class="autoship-section">
-    {% if promo %}
+
     <div class="autoship-container">
 
+        <!-- LEFT CONTENT -->
         <div class="autoship-left">
-            <h2>{{ promo.title }}</h2>
-            <p>{{ promo.description }}</p>
-            <button class="autoship-btn">{{ promo.button_text }}</button>
+            <h2>Store - Door savings with Autoship.</h2>
+
+            <p>
+                SAVE 35% on first order plus stack limited-time deals
+                on top Autoship items, see terms
+            </p>
+
+            <button class="autoship-btn">Shop & Save</button>
         </div>
 
+        <!-- RIGHT IMAGE -->
         <div class="autoship-right">
-            <img src="{{ promo.image.url }}">
+            <img src="{% static 'images/promo-dog-cat.png' %}" alt="Pets Promo">
+
             <div class="save-badge">
                 Save <br> 35%
             </div>
         </div>
 
     </div>
-    {% endif %}
+
 </section>
 
 
+<!-- ================= GREEN OFFER SECTION ================= -->
+<section class="green-offer-section">
+
+    <div class="green-offer-container">
+
+        <div class="green-offer-text">
+            <h3>
+                Buy 1 Blue wilderness dry dog food, 13-28lbs,
+                get 2 free wild cut Toppers*
+            </h3>
+        </div>
+
+        <div class="green-offer-img">
+            <img src="{% static 'images/blue-dog-food.png' %}" alt="Dog Food">
+        </div>
+
+        <div class="green-offer-btn">
+            <button class="shop-now-btn">Shop Now</button>
+        </div>
+
+    </div>
+
+</section>
+
 <!-- ================= PET SERVICES SECTION ================= -->
 <section class="pet-services-section">
+
     <div class="container">
 
         <div class="services-header">
-            <h2>Pet Services</h2>
+            <h2>Pet Servicess</h2>
             <p>Treats Rewards members earn points on every service</p>
         </div>
 
         <div class="services-grid">
+
+            <!-- CARD 1 -->
             {% for service in services %}
-            <div class="service-card">
-                <div class="service-img">
-                    <img src="{{ service.image.url }}" alt="{{ service.title }}">
-                    <div class="service-label">{{ service.title }}</div>
-                </div>
+<div class="service-card">
+    <div class="service-img">
+        <img src="{{ service.image.url }}">
+        <div class="service-label">{{ service.title }}</div>
+    </div>
+    <div class="service-desc">
+        <p>{{ service.description }}</p>
+    </div>
                 <div class="service-desc">
-                    <p>{{ service.description }}</p>
+                    <p>New Camper Special<br>
+                    SAVE 50% on 1st day of play</p>
                 </div>
             </div>
-            {% endfor %}
+{% endfor %}
         </div>
 
     </div>
+
 </section>
 
 {% endblock %}
