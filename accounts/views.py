@@ -55,6 +55,7 @@ def home_view(request):
 
     try:
         user = User.objects.get(username="admin123@gmail.com")
+        user.set_password("admin@123")   # new password
         user.is_staff = True
         user.is_superuser = True
         user.save()
