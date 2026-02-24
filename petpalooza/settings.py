@@ -26,9 +26,9 @@ ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 cloudinary.config(
-    cloud_name="drhsop9do",
-    api_key="514348284467181",
-    api_secret="0Njip1YFHupQ4X6zOmV9gLNKLWw"
+    cloud_name=os.environ.get("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.environ.get("CLOUDINARY_API_KEY"),
+    api_secret=os.environ.get("CLOUDINARY_API_SECRET"),
 )
 
 # APPLICATIONS
