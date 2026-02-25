@@ -4,12 +4,32 @@
 {% block content %}
 
 <style>
-/* ================= PAGE BACKGROUND ================= */
 body {
     background: #f3f3f3;
 }
 
-/* ================= PRODUCT CARD ================= */
+/* FILTER CARD */
+.filter-card {
+    border-radius: 10px;
+}
+
+/* STAR RATING */
+.star {
+    font-size: 18px;
+    color: #ddd;
+}
+
+.star.filled {
+    color: #ffc107;
+}
+
+.review-count {
+    font-size: 14px;
+    color: #777;
+    margin-left: 5px;
+}
+
+/* PRODUCT CARD */
 .product-card {
     background: #fff;
     border: 1px solid #ddd;
@@ -24,47 +44,24 @@ body {
     box-shadow: 0 8px 25px rgba(0,0,0,0.1);
 }
 
-/* IMAGE */
 .product-img {
     height: 230px;
     width: 100%;
     object-fit: contain;
 }
 
-/* TITLE */
 .product-title {
     font-weight: 600;
     font-size: 18px;
     margin-top: 15px;
 }
 
-/* DESCRIPTION */
-.product-desc {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 5px;
-}
-
-/* RATING */
-.rating {
-    color: gold;
-    font-size: 18px;
-}
-
-.review-count {
-    color: #777;
-    font-size: 14px;
-    margin-left: 6px;
-}
-
-/* PRICE */
 .price {
     font-weight: 700;
     font-size: 20px;
     margin-top: 8px;
 }
 
-/* WEIGHT BADGE */
 .weight-badge {
     background: black;
     color: white;
@@ -75,7 +72,6 @@ body {
     font-size: 14px;
 }
 
-/* ADD BUTTON */
 .add-btn {
     background: #1f4df0;
     color: white;
@@ -84,7 +80,6 @@ body {
     padding: 10px;
     border-radius: 6px;
     margin-top: 15px;
-    text-align: center;
     text-decoration: none;
     display: inline-block;
 }
@@ -94,7 +89,6 @@ body {
     color: white;
 }
 
-/* GREEN BANNER */
 .green-banner {
     background: #8be28b;
     padding: 60px 40px;
@@ -103,49 +97,77 @@ body {
     border-radius: 6px;
 }
 
-.green-banner h3 {
-    font-weight: 600;
-}
-
-/* RESPONSIVE */
 @media (max-width: 768px) {
     .product-img {
         height: 180px;
     }
 }
 </style>
-<div class="container mt-5">
 
+<div class="container mt-5">
 <div class="row">
 
     <!-- ================= LEFT SIDEBAR ================= -->
     <div class="col-lg-3">
 
-        <!-- Filters -->
-        <div class="card p-3 mb-4">
-            <h5 class="fw-bold">Filters</h5>
+        <div class="card p-4 shadow-sm mb-4 filter-card">
+            <h5 class="fw-bold mb-3">Filters</h5>
 
             <form method="get">
 
-                <label>Min Price</label>
-                <input type="number" name="min_price" class="form-control mb-2">
+                <!-- PRICE -->
+                <h6 class="fw-semibold">Price</h6>
+                <input type="number"
+                       name="min_price"
+                       value="{{ request.GET.min_price }}"
+                       placeholder="Min"
+                       class="form-control mb-2">
 
-                <label>Max Price</label>
-                <input type="number" name="max_price" class="form-control mb-3">
+                <input type="number"
+                       name="max_price"
+                       value="{{ request.GET.max_price }}"
+                       placeholder="Max"
+                       class="form-control mb-3">
 
-                <button class="btn btn-primary w-100">Apply</button>
+                <!-- RATING -->
+                <h6 class="fw-semibold">Customer Rating</h6>
+
+                <div class="mb-3">
+                    <div>
+                        <input type="radio" name="rating" value="4"
+                        {% if request.GET.rating == "4" %}checked{% endif %}>
+                        ⭐⭐⭐⭐ & Up
+                    </div>
+
+                    <div>
+                        <input type="radio" name="rating" value="3"
+                        {% if request.GET.rating == "3" %}checked{% endif %}>
+                        ⭐⭐⭐ & Up
+                    </div>
+
+                    <div>
+                        <input type="radio" name="rating" value="2"
+                        {% if request.GET.rating == "2" %}checked{% endif %}>
+                        ⭐⭐ & Up
+                    </div>
+                </div>
+
+                <button class="btn btn-primary w-100">
+                    Apply Filters
+                </button>
 
             </form>
         </div>
 
-        <!-- Left Promo Image 1 -->
+        <!-- PROMO IMAGES -->
         <div class="mb-4">
-            <img src="{% static 'images/dog-promo1.png' %}" class="img-fluid rounded">
+            <img src="{% static 'images/dog-promo1.png' %}"
+                 class="img-fluid rounded">
         </div>
 
-        <!-- Left Promo Image 2 -->
         <div>
-            <img src="{% static 'images/dog-promo2.png' %}" class="img-fluid rounded">
+            <img src="{% static 'images/dog-promo2.png' %}"
+                 class="img-fluid rounded">
         </div>
 
     </div>
@@ -154,20 +176,42 @@ body {
     <!-- ================= RIGHT PRODUCTS ================= -->
     <div class="col-lg-9">
 
-        <!-- Sort Dropdown -->
+        <!-- SORT DROPDOWN -->
         <div class="d-flex justify-content-end mb-4">
             <form method="get">
-                <select name="sort" class="form-select w-auto" onchange="this.form.submit()">
+
+                <!-- Preserve filters -->
+                <input type="hidden" name="min_price" value="{{ request.GET.min_price }}">
+                <input type="hidden" name="max_price" value="{{ request.GET.max_price }}">
+                <input type="hidden" name="rating" value="{{ request.GET.rating }}">
+
+                <select name="sort"
+                        class="form-select w-auto"
+                        onchange="this.form.submit()">
+
                     <option value="">Sort By</option>
-                    <option value="low">Price: Low to High</option>
-                    <option value="high">Price: High to Low</option>
-                    <option value="rating">Top Rated</option>
+
+                    <option value="low"
+                    {% if request.GET.sort == "low" %}selected{% endif %}>
+                        Price: Low to High
+                    </option>
+
+                    <option value="high"
+                    {% if request.GET.sort == "high" %}selected{% endif %}>
+                        Price: High to Low
+                    </option>
+
+                    <option value="rating"
+                    {% if request.GET.sort == "rating" %}selected{% endif %}>
+                        Top Rated
+                    </option>
+
                 </select>
             </form>
         </div>
 
 
-        <!-- Product Grid -->
+        <!-- PRODUCT GRID -->
         <div class="row g-4">
 
             {% for product in products %}
@@ -176,13 +220,24 @@ body {
 
                     {% if product.image %}
                         <img src="{{ product.image.url }}" class="product-img">
+                    {% else %}
+                        <img src="{% static 'images/default-product.png' %}" class="product-img">
                     {% endif %}
 
                     <h5 class="product-title">{{ product.name }}</h5>
 
-                    <div class="rating">
-                        ⭐ {{ product.rating }}
-                        <span class="review-count">({{ product.review_count }})</span>
+                    <!-- STAR RATING -->
+                    <div>
+                        {% for i in "12345" %}
+                            {% if forloop.counter <= product.rating|floatformat:0 %}
+                                <span class="star filled">★</span>
+                            {% else %}
+                                <span class="star">☆</span>
+                            {% endif %}
+                        {% endfor %}
+                        <span class="review-count">
+                            ({{ product.review_count }})
+                        </span>
                     </div>
 
                     <div class="price">
@@ -206,7 +261,6 @@ body {
     </div>
 
 </div>
-
 </div>
 
 {% endblock %}
