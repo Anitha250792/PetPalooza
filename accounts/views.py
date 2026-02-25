@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from .forms import ContactForm
 from core.models import HeroSlide, PetCategory, PromoSection, ServiceCard
 from cart.models import Product
+from django.db.models import Q
 
 def login_view(request):
 
@@ -75,3 +76,18 @@ def contact_view(request):
         form = ContactForm()
 
     return render(request, 'contact.html', {'form': form})
+
+def search(request):
+    query = request.GET.get('q')
+    products = Product.objects.all()
+
+    if query:
+        products = products.filter(
+            Q(name__icontains=query) |
+            Q(category__icontains=query)
+        )
+
+    return render(request, "search.html", {
+        "products": products,
+        "query": query
+    })

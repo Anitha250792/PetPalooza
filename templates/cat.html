@@ -4,6 +4,32 @@
 {% block content %}
 
 <style>
+body {
+    background: #f3f3f3;
+}
+
+/* FILTER CARD */
+.filter-card {
+    border-radius: 10px;
+}
+
+/* STAR RATING */
+.star {
+    font-size: 18px;
+    color: #ddd;
+}
+
+.star.filled {
+    color: #ffc107;
+}
+
+.review-count {
+    font-size: 14px;
+    color: #777;
+    margin-left: 5px;
+}
+
+/* PRODUCT CARD */
 .product-card {
     background: #fff;
     border: 1px solid #ddd;
@@ -30,17 +56,6 @@
     margin-top: 15px;
 }
 
-.rating {
-    color: gold;
-    font-size: 18px;
-}
-
-.review-count {
-    color: #777;
-    font-size: 14px;
-    margin-left: 6px;
-}
-
 .price {
     font-weight: 700;
     font-size: 20px;
@@ -65,63 +80,187 @@
     padding: 10px;
     border-radius: 6px;
     margin-top: 15px;
-    text-align: center;
     text-decoration: none;
     display: inline-block;
+}
+
+.add-btn:hover {
+    background: #163bc4;
+    color: white;
+}
+
+.green-banner {
+    background: #8be28b;
+    padding: 60px 40px;
+    text-align: center;
+    margin-top: 60px;
+    border-radius: 6px;
+}
+
+@media (max-width: 768px) {
+    .product-img {
+        height: 180px;
+    }
 }
 </style>
 
 <div class="container mt-5">
+<div class="row">
 
-    <h2 class="fw-bold mb-4">Cat</h2>
+    <!-- ================= LEFT SIDEBAR ================= -->
+    <div class="col-lg-3">
 
-    {% if products %}
-    <div class="row g-4">
-        {% for product in products %}
-        <div class="col-lg-4 col-md-6">
-            <div class="product-card text-center">
+        <div class="card p-4 shadow-sm mb-4 filter-card">
+            <h5 class="fw-bold mb-3">Filters</h5>
 
-                {% if product.image %}
-                    <img src="{{ product.image.url }}" class="product-img">
-                {% else %}
-                    <img src="{% static 'images/default-product.png' %}" class="product-img">
-                {% endif %}
+            <form method="get">
 
-                <h5 class="product-title">
-                    {{ product.name }}
-                </h5>
+                <!-- PRICE -->
+                <h6 class="fw-semibold">Price</h6>
+                <input type="number"
+                       name="min_price"
+                       value="{{ request.GET.min_price }}"
+                       placeholder="Min"
+                       class="form-control mb-2">
 
-                <div class="rating">
-                    {% for i in "12345" %}
-                        {% if forloop.counter <= product.rating %}
-                            ⭐
-                        {% else %}
-                            ☆
-                        {% endif %}
-                    {% endfor %}
-                    <span class="review-count">({{ product.review_count }})</span>
+                <input type="number"
+                       name="max_price"
+                       value="{{ request.GET.max_price }}"
+                       placeholder="Max"
+                       class="form-control mb-3">
+
+                <!-- RATING -->
+                <h6 class="fw-semibold">Customer Rating</h6>
+
+                <div class="mb-3">
+                    <div>
+                        <input type="radio" name="rating" value="4"
+                        {% if request.GET.rating == "4" %}checked{% endif %}>
+                        ⭐⭐⭐⭐ & Up
+                    </div>
+
+                    <div>
+                        <input type="radio" name="rating" value="3"
+                        {% if request.GET.rating == "3" %}checked{% endif %}>
+                        ⭐⭐⭐ & Up
+                    </div>
+
+                    <div>
+                        <input type="radio" name="rating" value="2"
+                        {% if request.GET.rating == "2" %}checked{% endif %}>
+                        ⭐⭐ & Up
+                    </div>
                 </div>
 
-                <div class="price">
-                    ₹ {{ product.price }}
-                </div>
+                <button class="btn btn-primary w-100">
+                    Apply Filters
+                </button>
 
-                <span class="weight-badge">
-                    {{ product.weight }}
-                </span>
-
-                <a href="{% url 'add_to_cart' product.id %}" class="add-btn">
-                    Add to Cart
-                </a>
-
-            </div>
+            </form>
         </div>
-        {% endfor %}
-    </div>
-    {% else %}
-        <p>No Cat products available.</p>
-    {% endif %}
 
+        <!-- PROMO IMAGES -->
+        <div class="mb-4">
+            <img src="{% static 'images/dog-promo1.png' %}"
+                 class="img-fluid rounded">
+        </div>
+
+        <div>
+            <img src="{% static 'images/dog-promo2.png' %}"
+                 class="img-fluid rounded">
+        </div>
+
+    </div>
+
+
+    <!-- ================= RIGHT PRODUCTS ================= -->
+    <div class="col-lg-9">
+
+        <!-- SORT DROPDOWN -->
+        <div class="d-flex justify-content-end mb-4">
+            <form method="get">
+
+                <!-- Preserve filters -->
+                <input type="hidden" name="min_price" value="{{ request.GET.min_price }}">
+                <input type="hidden" name="max_price" value="{{ request.GET.max_price }}">
+                <input type="hidden" name="rating" value="{{ request.GET.rating }}">
+
+                <select name="sort"
+                        class="form-select w-auto"
+                        onchange="this.form.submit()">
+
+                    <option value="">Sort By</option>
+
+                    <option value="low"
+                    {% if request.GET.sort == "low" %}selected{% endif %}>
+                        Price: Low to High
+                    </option>
+
+                    <option value="high"
+                    {% if request.GET.sort == "high" %}selected{% endif %}>
+                        Price: High to Low
+                    </option>
+
+                    <option value="rating"
+                    {% if request.GET.sort == "rating" %}selected{% endif %}>
+                        Top Rated
+                    </option>
+
+                </select>
+            </form>
+        </div>
+
+
+        <!-- PRODUCT GRID -->
+        <div class="row g-4">
+
+            {% for product in products %}
+            <div class="col-lg-4 col-md-6">
+                <div class="product-card text-center">
+
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" class="product-img">
+                    {% else %}
+                        <img src="{% static 'images/default-product.png' %}" class="product-img">
+                    {% endif %}
+
+                    <h5 class="product-title">{{ product.name }}</h5>
+
+                    <!-- STAR RATING -->
+                    <div>
+                        {% for i in "12345" %}
+                            {% if forloop.counter <= product.rating|floatformat:0 %}
+                                <span class="star filled">★</span>
+                            {% else %}
+                                <span class="star">☆</span>
+                            {% endif %}
+                        {% endfor %}
+                        <span class="review-count">
+                            ({{ product.review_count }})
+                        </span>
+                    </div>
+
+                    <div class="price">
+                        ₹ {{ product.price }}
+                    </div>
+
+                    <span class="weight-badge">
+                        {{ product.weight }}
+                    </span>
+
+                    <a href="{% url 'add_to_cart' product.id %}" class="add-btn">
+                        Add to Cart
+                    </a>
+
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
 </div>
 
 {% endblock %}

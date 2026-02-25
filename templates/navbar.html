@@ -21,11 +21,17 @@
 </a>
 
         <!-- SEARCH -->
-        <form class="d-flex search-bar mx-auto">
-            <input class="form-control"
-                   type="search"
-                   placeholder="Search for products">
-        </form>
+        <form class="d-flex search-bar mx-auto"
+      method="GET"
+      action="{% url 'search' %}">
+
+    <input class="form-control"
+           type="search"
+           name="q"
+           placeholder="Search for products..."
+           value="{{ request.GET.q }}">
+
+</form>
 
         <!-- RIGHT MENU -->
         <div class="d-flex align-items-center gap-3">
@@ -35,9 +41,35 @@
             <a href="{% url 'contact' %}" class="nav-link-custom">Contact</a>
 
             <!-- LOGIN ICON -->
-            <a href="{% url 'login' %}" class="nav-icon">
-                <i class="bi bi-person"></i> Log In
-            </a>
+            {% if user.is_authenticated %}
+
+    <div class="dropdown">
+        <a class="nav-icon dropdown-toggle text-decoration-none"
+           href="#"
+           data-bs-toggle="dropdown">
+            <i class="bi bi-person-circle"></i>
+            {{ user.username }}
+        </a>
+
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+                <a class="dropdown-item" href="#">My Profile</a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="{% url 'logout' %}">
+                    Logout
+                </a>
+            </li>
+        </ul>
+    </div>
+
+{% else %}
+
+    <a href="{% url 'login' %}" class="nav-icon">
+        <i class="bi bi-person"></i> Log In
+    </a>
+
+{% endif %}
 
             <!-- CART ICON -->
             <a href="{% url 'cart_page' %}" class="nav-icon position-relative">
@@ -326,4 +358,4 @@
 
         </ul>
     </div>
-</div>
+</div>    

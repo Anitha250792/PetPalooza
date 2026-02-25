@@ -50,23 +50,23 @@
 
             <div class="col-md-2">
                 <ul class="footer-list">
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Shop</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">FAQ</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                    <li><a href="{% url 'dog' %}">Shop</a></li>
+                    <li><a href="{% url 'contact' %}">Blog</a></li>
+                    <li><a href="{% url 'contact' %}">FAQ</a></li>
                 </ul>
             </div>
 
             <div class="col-md-2">
                 <ul class="footer-list">
-                    <li><a href="#">Dog</a></li>
-                    <li><a href="#">Cat</a></li>
-                    <li><a href="#">Fish</a></li>
-                    <li><a href="#">Rats</a></li>
-                    <li><a href="#">Rabbits</a></li>
-                    <li><a href="#">Hamsters</a></li>
-                    <li><a href="#">Guinea pigs</a></li>
+                    <li><a href="{% url 'dog' %}">Dog</a></li>
+                    <li><a href="{% url 'cat' %}">Cat</a></li>
+                    <li><a href="{% url 'smallpets' %}">Fish</a></li>
+                    <li><a href="{% url 'smallpets' %}">Rats</a></li>
+                    <li><a href="{% url 'smallpets' %}">Rabbits</a></li>
+                    <li><a href="{% url 'smallpets' %}">Hamsters</a></li>
+                    <li><a href="{% url 'smallpets' %}">Guinea pigs</a></li>
                 </ul>
             </div>
 

@@ -34,11 +34,55 @@ def addtocart(request):
 
 def cat(request):
     products = Product.objects.filter(category__iexact="cat")
+
+    min_price = request.GET.get('min_price')
+    max_price = request.GET.get('max_price')
+    rating = request.GET.get('rating')
+    sort = request.GET.get('sort')
+
+    if min_price:
+        products = products.filter(price__gte=min_price)
+
+    if max_price:
+        products = products.filter(price__lte=max_price)
+
+    if rating:
+        products = products.filter(rating__gte=rating)
+
+    if sort == "low":
+        products = products.order_by('price')
+    elif sort == "high":
+        products = products.order_by('-price')
+    elif sort == "rating":
+        products = products.order_by('-rating')
+
     return render(request, "cat.html", {"products": products})
 
 
 def smallpets(request):
     products = Product.objects.filter(category__iexact="smallpets")
+
+    min_price = request.GET.get('min_price')
+    max_price = request.GET.get('max_price')
+    rating = request.GET.get('rating')
+    sort = request.GET.get('sort')
+
+    if min_price:
+        products = products.filter(price__gte=min_price)
+
+    if max_price:
+        products = products.filter(price__lte=max_price)
+
+    if rating:
+        products = products.filter(rating__gte=rating)
+
+    if sort == "low":
+        products = products.order_by('price')
+    elif sort == "high":
+        products = products.order_by('-price')
+    elif sort == "rating":
+        products = products.order_by('-rating')
+
     return render(request, "smallpets.html", {"products": products})
 
 def services(request):
