@@ -27,12 +27,7 @@ def dog_view(request):
     elif sort == "rating":
         products = products.order_by('-rating')
 
-
-    context = {
-        "products": products
-    }
-
-    return render(request, "dog.html", context)
+    return render(request, "dog.html", {"products": products})
 
 def addtocart(request):
     return render(request, 'addtocart.html')
