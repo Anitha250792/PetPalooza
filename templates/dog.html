@@ -102,6 +102,7 @@ body {
         height: 180px;
     }
 }
+
 </style>
 
 <div class="container mt-5">
@@ -228,17 +229,17 @@ body {
 
                     <!-- STAR RATING -->
                     <div>
-                        {% for i in "12345" %}
-                            {% if forloop.counter <= product.rating|floatformat:0 %}
-                                <span class="star filled">★</span>
-                            {% else %}
-                                <span class="star">☆</span>
-                            {% endif %}
-                        {% endfor %}
-                        <span class="review-count">
-                            ({{ product.review_count }})
-                        </span>
-                    </div>
+    {% for i in "12345"|make_list %}
+    {% if forloop.counter <= product.rating|floatformat:0 %}
+        <span class="star filled">★</span>
+    {% else %}
+        <span class="star">★</span>
+    {% endif %}
+{% endfor %}
+    <span class="review-count">
+        ({{ product.review_count }})
+    </span>
+</div>
 
                     <div class="price">
                         ₹ {{ product.price }}
