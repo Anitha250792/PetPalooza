@@ -3,7 +3,7 @@ from cart.models import Product
 from django.shortcuts import render
 from django.db.models import Q
 
-def dog_view(request):
+def dog(request):
     products = Product.objects.filter(category="Dog")
 
     min_price = request.GET.get('min_price')
