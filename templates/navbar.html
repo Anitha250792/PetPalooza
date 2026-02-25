@@ -43,32 +43,24 @@
             <!-- LOGIN ICON -->
             {% if user.is_authenticated %}
 
-<div class="dropdown">
-    <a class="nav-icon dropdown-toggle text-decoration-none"
-       href="#"
-       data-bs-toggle="dropdown">
-        <i class="bi bi-person-circle"></i>
-        {{ user.username }}
-    </a>
+    <div class="dropdown">
+        <a class="nav-icon dropdown-toggle text-decoration-none"
+           href="#"
+           data-bs-toggle="dropdown">
+            <i class="bi bi-person-circle"></i>
+            {{ user.username }}
+        </a>
 
-    <ul class="dropdown-menu dropdown-menu-end">
-        <li>
-            <form action="{% url 'logout' %}" method="post">
-                {% csrf_token %}
-                <button type="submit" class="dropdown-item">
-                    Logout
-                </button>
-            </form>
-        </li>
-    </ul>
-</div>
-
-{% else %}
-
-<a href="{% url 'login' %}" class="nav-icon">
-    <i class="bi bi-person"></i> Log In
-</a>
-
+        <ul class="dropdown-menu dropdown-menu-end">
+            
+            <li>
+                {% if user.is_authenticated %}
+<form action="{% url 'logout' %}" method="post" class="d-inline">
+    {% csrf_token %}
+    <button type="submit" class="dropdown-item border-0 bg-transparent">
+        <i class="bi bi-box-arrow-right"></i> Logout
+    </button>
+</form>
 {% endif %}
             </li>
         </ul>
