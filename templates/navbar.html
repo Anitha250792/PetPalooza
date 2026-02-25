@@ -57,7 +57,7 @@
             </li>
             <li>
                 {% if user.is_authenticated %}
-<form action="{% url 'logout' %}" method="post" class="d-inline">
+<form action="{% url 'login' %}" method="post" class="d-inline">
     {% csrf_token %}
     <button type="submit" class="nav-icon border-0 bg-transparent">
         <i class="bi bi-box-arrow-right"></i> Logout
