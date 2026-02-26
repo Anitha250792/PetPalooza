@@ -12,7 +12,7 @@ urlpatterns = [
     path('dog/', views.dog, name='dog'),
     path('cat/', views.cat, name='cat'),
     path('smallpets/', views.smallpets, name='smallpets'),
-    path('petservice/', views.services, name='services'),
+    
     path('consult/', views.brands, name='consult'),
     path('brands/', views.brands, name='brands'),
     path('cart/', include('cart.urls')),

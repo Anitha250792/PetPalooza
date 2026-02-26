@@ -91,3 +91,7 @@ def search(request):
         "products": products,
         "query": query
     })
+
+
+def petservice_view(request):
+    return render(request, "petservice.html")

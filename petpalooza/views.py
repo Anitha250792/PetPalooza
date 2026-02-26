@@ -85,8 +85,7 @@ def smallpets(request):
 
     return render(request, "smallpets.html", {"products": products})
 
-def petservice_view(request):
-    return render(request, "petservice.html")
+
 
 def brands(request):
     return render(request, 'brands.html')
