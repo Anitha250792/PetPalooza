@@ -13,7 +13,7 @@ urlpatterns = [
     path('cat/', views.cat, name='cat'),
     path('smallpets/', views.smallpets, name='smallpets'),
     
-    path('consult/', views.brands, name='consult'),
+    
     path('brands/', views.brands, name='brands'),
     path('cart/', include('cart.urls')),
     path('about/', views.about, name='about'),

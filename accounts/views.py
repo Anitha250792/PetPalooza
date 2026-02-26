@@ -95,3 +95,6 @@ def search(request):
 
 def petservice_view(request):
     return render(request, "petservice.html")
+
+def contact_view(request):
+    return render(request, "contact.html")
