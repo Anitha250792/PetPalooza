@@ -12,9 +12,6 @@ urlpatterns = [
     path('dog/', views.dog, name='dog'),
     path('cat/', views.cat, name='cat'),
     path('smallpets/', views.smallpets, name='smallpets'),
-    
-    
-    path('brands/', views.brands, name='brands'),
     path('cart/', include('cart.urls')),
     path('about/', views.about, name='about'),
     path('contact/', account_views.contact_view, name='contact'),

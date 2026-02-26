@@ -87,8 +87,7 @@ def smallpets(request):
 
 
 
-def brands(request):
-    return render(request, 'brands.html')
+
 
 # views.py
 def about(request):
