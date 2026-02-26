@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    /* ================= HERO ================= */
+.hero-section {
+    background: url("/static/images/hero_dogs.jpg") center/cover no-repeat;
+    height: 350px;
+    position: relative;
+}
+
+.logo-circle {
+    background: #1d4ed8;
+    color: white;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 60px;
+    font-weight: bold;
+}
+
+/* ================= ICONS ================= */
+.service-icons {
+    margin-top: -60px;
+    background: #eee;
+    padding: 30px;
+    gap: 25px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.icon-card {
+    background: #8ee28e;
+    padding: 30px;
+    text-align: center;
+    border-radius: 10px;
+    width: 150px;
+}
+
+.icon-card i {
+    font-size: 28px;
+}
+
+/* ================= TEXT ================= */
+.pet-services-text {
+    background: #8ee28e;
+    padding: 50px 0;
+}
+
+/* ================= SUMMER SECTION ================= */
+.special-section {
+    margin-top: 50px;
+}
+
+.summer-box {
+    background: #1d4ed8;
+    color: white;
+    padding: 40px;
+}
+
+.monthly-box {
+    background: #8ee28e;
+    padding: 40px;
+}
+
+.special-img {
+    border-radius: 10px;
+}
+
+/* ================= OFFERS ================= */
+.offers-section {
+    margin: 70px auto;
+}
+
+.offer-card {
+    border: 1px solid #ccc;
+    padding: 40px;
+    text-align: center;
+    height: 100%;
+}
+
+.icon-card:hover {
+    transform: translateY(-5px);
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+.offer-card:hover {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    transition: 0.3s ease;
+}
+
+</style>
+<!-- ================= HERO BANNER ================= -->
+<section class="hero-section">
+    <div class="hero-overlay text-center">
+        <div class="logo-circle">
+            <h2>PetPalooza</h2>
+        </div>
+    </div>
+</section>
+
+
+<!-- ================= SERVICE ICONS ================= -->
+<section class="service-icons container">
+    <div class="icon-card">
+        <i class="bi bi-scissors"></i>
+        <h5>Grooming</h5>
+    </div>
+
+    <div class="icon-card">
+        <i class="bi bi-house-door"></i>
+        <h5>PetsHotel</h5>
+    </div>
+
+    <div class="icon-card">
+        <i class="bi bi-bone"></i>
+        <h5>Doggie Day Camp</h5>
+    </div>
+
+    <div class="icon-card">
+        <i class="bi bi-mortarboard"></i>
+        <h5>Training</h5>
+    </div>
+
+    <div class="icon-card">
+        <i class="bi bi-heart-pulse"></i>
+        <h5>Veterinary Care</h5>
+    </div>
+
+    <div class="icon-card">
+        <i class="bi bi-heart"></i>
+        <h5>Adoption</h5>
+    </div>
+</section>
+
+
+<!-- ================= PET SERVICES TEXT ================= -->
+<section class="pet-services-text">
+    <div class="container">
+        <h2>Pet Services</h2>
+        <p>
+            Whether it’s a pamper day, playdate, sleepover, training class or veterinary visit, 
+            we provide the best in pet services with highly trained, passionate associates. 
+            From our pet hotel & doggie day camp as an alternative to pet sitting, 
+            to our dog training and grooming as an alternative to DIY.
+        </p>
+    </div>
+</section>
+
+
+<!-- ================= SUMMER SPECIAL SECTION ================= -->
+<section class="container special-section">
+    <div class="row align-items-center">
+
+        <div class="col-md-4 summer-box">
+            <h3>Summer Special</h3>
+            <p>
+                Upgrade a salon visit or overnight stay with a strawberry ice cream spritz,
+                $350+ in coupon savings & more
+            </p>
+            <a href="#" class="btn btn-light btn-lg">Book Now</a>
+        </div>
+
+        <div class="col-md-4">
+            <img src="{% static 'images/dog_cat.jpg' %}" class="img-fluid special-img">
+        </div>
+
+        <div class="col-md-4 monthly-box">
+            <h3>Monthly specials</h3>
+            <p>
+                Check out deals, offers & events in grooming,
+                boarding, day camp & training
+            </p>
+            <a href="#" class="btn btn-primary btn-lg">Get Details</a>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= OFFER CARDS ================= -->
+<section class="offers-section container">
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="offer-card">
+                <h4>Yappy Hour</h4>
+                <p>$5 OFF on salon walk-in services<br>Monday Thru Friday</p>
+                <a href="#" class="btn btn-primary">Learn more</a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="offer-card">
+                <h4>ONLY $129 any 6-wk. Training Class</h4>
+                <p>(that's $21.50 a class) valid thru 7/6</p>
+                <a href="#" class="btn btn-primary">Enroll Now</a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="offer-card">
+                <h4>Traveling without your pet this summer?</h4>
+                <p>Suite upgrades and fun add-ons make their stay even more special.</p>
+                <a href="#" class="btn btn-primary">Book Stay</a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
