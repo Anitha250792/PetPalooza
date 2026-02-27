@@ -101,8 +101,7 @@ DATABASES = {
         "HOST": os.environ.get("MYSQLHOST"),
         "PORT": os.environ.get("MYSQLPORT"),
         "OPTIONS": {
-            "ssl": {"ca": ""},
-            "init_command": "SET sql_mode='STRICT_TRANS_TABLES'",
+            "ssl": {"ssl_mode": "REQUIRED"},
         },
     }
 }
