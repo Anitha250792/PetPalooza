@@ -7,6 +7,7 @@ from .forms import ContactForm
 from core.models import HeroSlide, PetCategory, PromoSection, ServiceCard
 from cart.models import Product
 from django.db.models import Q
+from django.db import connection
 
 def login_view(request):
 
@@ -98,3 +99,9 @@ def petservice_view(request):
 
 def contact_view(request):
     return render(request, "contact.html")
+
+def consult_view(request):
+    return render(request, "consult.html")
+
+def check_db(request):
+    return HttpResponse(connection.settings_dict["ENGINE"])
