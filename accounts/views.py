@@ -103,8 +103,3 @@ def contact_view(request):
 def consult_view(request):
     return render(request, "consult.html")
 
-def check_db(request):
-    with connection.cursor() as cursor:
-        cursor.execute("SELECT 1")
-        row = cursor.fetchone()
-    return HttpResponse(row)
