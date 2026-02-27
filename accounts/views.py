@@ -104,4 +104,7 @@ def consult_view(request):
     return render(request, "consult.html")
 
 def check_db(request):
-    return HttpResponse(connection.settings_dict["ENGINE"])
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT 1")
+        row = cursor.fetchone()
+    return HttpResponse(row)
