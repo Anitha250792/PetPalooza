@@ -1,11 +1,11 @@
 import os
+
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 from pathlib import Path
 from dotenv import load_dotenv
-import pymysql
-pymysql.install_as_MySQLdb()
+
 
 
 load_dotenv()
