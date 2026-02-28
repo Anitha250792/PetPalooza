@@ -15,9 +15,6 @@ urlpatterns = [
     path('cart/', include('cart.urls')),
     path('about/', views.about, name='about'),
     path('contact/', account_views.contact_view, name='contact'),
-    
-    
-
 ]
 
 # ✅ MEDIA FILES (important for product images)
