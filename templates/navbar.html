@@ -16,14 +16,14 @@
     <div class="container">
 
         <!-- LOGO -->
-        <a class="navbar-brand" href="{% url 'home' %}">
+        <a class="navbar-brand" href="{% url 'accounts:home' %}">
     <img src="{% static 'images/logo.png' %}" height="100">
 </a>
 
         <!-- SEARCH -->
         <form class="d-flex search-bar mx-auto"
       method="GET"
-      action="{% url 'search' %}">
+      action="{% url 'accounts:search' %}">
 
     <input class="form-control"
            type="search"
@@ -36,9 +36,9 @@
         <!-- RIGHT MENU -->
         <div class="d-flex align-items-center gap-3">
 
-            <a href="{% url 'home' %}" class="nav-link-custom">Home</a>
+            <a href="{% url 'accounts:home' %}" class="nav-link-custom">Home</a>
             <a href="{% url 'about' %}" class="nav-link-custom">About</a>
-            <a href="{% url 'contact' %}" class="nav-link-custom">Contact</a>
+            <a href="{% url 'accounts:contact' %}" class="nav-link-custom">Contact</a>
 
             <!-- LOGIN ICON -->
             {% if user.is_authenticated %}
@@ -55,7 +55,7 @@
             
             <li>
                 {% if user.is_authenticated %}
-<form action="{% url 'logout' %}" method="post" class="d-inline">
+<form action="{% url 'accounts:logout' %}" method="post" class="d-inline">
     {% csrf_token %}
     <button type="submit" class="dropdown-item border-0 bg-transparent">
         <i class="bi bi-box-arrow-right"></i> Logout
@@ -68,7 +68,7 @@
 
 {% else %}
 
-    <a href="{% url 'login' %}" class="nav-icon">
+    <a href="{% url 'accounts:login' %}" class="nav-icon">
         <i class="bi bi-person"></i> Log In
     </a>
 
@@ -356,7 +356,7 @@
             </li>
 
            <li class="nav-item">
-    <a class="nav-link text-white" href="{% url 'consult' %}">
+    <a class="nav-link text-white" href="{% url 'accounts:consult' %}">
         Consult a Vet
     </a>
 </li>
