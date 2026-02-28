@@ -15,7 +15,11 @@ class Product(models.Model):
 
     rating = models.DecimalField(max_digits=3, decimal_places=1, default=0)
     review_count = models.IntegerField(default=0)
-
+    
+    @property
+    def rating_int(self):
+        return int(self.rating)
+    
     def __str__(self):
         return self.name
 
