@@ -17,6 +17,7 @@ body {
 .star {
     font-size: 18px;
     color: #ddd;
+    margin: 0 1px;
 }
 
 .star.filled {
@@ -72,6 +73,15 @@ body {
     font-size: 14px;
 }
 
+h2 
+{font-size: 18px;
+    font-weight: 700;
+color: black;}
+p{
+   font-size: 14px;
+color: black; 
+}
+
 .add-btn {
     background: #1f4df0;
     color: white;
@@ -102,7 +112,66 @@ body {
         height: 180px;
     }
 }
+
+/* ================= RESPONSIVE FIX ================= */
+
+@media (max-width: 992px) {
+    .col-lg-3 {
+        order: 2;
+    }
+    .col-lg-9 {
+        order: 1;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .product-card {
+        padding: 15px;
+    }
+
+    .product-img {
+        height: 170px;
+    }
+
+    .product-title {
+        font-size: 16px;
+    }
+
+    .price {
+        font-size: 18px;
+    }
+
+    .weight-badge {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+
+    .add-btn {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .star {
+        font-size: 16px;
+    }
+
+    .review-count {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 576px) {
+    .product-img {
+        height: 150px;
+    }
+
+    .filter-card {
+        margin-bottom: 25px;
+    }
+}
 </style>
+
 
 <div class="container mt-5">
 <div class="row">
@@ -163,26 +232,36 @@ body {
         <div class="mb-4">
             <img src="{% static 'images/hamster1.png' %}"
                  class="img-fluid rounded">
+                 <h2>Stress - Free Summer</h2>
+                 <p>Keep your pup calm along all season</p>
         </div>
 
         <div>
             <img src="{% static 'images/IMG_20250613_140914_408 (2).png' %}"
                  class="img-fluid rounded">
+                 <h2>Stress - Free Summer</h2>
+                 <p>Keep your pup calm along all season</p>
         </div>
 
         <div>
             <img src="{% static 'images/IMG_20250611_140932_779.png' %}"
                  class="img-fluid rounded">
+                 <h2>Stress - Free Summer</h2>
+                 <p>Keep your pup calm along all season</p>
         </div>
 
         <div>
             <img src="{% static 'images/IMG_20250611_153040_224 (1).png' %}"
                  class="img-fluid rounded">
+                 <h2>Stress - Free Summer</h2>
+                 <p>Keep your pup calm along all season</p>
         </div>
 
         <div>
             <img src="{% static 'images/IMG_20250611_140849_503.png' %}"
                  class="img-fluid rounded">
+                 <h2>Stress - Free Summer</h2>
+                 <p>Keep your pup calm along all season</p>
         </div>
 
     </div>
@@ -243,18 +322,17 @@ body {
 
                     <!-- STAR RATING -->
                     <div>
-                        {% for i in "12345" %}
-                            {% if forloop.counter <= product.rating|floatformat:0 %}
-                                <span class="star filled">★</span>
-                            {% else %}
-                                <span class="star">☆</span>
-                            {% endif %}
-                        {% endfor %}
-                        <span class="review-count">
-                            ({{ product.review_count }})
-                        </span>
-                    </div>
-
+    {% with rating_int=product.rating|floatformat:0 %}
+        {% for i in "12345" %}
+            {% if forloop.counter <= rating_int|add:"0" %}
+                <span class="star filled">★</span>
+            {% else %}
+                <span class="star">★</span>
+            {% endif %}
+        {% endfor %}
+    {% endwith %}
+    <span class="review-count">({{ product.review_count }})</span>
+</div>
                     <div class="price">
                         ₹ {{ product.price }}
                     </div>
