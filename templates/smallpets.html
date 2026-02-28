@@ -328,7 +328,7 @@ color: black;
                     <h5 class="product-title">{{ product.name }}</h5>
 
                     <!-- STAR RATING -->
-                    <div>
+                   <div>
     {% for i in "12345"|make_list %}
         {% if forloop.counter <= product.rating %}
             <span class="star filled">★</span>
