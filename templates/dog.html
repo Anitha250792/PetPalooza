@@ -168,6 +168,12 @@ color: black;
         margin-bottom: 25px;
     }
 }
+@media (max-width: 576px) {
+    .col-lg-4,
+    .col-md-6 {
+        width: 100%;
+    }
+}
 </style>
 
 <div class="container mt-5">
@@ -318,15 +324,13 @@ color: black;
                     <!-- STAR RATING -->
                     <!-- STAR RATING -->
 <div>
-    {% with rating_int=product.rating|floatformat:0 %}
-        {% for i in "12345" %}
-            {% if forloop.counter <= rating_int|add:"0" %}
-                <span class="star filled">★</span>
-            {% else %}
-                <span class="star">★</span>
-            {% endif %}
-        {% endfor %}
-    {% endwith %}
+    {% for i in "12345"|make_list %}
+        {% if forloop.counter <= product.rating %}
+            <span class="star filled">★</span>
+        {% else %}
+            <span class="star">★</span>
+        {% endif %}
+    {% endfor %}
     <span class="review-count">({{ product.review_count }})</span>
 </div>
 
