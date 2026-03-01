@@ -87,8 +87,6 @@ def smallpets(request):
 
 
 
-
-
 # views.py
 def about(request):
     return render(request, 'about.html')
