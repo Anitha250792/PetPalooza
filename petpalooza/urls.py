@@ -8,12 +8,14 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
-    # Accounts app
-    path('', include('accounts.urls')),
-
-    # Cart app
+    path('', include(('accounts.urls', 'accounts'), namespace='accounts')),
+    path('dog/', views.dog, name='dog'),
+    path('cat/', views.cat, name='cat'),
+    path('smallpets/', views.smallpets, name='smallpets'),
     path('cart/', include('cart.urls')),
+    path('about/', views.about, name='about'),
+    path('consult/', views.consult_view, name='consult')  
+
 ]
 
 # ✅ MEDIA FILES (important for product images)
