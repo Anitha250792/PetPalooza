@@ -142,13 +142,15 @@
                     🚚 Free delivery on orders above ₹599
                 </p>
 
-                <a href="{% url 'add_to_cart' service.id %}" class="btn btn-primary">
-    Add to Cart
-</a>
+    {% if service %}
+        <a href="{% url 'cart:add_to_cart' service.id %}" 
+           class="btn btn-primary">
+            Add to Cart
+        </a>
+    {% else %}
+        <p class="text-danger">Service not available</p>
+    {% endif %}
 
-{% if service %}
-<a href="{% url 'add_to_cart' service.id %}">
-{% endif %}
             </div>
 
         </div>

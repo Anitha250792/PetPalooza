@@ -104,5 +104,10 @@ def consult_view(request):
     return render(request, "consult.html")
 
 def consultnow(request):
-    service = Service.objects.first()   # or filter specific one
-    return render(request, "consultnow.html", {"service": service})
+    service = Service.objects.first()
+    reviews = []  # or your real review query
+
+    return render(request, "consultnow.html", {
+        "service": service,
+        "reviews": reviews
+    })
