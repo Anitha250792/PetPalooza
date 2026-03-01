@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+/* TOP GREEN STEPS */
+.step-bar {
+    background: #8BE28B;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.step-bar h6 {
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+/* SERVICE BOX */
+.price-box {
+    border: 2px solid #000;
+    border-radius: 20px;
+    width: 220px;
+    overflow: hidden;
+}
+
+.price-header {
+    background: #0d6efd;
+    color: white;
+    padding: 10px;
+    font-weight: 600;
+}
+
+.price-body {
+    padding: 15px;
+}
+
+.old-price {
+    text-decoration: line-through;
+    color: gray;
+    font-size: 14px;
+}
+
+.discount {
+    color: #0d6efd;
+    font-weight: 600;
+}
+
+.add-btn {
+    background: #1f4fff;
+    color: white;
+    border-radius: 25px;
+    padding: 10px 30px;
+    border: none;
+    font-weight: 600;
+}
+
+/* REVIEWS */
+.review-card {
+    background: #eee;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.star {
+    color: gold;
+}
+
+.icon-social i {
+    font-size: 18px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+</style>
+
+<!-- STEP BAR -->
+<div class="step-bar">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4">
+                <div>💳</div>
+                <h6>Pay & book the consultant</h6>
+            </div>
+            <div class="col-md-4">
+                <div>🛡️</div>
+                <h6>Choose video or Teleconsultation</h6>
+            </div>
+            <div class="col-md-4">
+                <div>👨‍⚕️</div>
+                <h6>Receive prescription after the call</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MAIN SECTION -->
+<div class="container my-5">
+    <div class="row">
+
+        <!-- LEFT IMAGE -->
+        <div class="col-md-6">
+            <img src="{% static 'images/consult.jpg' %}" 
+                 class="img-fluid rounded" alt="Consultation">
+        </div>
+
+        <!-- RIGHT CONTENT -->
+        <div class="col-md-6">
+
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h3><strong>Services</strong></h3>
+                    <p>Instant Consultation (10 AM to 7 PM)</p>
+                </div>
+                <div class="badge bg-light text-dark border">
+                    5 ⭐
+                </div>
+            </div>
+
+            <div class="price-box mt-3">
+                <div class="price-header">
+                    Book consultation
+                </div>
+                <div class="price-body">
+                    <h5>
+                        ₹299 <span class="old-price">₹499</span>
+                    </h5>
+                    <div class="discount">40% OFF</div>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <div class="border p-3 rounded mb-2">
+                    💳 Bank offers and coupons 
+                    <span class="float-end text-primary">Check offers ></span>
+                </div>
+
+                <p class="text-muted">
+                    🚫 Currently, cash on delivery is not available on this product.
+                </p>
+
+                <p>
+                    🚚 Free delivery on orders above ₹599
+                </p>
+
+                <a href="{% url 'add_to_cart' service.id %}" 
+   class="btn add-btn mt-3">
+   Add to cart
+</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- CUSTOMER REVIEWS -->
+<div class="container my-5">
+    <h4 class="mb-4"><strong>Customer Reviews</strong></h4>
+
+    <div class="row g-4">
+
+        {% for review in reviews %}
+        <div class="col-md-4">
+            <div class="review-card">
+
+                <h6><strong>{{ review.name }}</strong></h6>
+                <small>{{ review.date }}</small>
+
+                <div class="my-2">
+    {% for i in "12345" %}
+        {% if forloop.counter <= review.rating %}
+            <span class="star text-warning">★</span>
+        {% else %}
+            <span class="star text-secondary">★</span>
+        {% endif %}
+    {% endfor %}
+</div>
+                <p>{{ review.comment }}</p>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="icon-social">
+                        <i class="bi bi-facebook"></i>
+                        <i class="bi bi-twitter"></i>
+                    </div>
+                    <div>
+                        👍 0 👎
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock %}

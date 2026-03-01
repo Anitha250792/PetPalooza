@@ -121,6 +121,34 @@
         margin: 20px;
     }
 }
+.stress-section {
+    background-color: #8ee08e;  /* light green */
+}
+
+.stress-img-wrapper {
+    max-width: 900px;
+    border: 2px solid #000;
+    padding: 20px;
+    border-radius: 30px;
+    background: #f8f8f8;
+}
+
+.icon-circle {
+    width: 120px;
+    height: 120px;
+    background-color: #bde3f4;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.icon-circle img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
 
 </style>
 
@@ -133,7 +161,7 @@
         <p>Wherever you are</p>
         <p>At only ₹299, get end-to-end support from our vets</p>
 
-        <a href="#" class="consult-btn">Consult Now</a>
+        <a href="{% url 'consultnow' %}" class="consult-btn">Consult Now</a>
     </div>
 </div>
 
@@ -149,43 +177,89 @@
 </div>
 
 <!-- ICON SECTION -->
-<div class="icon-section container">
-    <div class="row g-4">
+<div class="icon-section container py-5">
+    <div class="row g-4 text-center">
 
         <div class="col-md-2 col-4">
-            <div class="icon-circle">💊</div>
+            <div class="icon-circle">
+                <img src="{% static 'images/image 1.png' %}" alt="General Checkup">
+            </div>
+            <p class="mt-2">General Checkup</p>
         </div>
 
         <div class="col-md-2 col-4">
-            <div class="icon-circle">🐶</div>
+            <div class="icon-circle">
+                <img src="{% static 'images/image 2.png' %}" alt="Skin Issues">
+            </div>
+            <p class="mt-2">Skin Issues</p>
         </div>
 
         <div class="col-md-2 col-4">
-            <div class="icon-circle">🐾</div>
+            <div class="icon-circle">
+                <img src="{% static 'images/image 3.png' %}" alt="Digestive">
+            </div>
+            <p class="mt-2">Digestive Issues</p>
         </div>
 
         <div class="col-md-2 col-4">
-            <div class="icon-circle">👂</div>
+            <div class="icon-circle">
+                <img src="{% static 'images/image 4.png' %}" alt="Digestive">
+            </div>
+            <p class="mt-2">Paws & Limbs</p>
         </div>
 
         <div class="col-md-2 col-4">
-            <div class="icon-circle">👁</div>
+            <div class="icon-circle">
+                <img src="{% static 'images/image 5.png' %}" alt="Dental">
+            </div>
+            <p class="mt-2">Dental Issues</p>
         </div>
 
         <div class="col-md-2 col-4">
-            <div class="icon-circle">⏱</div>
+            <div class="icon-circle">
+                <img src="{% static 'images/image 6.png' %}" alt="Ear">
+            </div>
+            <p class="mt-2">Ear Issues</p>
+        </div>
+
+        <div class="col-md-2 col-4">
+            <div class="icon-circle">
+                <img src="{% static 'images/image 7.png' %}" alt="Eye">
+            </div>
+            <p class="mt-2">Eye Issues</p>
+        </div>
+
+        <div class="col-md-2 col-4">
+            <div class="icon-circle">
+                <img src="{% static 'images/image 8.png' %}" alt="Eye">
+            </div>
+            <p class="mt-2">Nutrition</p>
         </div>
 
     </div>
 </div>
 
-<!-- GREEN CTA SECTION -->
-<div class="green-section">
-    <div class="container">
-        <h3>Get Stress-Free Pet Care from the comfort of your home</h3>
-        <a href="{% url 'consultnow' %}" class="consult-btn mt-3">Consult Now</a>
+<!-- STRESS FREE SECTION -->
+<section class="stress-section py-5">
+    <div class="container text-center">
+
+        <!-- Rounded Image Card -->
+        <div class="stress-img-wrapper mx-auto mb-4">
+            <img src="{% static 'images/IMG_20250613_234053_840.png' %}" 
+                 class="img-fluid rounded-4"
+                 alt="Pet Care">
+        </div>
+
+        <h2 class="fw-bold mb-4">
+            Get Stress-Free Pet Care from the comfort of your home
+        </h2>
+
+        <a href="{% url 'consultnow' %}" class="btn btn-primary btn-lg px-5">
+            Consult Now
+        </a>
+
     </div>
-</div>
+</section>
 
 <!-- DOCTOR SECTION -->
 <div class="doctor-section container">
@@ -205,7 +279,7 @@
 
         <div class="col-md-4">
             <div class="doctor-card">
-                <img src="{% static 'images/image (36).png %}" class="doctor-img">
+                <img src="{% static 'images/image (36).png' %}" class="doctor-img">
                 <h5>Dr. Rashmi S</h5>
                 <p>Gynaecology & Obstetrics | 6+ Years</p>
                 <p>MVSc PhD</p>

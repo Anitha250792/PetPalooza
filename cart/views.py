@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Cart, CartItem, Product, Order
 import razorpay
+from .models import Service
 from django.conf import settings
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -183,3 +184,20 @@ def payment_success(request):
 def thankyou(request, order_id):
     order = get_object_or_404(Order, id=order_id)
     return render(request, "thankyou.html", {"order": order})
+
+def add_to_cart(request, service_id):
+    service = get_object_or_404(Service, id=service_id)
+
+    cart = request.session.get('cart', {})
+
+    if str(service_id) in cart:
+        cart[str(service_id)]['quantity'] += 1
+    else:
+        cart[str(service_id)] = {
+            'name': service.name,
+            'price': float(service.offer_price),
+            'quantity': 1
+        }
+
+    request.session['cart'] = cart
+    return redirect('consult_now')

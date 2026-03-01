@@ -102,3 +102,12 @@ def petservice_view(request):
 def consult_view(request):
     return render(request, "consult.html")
 
+def consult_now(request):
+    service = Service.objects.first()
+    reviews = Review.objects.all()
+
+    return render(request, "consultnow.html", {
+        "service": service,
+        "reviews": reviews
+    })
+
