@@ -8,6 +8,7 @@ from core.models import HeroSlide, PetCategory, PromoSection, ServiceCard
 from cart.models import Product
 from django.db.models import Q
 from django.db import connection
+from cart.models import Service
 
 def login_view(request):
 
@@ -103,4 +104,5 @@ def consult_view(request):
     return render(request, "consult.html")
 
 def consultnow(request):
-    return render(request, "consultnow.html")
+    service = Service.objects.first()   # or filter specific one
+    return render(request, "consultnow.html", {"service": service})

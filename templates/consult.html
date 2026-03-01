@@ -122,7 +122,8 @@
     }
 }
 .stress-section {
-    background-color: #8ee08e;  /* light green */
+    background-color: #8ee08e;
+    min-height: 300px;  /* light green */
 }
 
 .stress-img-wrapper {
@@ -131,6 +132,36 @@
     padding: 20px;
     border-radius: 30px;
     background: #f8f8f8;
+}
+
+.icon-circle {
+    width: 120px;
+    height: 120px;
+    background-color: #bde3f4;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.icon-circle img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.icon-row {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: nowrap;        /* 🔥 Prevent wrapping */
+    overflow-x: auto;         /* 🔥 Scroll if screen small */
+}
+
+.icon-item {
+    text-align: center;
+    min-width: 140px;
 }
 
 .icon-circle {
@@ -180,62 +211,62 @@
 
 <!-- ICON SECTION -->
 <div class="icon-section container py-5">
-    <div class="row g-4 text-center">
+    <div class="icon-row">
 
-        <div class="col-md-2 col-4">
+        <div class="icon-item">
             <div class="icon-circle">
-                <img src="{% static 'images/image 1.png' %}" alt="General Checkup">
+                <img src="{% static 'images/image 1.png' %}">
             </div>
-            <p class="mt-2">General Checkup</p>
+            <p>General Checkup</p>
         </div>
 
-        <div class="col-md-2 col-4">
+        <div class="icon-item">
             <div class="icon-circle">
-                <img src="{% static 'images/image 2.png' %}" alt="Skin Issues">
+                <img src="{% static 'images/image 2.png' %}">
             </div>
-            <p class="mt-2">Skin Issues</p>
+            <p>Skin Issues</p>
         </div>
 
-        <div class="col-md-2 col-4">
+        <div class="icon-item">
             <div class="icon-circle">
-                <img src="{% static 'images/image 3.png' %}" alt="Digestive">
+                <img src="{% static 'images/image 3.png' %}">
             </div>
-            <p class="mt-2">Digestive Issues</p>
+            <p>Digestive Issues</p>
         </div>
 
-        <div class="col-md-2 col-4">
+        <div class="icon-item">
             <div class="icon-circle">
-                <img src="{% static 'images/image 4.png' %}" alt="Digestive">
+                <img src="{% static 'images/image 4.png' %}">
             </div>
-            <p class="mt-2">Paws & Limbs</p>
+            <p>Paws & Limbs</p>
         </div>
 
-        <div class="col-md-2 col-4">
+        <div class="icon-item">
             <div class="icon-circle">
-                <img src="{% static 'images/image 5.png' %}" alt="Dental">
+                <img src="{% static 'images/image 5.png' %}">
             </div>
-            <p class="mt-2">Dental Issues</p>
+            <p>Dental Issues</p>
         </div>
 
-        <div class="col-md-2 col-4">
+        <div class="icon-item">
             <div class="icon-circle">
-                <img src="{% static 'images/image 6.png' %}" alt="Ear">
+                <img src="{% static 'images/image 6.png' %}">
             </div>
-            <p class="mt-2">Ear Issues</p>
+            <p>Ear Issues</p>
         </div>
 
-        <div class="col-md-2 col-4">
+        <div class="icon-item">
             <div class="icon-circle">
-                <img src="{% static 'images/image 7.png' %}" alt="Eye">
+                <img src="{% static 'images/image 7.png' %}">
             </div>
-            <p class="mt-2">Eye Issues</p>
+            <p>Eye Issues</p>
         </div>
 
-        <div class="col-md-2 col-4">
+        <div class="icon-item">
             <div class="icon-circle">
-                <img src="{% static 'images/image 8.png' %}" alt="Eye">
+                <img src="{% static 'images/image 8.png' %}">
             </div>
-            <p class="mt-2">Nutrition</p>
+            <p>Nutrition</p>
         </div>
 
     </div>
