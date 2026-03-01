@@ -14,8 +14,7 @@ urlpatterns = [
     path('smallpets/', views.smallpets, name='smallpets'),
     path('cart/', include('cart.urls')),
     path('about/', views.about, name='about'),
-    path('consult/', views.consult_view, name='consult')  
-
+    
 ]
 
 # ✅ MEDIA FILES (important for product images)
