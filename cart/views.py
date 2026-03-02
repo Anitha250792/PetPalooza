@@ -200,4 +200,4 @@ def add_to_cart(request, service_id):
         }
 
     request.session['cart'] = cart
-    return redirect('consult_now')
+    return redirect('accounts:consult_now')
