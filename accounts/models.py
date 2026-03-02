@@ -1,26 +1,31 @@
 from django.db import models
+from django.utils import timezone
 import uuid
+
 
 class ContactMessage(models.Model):
 
-    STATUS_CHOICES = (
-        ('Open', 'Open'),
-        ('Replied', 'Replied'),
-    )
+    # 🔥 Auto-generated ticket ID
+    ticket_id = models.CharField(max_length=50, unique=True)
 
-    ticket_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     name = models.CharField(max_length=200)
     email = models.EmailField()
     subject = models.CharField(max_length=300)
     message = models.TextField()
 
     admin_reply = models.TextField(blank=True, null=True)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Open')
+    is_replied = models.BooleanField(default=False)
+    replied_at = models.DateTimeField(blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def save(self, *args, **kwargs):
+        if not self.ticket_id:
+            self.ticket_id = "TKT-" + uuid.uuid4().hex[:8].upper()
+        super().save(*args, **kwargs)
+
     def __str__(self):
-        return f"{self.name} - {self.ticket_id}"
+        return f"{self.ticket_id} - {self.name}"
     
 class Review(models.Model):
     name = models.CharField(max_length=100)
