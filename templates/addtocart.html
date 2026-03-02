@@ -123,64 +123,55 @@ table td {
 </thead>
 <tbody>
 
-{% if items %}
-    {% for item in items %}
-    <tr>
-        <td>
+{% for item in items %}
+<tr>
+    <td>
+        {% if item.product %}
             <a href="{% url 'remove_item' item.id %}">
                 <button class="delete-btn">×</button>
             </a>
-        </td>
+        {% elif item.service %}
+            <a href="{% url 'remove_service_item' item.service.id %}">
+                <button class="delete-btn">×</button>
+            </a>
+        {% endif %}
+    </td>
 
-        <td>
+    <td>
+        {% if item.product %}
             {% if item.product.image %}
                 <img src="{{ item.product.image.url }}" height="60">
             {% endif %}
             {{ item.product.name }}
-        </td>
+        {% elif item.service %}
+            {{ item.service.name }}
+        {% endif %}
+    </td>
 
-        <td>₹{{ item.product.price }}</td>
+    <td>
+        {% if item.product %}
+            ₹{{ item.product.price }}
+        {% elif item.service %}
+            ₹{{ item.service.offer_price }}
+        {% endif %}
+    </td>
 
-        <td>
-            <div class="qty-wrapper">
-                <a href="{% url 'decrease_quantity' item.id %}" class="qty-btn">-</a>
-                <div class="qty-number">{{ item.quantity }}</div>
-                <a href="{% url 'increase_quantity' item.id %}" class="qty-btn">+</a>
-            </div>
-        </td>
+    <td>
+        <div class="qty-wrapper">
+            <a href="{% url 'decrease_quantity' item.id %}" class="qty-btn">-</a>
+            <div class="qty-number">{{ item.quantity }}</div>
+            <a href="{% url 'increase_quantity' item.id %}" class="qty-btn">+</a>
+        </div>
+    </td>
 
-        <td>₹{{ item.subtotal }}</td>
-    </tr>
-    {% endfor %}
-{% endif %}
+    <td>₹{{ item.subtotal }}</td>
+</tr>
 
-
-{% if request.session.cart %}
-    {% for key, item in request.session.cart.items %}
-    <tr>
-        <td>
-            <a href="{% url 'remove_service_item' key %}">
-                <button class="delete-btn">×</button>
-            </a>
-        </td>
-
-        <td>{{ item.name }}</td>
-
-        <td>₹{{ item.price }}</td>
-
-        <td>{{ item.quantity }}</td>
-
-        <td>₹{{ item.price|floatformat:2 }}</td>
-    </tr>
-    {% endfor %}
-{% endif %}
-
-
-{% if not items and not request.session.cart %}
+{% empty %}
 <tr>
     <td colspan="5">Your cart is empty.</td>
 </tr>
-{% endif %}
+{% endfor %}
 
 </tbody>
 

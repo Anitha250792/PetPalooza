@@ -185,22 +185,7 @@ def thankyou(request, order_id):
     order = get_object_or_404(Order, id=order_id)
     return render(request, "thankyou.html", {"order": order})
 
-def add_service_to_cart(request, service_id):
-    service = get_object_or_404(Service, id=service_id)
 
-    cart = request.session.get('cart', {})
-
-    if str(service_id) in cart:
-        cart[str(service_id)]['quantity'] += 1
-    else:
-        cart[str(service_id)] = {
-            'name': service.name,
-            'price': float(service.offer_price),
-            'quantity': 1
-        }
-
-    request.session['cart'] = cart
-    return redirect('accounts:consultnow')
 
 def add_service_to_cart(request, service_id):
     if not request.user.is_authenticated:
@@ -221,10 +206,10 @@ def add_service_to_cart(request, service_id):
     return redirect('cart_page')
 
 def remove_service_item(request, service_id):
-    cart = request.session.get('cart', {})
-
-    if service_id in cart:
-        del cart[service_id]
-
-    request.session['cart'] = cart
+    item = get_object_or_404(
+        CartItem,
+        service_id=service_id,
+        cart__user=request.user
+    )
+    item.delete()
     return redirect('cart_page')
