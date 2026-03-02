@@ -3,6 +3,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.utils import timezone
 from .models import ContactMessage
+from django.conf import settings
 
 
 @admin.register(ContactMessage)
@@ -26,6 +27,9 @@ class ContactMessageAdmin(admin.ModelAdmin):
 
         # Only send email if reply added AND not already replied
         if obj.admin_reply and not obj.is_replied:
+            
+            
+            print("EMAIL BACKEND:", settings.EMAIL_BACKEND)
             print("SENDGRID KEY:", settings.SENDGRID_API_KEY)
 
             send_mail(
