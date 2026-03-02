@@ -18,21 +18,21 @@ class ContactMessageAdmin(admin.ModelAdmin):
         "subject",
         "message",
         "admin_reply",
-        "is_replied",
-        "replied_at",
     )
 
     def save_model(self, request, obj, form, change):
 
-        # Check if admin_reply field was changed
-        if "admin_reply" in form.changed_data and obj.admin_reply:
+        # Only send if admin_reply added now
+        if change:
+            old_obj = ContactMessage.objects.get(pk=obj.pk)
 
-            print("SENDING EMAIL...")
-            print("EMAIL BACKEND:", settings.EMAIL_BACKEND)
+            if not old_obj.admin_reply and obj.admin_reply:
+                print("🔥 SENDING EMAIL")
+                print("BACKEND:", settings.EMAIL_BACKEND)
 
-            send_mail(
-                subject=f"Reply to your Ticket {obj.ticket_id}",
-                message=f"""
+                send_mail(
+                    subject=f"Reply to your Ticket {obj.ticket_id}",
+                    message=f"""
 Hello {obj.name},
 
 Your support ticket has been replied.
@@ -43,12 +43,12 @@ Admin Reply:
 Thank you,
 PetPalooza Support
 """,
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[obj.email],
-                fail_silently=False,
-            )
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[obj.email],
+                    fail_silently=False,
+                )
 
-            obj.is_replied = True
-            obj.replied_at = timezone.now()
+                obj.is_replied = True
+                obj.replied_at = timezone.now()
 
         super().save_model(request, obj, form, change)
