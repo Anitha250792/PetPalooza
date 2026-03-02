@@ -14,6 +14,7 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from django.conf import settings
 from .models import ContactMessage
+from accounts.models import Review
 
 def login_view(request):
 
@@ -121,7 +122,8 @@ def consult_view(request):
 
 def consultnow(request):
     service = Service.objects.first()
-    reviews = []  # or your real review query
+
+    reviews = Review.objects.all().order_by("-created_at")
 
     return render(request, "consultnow.html", {
         "service": service,
