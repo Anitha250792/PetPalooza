@@ -26,6 +26,7 @@ class ContactMessageAdmin(admin.ModelAdmin):
 
         # Only send email if reply added AND not already replied
         if obj.admin_reply and not obj.is_replied:
+            print("SENDGRID KEY:", settings.SENDGRID_API_KEY)
 
             send_mail(
                 subject=f"Reply to your Ticket {obj.ticket_id}",
