@@ -74,22 +74,16 @@ def home_view(request):
     })
 
 def contact_view(request):
-    user_messages = None
+    form = ContactForm(request.POST or None)
 
     if request.method == "POST":
-        form = ContactForm(request.POST)
         if form.is_valid():
             message = form.save()
             messages.success(request, f"Your ticket {message.ticket_id} has been created!")
             return redirect('accounts:contact')
-    else:
-        form = ContactForm()
 
-    # 🔥 Show user their previous tickets (based on email if logged in)
-    if request.user.is_authenticated:
-        user_messages = ContactMessage.objects.filter(
-            email=request.user.email
-        ).order_by("-created_at")
+    # 🔥 TEMP DEBUG
+    user_messages = ContactMessage.objects.all().order_by("-created_at")
 
     return render(request, 'contact.html', {
         'form': form,
