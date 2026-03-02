@@ -10,6 +10,8 @@ from django.db.models import Q
 from django.db import connection
 from cart.models import Service
 from django.core.mail import send_mail
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 from django.conf import settings
 
 def login_view(request):
@@ -75,35 +77,28 @@ def contact_view(request):
         if form.is_valid():
             contact = form.save()
 
-            # 1️⃣ Send Email to Admin
-            subject = f"New Contact Message: {contact.subject}"
-            message = f"""
-Name: {contact.name}
-Email: {contact.email}
+            try:
+                message = Mail(
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    to_emails=settings.DEFAULT_FROM_EMAIL,  # You receive the message
+                    subject=f"New Contact: {contact.subject}",
+                    html_content=f"""
+                        <strong>Name:</strong> {contact.name}<br>
+                        <strong>Email:</strong> {contact.email}<br><br>
+                        <strong>Message:</strong><br>
+                        {contact.message}
+                    """
+                )
 
-Message:
-{contact.message}
-"""
+                sg = SendGridAPIClient(settings.SENDGRID_API_KEY)
+                sg.send(message)
 
-            send_mail(
-                subject,
-                message,
-                settings.DEFAULT_FROM_EMAIL,
-                ["ntanithasaravanan@gmail.com"],  # Admin email
-                fail_silently=False,
-            )
-
-            # 2️⃣ Send Confirmation to User
-            send_mail(
-                "We received your message - PetPalooza",
-                "Thank you for contacting PetPalooza. Our team will respond shortly.",
-                settings.DEFAULT_FROM_EMAIL,
-                [contact.email],
-                fail_silently=False,
-            )
+            except Exception as e:
+                print("SendGrid Error:", e)
 
             messages.success(request, "Your message has been sent successfully!")
             return redirect('accounts:contact')
+
     else:
         form = ContactForm()
 
