@@ -3,7 +3,6 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.utils import timezone
 from .models import ContactMessage
-from django.conf import settings
 
 
 @admin.register(ContactMessage)
@@ -25,16 +24,25 @@ class ContactMessageAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
 
-        # Only send email if reply added AND not already replied
-        if obj.admin_reply and not obj.is_replied:
-            
-            
+        # Check if admin_reply field was changed
+        if "admin_reply" in form.changed_data and obj.admin_reply:
+
+            print("SENDING EMAIL...")
             print("EMAIL BACKEND:", settings.EMAIL_BACKEND)
-            print("SENDGRID KEY:", settings.SENDGRID_API_KEY)
 
             send_mail(
                 subject=f"Reply to your Ticket {obj.ticket_id}",
-                message=obj.admin_reply,
+                message=f"""
+Hello {obj.name},
+
+Your support ticket has been replied.
+
+Admin Reply:
+{obj.admin_reply}
+
+Thank you,
+PetPalooza Support
+""",
                 from_email=settings.DEFAULT_FROM_EMAIL,
                 recipient_list=[obj.email],
                 fail_silently=False,
