@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'core',
     'cloudinary', 
     'cloudinary_storage',
-     ]
+    'sendgrid_backend',
+]
 
 # MIDDLEWARE
 MIDDLEWARE = [
