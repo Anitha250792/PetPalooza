@@ -8,7 +8,7 @@ from .models import ContactMessage
 @admin.register(ContactMessage)
 class ContactMessageAdmin(admin.ModelAdmin):
 
-    list_display = ("ticket_id", "name", "email", "is_replied", "created_at")
+    list_display = ("ticket_id", "name", "email", "subject", "is_replied", "created_at")
     readonly_fields = ("ticket_id", "name", "email", "subject", "message", "created_at")
 
     fields = (
@@ -18,10 +18,13 @@ class ContactMessageAdmin(admin.ModelAdmin):
         "subject",
         "message",
         "admin_reply",
+        "is_replied",
+        "replied_at",
     )
 
     def save_model(self, request, obj, form, change):
 
+        # Only send email if reply added AND not already replied
         if obj.admin_reply and not obj.is_replied:
 
             send_mail(
