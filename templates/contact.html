@@ -140,6 +140,86 @@ body {
         text-align: center;
     }
 }
+
+/* ================= TICKET SECTION ================= */
+
+.ticket-wrapper {
+    margin-top: 50px;
+}
+
+.ticket-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+    transition: 0.3s ease;
+}
+
+.ticket-card:hover {
+    transform: translateY(-4px);
+}
+
+.ticket-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.ticket-id {
+    font-weight: 700;
+    color: #1f4df0;
+}
+
+.ticket-status {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.status-pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-replied {
+    background: #d4edda;
+    color: #155724;
+}
+
+.ticket-subject {
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.ticket-date {
+    font-size: 13px;
+    color: #777;
+}
+
+.reply-box {
+    margin-top: 18px;
+    background: #f8f9fa;
+    padding: 18px;
+    border-radius: 12px;
+    border-left: 4px solid #1f4df0;
+}
+
+.reply-title {
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .ticket-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
 </style>
 
 <div class="container">
@@ -312,7 +392,52 @@ body {
     </button>
 </form>
 
+{% if user_messages %}
+<div class="ticket-wrapper">
+    <hr class="mt-5">
+    <h4 class="section-title">Your Support Tickets</h4>
 
+    {% for ticket in user_messages %}
+    <div class="ticket-card">
+
+        <div class="ticket-header">
+            <div class="ticket-id">
+                🎫 {{ ticket.ticket_id }}
+            </div>
+
+            {% if ticket.is_replied %}
+                <div class="ticket-status status-replied">
+                    Replied
+                </div>
+            {% else %}
+                <div class="ticket-status status-pending">
+                    Pending
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="ticket-subject">
+            {{ ticket.subject }}
+        </div>
+
+        <div class="ticket-date">
+            Submitted on {{ ticket.created_at|date:"F d, Y - h:i A" }}
+        </div>
+
+        {% if ticket.admin_reply %}
+        <div class="reply-box">
+            <div class="reply-title">Admin Reply:</div>
+            <p>{{ ticket.admin_reply }}</p>
+            <small class="text-muted">
+                Replied on {{ ticket.replied_at|date:"F d, Y - h:i A" }}
+            </small>
+        </div>
+        {% endif %}
+
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
 </div>
 
 {% endblock %}

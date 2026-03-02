@@ -13,6 +13,7 @@ from django.core.mail import send_mail
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from django.conf import settings
+from .models import ContactMessage
 
 def login_view(request):
 
@@ -72,37 +73,27 @@ def home_view(request):
     })
 
 def contact_view(request):
+    user_messages = None
+
     if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
-            contact = form.save()
-
-            try:
-                message = Mail(
-                    from_email=settings.DEFAULT_FROM_EMAIL,
-                    to_emails=settings.DEFAULT_FROM_EMAIL,  # You receive the message
-                    subject=f"New Contact: {contact.subject}",
-                    html_content=f"""
-                        <strong>Name:</strong> {contact.name}<br>
-                        <strong>Email:</strong> {contact.email}<br><br>
-                        <strong>Message:</strong><br>
-                        {contact.message}
-                    """
-                )
-
-                sg = SendGridAPIClient(settings.SENDGRID_API_KEY)
-                sg.send(message)
-
-            except Exception as e:
-                print("SendGrid Error:", e)
-
-            messages.success(request, "Your message has been sent successfully!")
+            message = form.save()
+            messages.success(request, f"Your ticket {message.ticket_id} has been created!")
             return redirect('accounts:contact')
-
     else:
         form = ContactForm()
 
-    return render(request, 'contact.html', {'form': form})
+    # 🔥 Show user their previous tickets (based on email if logged in)
+    if request.user.is_authenticated:
+        user_messages = ContactMessage.objects.filter(
+            email=request.user.email
+        ).order_by("-created_at")
+
+    return render(request, 'contact.html', {
+        'form': form,
+        'user_messages': user_messages
+    })
 
 def search(request):
     query = request.GET.get('q')
