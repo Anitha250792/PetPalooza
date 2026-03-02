@@ -9,6 +9,8 @@ from cart.models import Product
 from django.db.models import Q
 from django.db import connection
 from cart.models import Service
+from django.core.mail import send_mail
+from django.conf import settings
 
 def login_view(request):
 
@@ -71,9 +73,37 @@ def contact_view(request):
     if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
-            form.save()
+            contact = form.save()
+
+            # 1️⃣ Send Email to Admin
+            subject = f"New Contact Message: {contact.subject}"
+            message = f"""
+Name: {contact.name}
+Email: {contact.email}
+
+Message:
+{contact.message}
+"""
+
+            send_mail(
+                subject,
+                message,
+                settings.DEFAULT_FROM_EMAIL,
+                ["ntanithasaravanan@gmail.com"],  # Admin email
+                fail_silently=False,
+            )
+
+            # 2️⃣ Send Confirmation to User
+            send_mail(
+                "We received your message - PetPalooza",
+                "Thank you for contacting PetPalooza. Our team will respond shortly.",
+                settings.DEFAULT_FROM_EMAIL,
+                [contact.email],
+                fail_silently=False,
+            )
+
             messages.success(request, "Your message has been sent successfully!")
-            return redirect('contact')
+            return redirect('accounts:contact')
     else:
         form = ContactForm()
 

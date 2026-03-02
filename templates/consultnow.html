@@ -317,45 +317,65 @@
 </div>
 
 
-<!-- CUSTOMER REVIEWS -->
-<div class="container my-5">
-    <h4 class="mb-4"><strong>Customer Reviews</strong></h4>
+<!-- CUSTOMER REVIEWS SECTION -->
+<section class="reviews-section">
+    <div class="container">
+        <h3 class="section-title">Customer Reviews</h3>
 
-    <div class="row g-4">
+        <div class="row">
 
-        {% for review in reviews %}
-        <div class="col-md-4">
-            <div class="review-card">
+            {% for review in reviews %}
+            <div class="col-lg-4 col-md-6 col-12 mb-4">
+                <div class="review-card">
 
-                <h6><strong>{{ review.name }}</strong></h6>
-                <small>{{ review.date }}</small>
+                    <!-- Top Info -->
+                    <div class="review-header">
+                        <div class="user-icon">
+                            <i class="bi bi-person"></i>
+                        </div>
 
-                <div class="my-2">
-    {% for i in "12345" %}
-        {% if forloop.counter <= review.rating %}
-            <span class="star text-warning">★</span>
-        {% else %}
-            <span class="star text-secondary">★</span>
-        {% endif %}
-    {% endfor %}
-</div>
-                <p>{{ review.comment }}</p>
-
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="icon-social">
-                        <i class="bi bi-facebook"></i>
-                        <i class="bi bi-twitter"></i>
+                        <div>
+                            <h6 class="review-name">{{ review.name }}</h6>
+                            <small class="review-date">{{ review.date }}</small>
+                        </div>
                     </div>
-                    <div>
-                        👍 0 👎
+
+                    <!-- Stars -->
+                    <div class="review-stars">
+                        {% for i in "12345" %}
+                            {% if forloop.counter <= review.rating %}
+                                <span class="star filled">★</span>
+                            {% else %}
+                                <span class="star">★</span>
+                            {% endif %}
+                        {% endfor %}
                     </div>
+
+                    <!-- Review Text -->
+                    <p class="review-text">
+                        {{ review.comment }}
+                    </p>
+
+                    <!-- Bottom Section -->
+                    <div class="review-footer">
+                        <div class="social-icons">
+                            <i class="bi bi-facebook"></i>
+                            <i class="bi bi-twitter"></i>
+                        </div>
+
+                        <div class="like-section">
+                            <i class="bi bi-hand-thumbs-up"></i>
+                            <span>0</span>
+                            <i class="bi bi-hand-thumbs-down ms-2"></i>
+                        </div>
+                    </div>
+
                 </div>
-
             </div>
-        </div>
-        {% endfor %}
+            {% endfor %}
 
+        </div>
     </div>
-</div>
+</section>
 
 {% endblock %}
