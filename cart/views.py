@@ -201,3 +201,30 @@ def add_service_to_cart(request, service_id):
 
     request.session['cart'] = cart
     return redirect('accounts:consultnow')
+
+def add_service_to_cart(request, service_id):
+    if not request.user.is_authenticated:
+        return redirect('accounts:login')
+
+    service = get_object_or_404(Service, id=service_id)
+    cart, created = Cart.objects.get_or_create(user=request.user)
+
+    item, created = CartItem.objects.get_or_create(
+        cart=cart,
+        service=service
+    )
+
+    if not created:
+        item.quantity += 1
+        item.save()
+
+    return redirect('cart_page')
+
+def remove_service_item(request, service_id):
+    cart = request.session.get('cart', {})
+
+    if service_id in cart:
+        del cart[service_id]
+
+    request.session['cart'] = cart
+    return redirect('cart_page')

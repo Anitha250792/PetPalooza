@@ -32,14 +32,36 @@ class Cart(models.Model):
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+
+    service = models.ForeignKey(
+    'Service',   # <-- string reference
+    on_delete=models.CASCADE,
+    null=True,
+    blank=True
+)
+
     quantity = models.IntegerField(default=1)
 
-    class Meta:
-        unique_together = ('cart', 'product')
-
     def subtotal(self):
-        return self.product.price * self.quantity
+        if self.product:
+            return self.product.price * self.quantity
+        if self.service:
+            return self.service.offer_price * self.quantity
+        return 0
+
+    def __str__(self):
+        if self.product:
+            return self.product.name
+        if self.service:
+            return self.service.name
+        return "Cart Item"
     
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
