@@ -230,27 +230,83 @@
         font-size: 12px;
     }
 }
+
+/* RATE BUTTON */
+.rate-btn {
+    background: linear-gradient(135deg, #1f4df0, #0d6efd);
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s ease;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.rate-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    color: #fff;
+}
+
+/* EMPTY REVIEW STATE */
+.empty-review-box {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* REVIEW FORM WRAPPER */
+.review-form-wrapper {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+/* STAR RATING */
+.star-rating {
+    direction: rtl;
+    display: inline-flex;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    font-size: 32px;
+    color: #ccc;
+    cursor: pointer;
+    transition: 0.3s ease;
+    padding: 0 5px;
+}
+
+.star-rating input:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: #ffc107;
+}
+
+/* SUBMIT BUTTON */
+.submit-review-btn {
+    background: linear-gradient(135deg, #1f4df0, #0d6efd);
+    color: #fff;
+    padding: 10px 30px;
+    border-radius: 30px;
+    border: none;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.submit-review-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
 </style>
 
-<!-- STEP BAR
-<div class="step-bar">
-    <div class="container">
-        <div class="row text-center">
-            <div class="col-md-4">
-                <div>💳</div>
-                <h6>Pay & book the consultant</h6>
-            </div>
-            <div class="col-md-4">
-                <div>🛡️</div>
-                <h6>Choose video or Teleconsultation</h6>
-            </div>
-            <div class="col-md-4">
-                <div>👨‍⚕️</div>
-                <h6>Receive prescription after the call</h6>
-            </div>
-        </div>
-    </div>
-</div> -->
 
 <!-- MAIN SECTION -->
 <div class="container my-5">
@@ -320,15 +376,23 @@
 <!-- CUSTOMER REVIEWS SECTION -->
 <section class="reviews-section">
     <div class="container">
-        <h3 class="section-title">Customer Reviews</h3>
 
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="section-title mb-0">Customer Reviews</h3>
+
+            <!-- ⭐ Rate Button -->
+            <a href="#rateService" class="rate-btn">
+                ⭐ Rate Our Service
+            </a>
+        </div>
+
+        {% if reviews %}
         <div class="row">
 
             {% for review in reviews %}
             <div class="col-lg-4 col-md-6 col-12 mb-4">
                 <div class="review-card">
 
-                    <!-- Top Info -->
                     <div class="review-header">
                         <div class="user-icon">
                             <i class="bi bi-person"></i>
@@ -336,11 +400,12 @@
 
                         <div>
                             <h6 class="review-name">{{ review.name }}</h6>
-                            <small class="review-date">{{ review.date }}</small>
+                            <small class="review-date">
+                                {{ review.created_at|date:"F d, Y" }}
+                            </small>
                         </div>
                     </div>
 
-                    <!-- Stars -->
                     <div class="review-stars">
                         {% for i in "12345" %}
                             {% if forloop.counter <= review.rating %}
@@ -351,31 +416,72 @@
                         {% endfor %}
                     </div>
 
-                    <!-- Review Text -->
                     <p class="review-text">
                         {{ review.comment }}
                     </p>
-
-                    <!-- Bottom Section -->
-                    <div class="review-footer">
-                        <div class="social-icons">
-                            <i class="bi bi-facebook"></i>
-                            <i class="bi bi-twitter"></i>
-                        </div>
-
-                        <div class="like-section">
-                            <i class="bi bi-hand-thumbs-up"></i>
-                            <span>0</span>
-                            <i class="bi bi-hand-thumbs-down ms-2"></i>
-                        </div>
-                    </div>
 
                 </div>
             </div>
             {% endfor %}
 
         </div>
-    </div>
-</section>
 
+        {% else %}
+        <!-- Empty State -->
+        <div class="empty-review-box text-center">
+            <h5>No reviews yet</h5>
+            <p>Be the first to share your experience!</p>
+        </div>
+        {% endif %}
+
+    </div>
+    <!-- RATE SERVICE FORM -->
+<div id="rateService" class="review-form-wrapper mt-5">
+
+    <h4 class="text-center mb-4">Rate Our Service</h4>
+
+    <form method="POST" class="review-form">
+        {% csrf_token %}
+
+        <!-- Name -->
+        <div class="mb-3">
+            <input type="text" name="name" class="form-control"
+                   placeholder="Your Name" required>
+        </div>
+
+        <!-- Star Rating -->
+        <div class="star-rating text-center mb-3">
+            <input type="radio" name="rating" value="5" id="star5">
+            <label for="star5">★</label>
+
+            <input type="radio" name="rating" value="4" id="star4">
+            <label for="star4">★</label>
+
+            <input type="radio" name="rating" value="3" id="star3">
+            <label for="star3">★</label>
+
+            <input type="radio" name="rating" value="2" id="star2">
+            <label for="star2">★</label>
+
+            <input type="radio" name="rating" value="1" id="star1">
+            <label for="star1">★</label>
+        </div>
+
+        <!-- Comment -->
+        <div class="mb-3">
+            <textarea name="comment"
+                      class="form-control"
+                      placeholder="Write your review..."
+                      rows="4"
+                      required></textarea>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="submit-review-btn">
+                Submit Review
+            </button>
+        </div>
+    </form>
+</div>
+</section>
 {% endblock %}

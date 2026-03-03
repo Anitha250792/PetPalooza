@@ -117,7 +117,18 @@ def consult_view(request):
 def consultnow(request):
     service = Service.objects.first()
 
-    reviews = Review.objects.all().order_by("-created_at")
+    if request.method == "POST":
+        name = request.POST.get("name")
+        rating = request.POST.get("rating")
+        comment = request.POST.get("comment")
+
+        Review.objects.create(
+            name=name,
+            rating=rating,
+            comment=comment
+        )
+
+    reviews = Review.objects.order_by("-created_at")
 
     return render(request, "consultnow.html", {
         "service": service,
