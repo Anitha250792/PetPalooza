@@ -149,3 +149,19 @@ def consultnow(request):
         "service": service,
         "reviews": reviews
     })
+
+def contact_view(request):
+    form = ContactForm(request.POST or None)
+
+    if request.method == "POST":
+        if form.is_valid():
+            message = form.save()
+            messages.success(request, f"Your ticket {message.ticket_id} has been created!")
+            return redirect('accounts:contact')
+
+    user_messages = ContactMessage.objects.all().order_by("-created_at")
+
+    return render(request, 'contact.html', {
+        'form': form,
+        'user_messages': user_messages
+    })
