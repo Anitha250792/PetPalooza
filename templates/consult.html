@@ -286,12 +286,42 @@
         </div>
 
         <h2 class="fw-bold mb-4">
-            Get Stress-Free Pet Care from the comfort of your home
-        </h2>
+    Get Stress-Free Pet Care from the comfort of your home
+</h2>
 
-        <a href="{% url 'accounts:consultnow' %}" class="btn btn-primary btn-lg px-5">
-            Consult Now
-        </a>
+<!-- CONSULTATION BOOKING FORM -->
+<form method="POST" class="mt-4" style="max-width:600px;margin:auto;">
+{% csrf_token %}
+
+<div class="mb-3">
+<input type="text" name="name" class="form-control" placeholder="Your Name" required>
+</div>
+
+<div class="mb-3">
+<input type="email" name="email" class="form-control" placeholder="Email Address" required>
+</div>
+
+<div class="mb-3">
+<input type="text" name="phone" class="form-control" placeholder="Phone Number" required>
+</div>
+
+<div class="mb-3">
+<select name="pet_type" class="form-control">
+<option value="Dog">Dog</option>
+<option value="Cat">Cat</option>
+<option value="Small Pet">Small Pet</option>
+</select>
+</div>
+
+<div class="mb-3">
+<textarea name="message" class="form-control" rows="3" placeholder="Describe your pet issue"></textarea>
+</div>
+
+<button type="submit" class="btn btn-primary btn-lg px-5">
+Book Consultation
+</button>
+
+</form>
 
     </div>
 </section>

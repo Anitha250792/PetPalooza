@@ -5,6 +5,7 @@ from .models import Service
 from django.conf import settings
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from petpalooza.utils.email_service import send_order_confirmation, send_admin_order_notification
 
 
 # ---------------- CART ---------------- #
@@ -171,7 +172,13 @@ def payment_success(request):
 
         order.save()
 
-        # Clear cart
+# Send confirmation email
+        send_order_confirmation(order)
+
+# Email to admin
+        send_admin_order_notification(order)        
+
+# Clear cart
         CartItem.objects.filter(cart__user=request.user).delete()
 
         return redirect("thankyou", order_id=order.id)

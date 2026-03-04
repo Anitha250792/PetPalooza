@@ -15,6 +15,9 @@ from sendgrid.helpers.mail import Mail
 from django.conf import settings
 from .models import ContactMessage
 from accounts.models import Review
+from core.models import ConsultationBooking
+from petpalooza.utils.email_service import send_consultation_confirmation
+from petpalooza.utils.email_service import send_welcome_email
 
 def login_view(request):
 
@@ -50,6 +53,10 @@ def login_view(request):
                     first_name=first_name,
                     last_name=last_name
                 )
+
+# Send welcome email
+                send_welcome_email(user)
+
                 messages.success(request, "Account created successfully!")
                 return redirect("/")
 
@@ -73,22 +80,30 @@ def home_view(request):
         "service_cards": service_cards,
     })
 
-def contact_view(request):
-    form = ContactForm(request.POST or None)
+def consult_view(request):
 
     if request.method == "POST":
-        if form.is_valid():
-            message = form.save()
-            messages.success(request, f"Your ticket {message.ticket_id} has been created!")
-            return redirect('accounts:contact')
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        phone = request.POST.get("phone")
+        pet_type = request.POST.get("pet_type")
+        message = request.POST.get("message")
 
-    # 🔥 TEMP DEBUG
-    user_messages = ContactMessage.objects.all().order_by("-created_at")
+        from core.models import ConsultationBooking
+        ConsultationBooking.objects.create(
+            name=name,
+            email=email,
+            phone=phone,
+            pet_type=pet_type,
+            message=message
+        )
 
-    return render(request, 'contact.html', {
-        'form': form,
-        'user_messages': user_messages
-    })
+        from petpalooza.utils.email_service import send_consultation_confirmation
+        send_consultation_confirmation(email, name)
+
+        messages.success(request, "Consultation booked successfully!")
+
+    return render(request, "consult.html")
 
 def search(request):
     query = request.GET.get('q')
