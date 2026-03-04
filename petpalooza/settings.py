@@ -153,10 +153,11 @@ CSRF_TRUSTED_ORIGINS = [
 
 # ================= EMAIL CONFIG ================= #
 
-
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 
 SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
+
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 
 DEFAULT_FROM_EMAIL = "ntanithasaravanan@gmail.com"
 
