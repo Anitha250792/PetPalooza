@@ -1,10 +1,11 @@
 from django.core.mail import send_mail
 from django.conf import settings
-from cart.models import CartItem
 
 
 def send_welcome_email(user):
+
     subject = "Welcome to PetPalooza 🐾"
+
     message = f"""
 Hi {user.first_name},
 
@@ -31,29 +32,23 @@ Thank you for joining us.
     )
 
 
-from django.core.mail import send_mail
-from django.conf import settings
-from cart.models import CartItem
-
-
 def send_order_confirmation(order):
 
-    items = CartItem.objects.filter(cart__user=order.user)
+    items = order.items.all()
 
     product_lines = ""
     subtotal = 0
 
     for item in items:
+
         if item.product:
             name = item.product.name
-            price = item.product.price
-        elif item.service:
-            name = item.service.name
-            price = item.service.offer_price
         else:
-            continue
+            name = item.service.name
 
+        price = item.price
         quantity = item.quantity
+
         line_total = price * quantity
         subtotal += line_total
 
@@ -62,7 +57,6 @@ def send_order_confirmation(order):
 Qty: {quantity}
 Price: ₹{price}
 Total: ₹{line_total}
-
 """
 
     shipping = 99 if subtotal > 0 else 0
@@ -93,8 +87,6 @@ Total Paid: ₹{grand_total}
 Delivery Address:
 {order.address}
 
-We will process your order shortly.
-
 Thank you for shopping with PetPalooza!
 
 PetPalooza Team
@@ -110,6 +102,7 @@ PetPalooza Team
 
 
 def send_consultation_confirmation(email, name):
+
     subject = "Pet Consultation Booking Confirmed"
 
     message = f"""
@@ -119,9 +112,7 @@ Your pet consultation request has been received.
 
 Our expert will contact you soon.
 
-Thank you for choosing PetPalooza.
-
-– PetPalooza Team
+PetPalooza Team
 """
 
     send_mail(
@@ -132,29 +123,29 @@ Thank you for choosing PetPalooza.
         fail_silently=False,
     )
 
+
 def send_admin_order_notification(order):
+
     subject = f"New Order Received - Order #{order.id}"
 
     message = f"""
-A new order has been placed on PetPalooza.
+A new order has been placed.
 
-Customer Name: {order.name}
+Customer: {order.name}
 Email: {order.email}
 Phone: {order.phone}
 
 Order ID: {order.id}
 Total Amount: ₹{order.total_amount}
 
-Shipping Address:
+Address:
 {order.address}
-
-Check admin dashboard for more details.
 """
 
     send_mail(
         subject,
         message,
         settings.DEFAULT_FROM_EMAIL,
-        ["ntanithasaravanan@gmail.com"],  # admin email
+        ["ntanithasaravanan@gmail.com"],
         fail_silently=False,
-    )    
+    )

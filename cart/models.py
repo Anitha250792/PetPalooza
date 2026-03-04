@@ -92,4 +92,51 @@ class Service(models.Model):
 
     def __str__(self):
         return self.name    
+    
+
+class OrderItem(models.Model):
+
+    order = models.ForeignKey(
+        Order,
+        on_delete=models.CASCADE,
+        related_name="items"
+    )
+
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+
+    service = models.ForeignKey(
+        Service,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+
+    quantity = models.IntegerField(default=1)
+
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    status = models.CharField(
+    max_length=50,
+    choices=[
+        ("Pending", "Pending"),
+        ("Shipped", "Shipped"),
+        ("Delivered", "Delivered"),
+    ],
+    default="Pending"
+)
+
+    def subtotal(self):
+        return self.price * self.quantity
+
+    def __str__(self):
+        if self.product:
+            return f"{self.product.name} ({self.quantity})"
+        if self.service:
+            return f"{self.service.name} ({self.quantity})"
+        return "Order Item"    
 

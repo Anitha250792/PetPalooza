@@ -126,9 +126,6 @@ def petservice_view(request):
 
 
 
-def consult_view(request):
-    return render(request, "consult.html")
-
 def consultnow(request):
     service = Service.objects.first()
 
