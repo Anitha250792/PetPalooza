@@ -18,6 +18,8 @@ from accounts.models import Review
 from core.models import ConsultationBooking
 from petpalooza.utils.email_service import send_consultation_confirmation
 from petpalooza.utils.email_service import send_welcome_email
+from django.contrib.auth.decorators import login_required
+from cart.models import Order
 
 def login_view(request):
 
@@ -161,4 +163,17 @@ def contact_view(request):
     return render(request, 'contact.html', {
         'form': form,
         'user_messages': user_messages
+    })
+
+
+@login_required
+def account_dashboard(request):
+
+    orders = Order.objects.filter(
+        user=request.user,
+        is_paid=True
+    ).prefetch_related("items").order_by("-created_at")
+
+    return render(request,"accounts/account_dashboard.html",{
+        "orders":orders
     })
