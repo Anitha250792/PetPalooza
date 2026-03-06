@@ -282,21 +282,41 @@ body {
                     <h4>Order Summary</h4>
 
                     {% for item in items %}
-                    <div class="summary-item">
-                        {% if item.product.image %}
-                            <img src="{{ item.product.image.url }}">
-                        {% else %}
-                            <img src="{% static 'images/default-product.png' %}">
-                        {% endif %}
+<div class="summary-item">
 
-                        <div class="ms-3 summary-item-details">
-                            <h6>{{ item.product.name }}</h6>
-                            <p>₹ {{ item.product.price }}</p>
-                            <p>Quantity {{ item.quantity }}</p>
-                            <p>{{ item.product.weight }}</p>
-                        </div>
-                    </div>
-                    {% endfor %}
+    {% if item.product %}
+        {% if item.product.image %}
+            <img src="{{ item.product.image.url }}">
+        {% else %}
+            <img src="{% static 'images/default-product.png' %}">
+        {% endif %}
+
+    {% elif item.service %}
+        <img src="{% static 'images/service.png' %}">
+
+    {% else %}
+        <img src="{% static 'images/default-product.png' %}">
+    {% endif %}
+
+    <div class="ms-3 summary-item-details">
+
+        {% if item.product %}
+            <h6>{{ item.product.name }}</h6>
+            <p>₹ {{ item.product.price }}</p>
+            <p>Quantity {{ item.quantity }}</p>
+            <p>{{ item.product.weight }}</p>
+
+        {% elif item.service %}
+            <h6>{{ item.service.name }}</h6>
+            <p>₹ {{ item.service.offer_price }}</p>
+            <p>Quantity {{ item.quantity }}</p>
+            <p>Service</p>
+        {% endif %}
+
+    </div>
+
+</div>
+{% endfor %}
 
                     <div class="discount-wrapper">
                         <input type="text" placeholder="Discount code or gift card">
