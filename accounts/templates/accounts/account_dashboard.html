@@ -129,10 +129,14 @@
 
 <div class="product-image">
 
-{% if item.product.image %}
-<img src="{{ item.product.image.url }}">
+{% if item.product and item.product.image %}
+    <img src="{{ item.product.image.url }}">
+
+{% elif item.service %}
+    <img src="{% static 'images/story.png' %}">
+
 {% else %}
-<img src="{% static 'images/product-placeholder.png' %}">
+    <img src="{% static 'images/product-placeholder.png' %}">
 {% endif %}
 
 </div>
@@ -143,13 +147,13 @@
 <div class="product-info">
 
 <h6>
-
 {% if item.product %}
 {{ item.product.name }}
-{% else %}
+<small class="text-muted">(Product)</small>
+{% elif item.service %}
 {{ item.service.name }}
+<small class="text-muted">(Service)</small>
 {% endif %}
-
 </h6>
 
 <p>Quantity: {{ item.quantity }}</p>
