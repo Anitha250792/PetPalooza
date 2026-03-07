@@ -169,19 +169,18 @@ def payment_success(request):
         order.address = address
         order.phone = phone
         order.email = email
-
         order.save()
 
-# ---------------- SAVE ORDER ITEMS ---------------- #
+        # ---------------- SAVE ORDER ITEMS ---------------- #
 
         cart_items = CartItem.objects.filter(cart__user=request.user)
 
         for item in cart_items:
 
             if item.product:
-               price = item.product.price
+                price = item.product.price
             else:
-               price = item.service.offer_price
+                price = item.service.offer_price
 
             OrderItem.objects.create(
                 order=order,
@@ -189,21 +188,21 @@ def payment_success(request):
                 service=item.service,
                 quantity=item.quantity,
                 price=price
-             )
+            )
 
-# ---------------- SEND EMAILS ---------------- #
+        # ---------------- SEND EMAILS ---------------- #
 
-            send_order_confirmation(order)
+        send_order_confirmation(order)
+        send_admin_order_notification(order)
 
-            send_admin_order_notification(order)
+        # ---------------- CLEAR CART ---------------- #
 
-# ---------------- CLEAR CART ---------------- #
-
-            CartItem.objects.filter(cart__user=request.user).delete()
+        CartItem.objects.filter(cart__user=request.user).delete()
 
         return redirect("thankyou", order_id=order.id)
 
-    except:
+    except Exception as e:
+        print(e)
         return JsonResponse({"error": "Payment verification failed"})
 
 # ---------------- THANK YOU ---------------- #
