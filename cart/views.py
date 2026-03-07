@@ -173,7 +173,7 @@ def payment_success(request):
 
         # ---------------- SAVE ORDER ITEMS ---------------- #
 
-        cart_items = CartItem.objects.filter(cart__user=request.user)
+        cart_items = CartItem.objects.filter(cart__user=order.user)
 
         for item in cart_items:
 
