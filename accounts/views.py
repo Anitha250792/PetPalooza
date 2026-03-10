@@ -20,6 +20,7 @@ from petpalooza.utils.email_service import send_consultation_confirmation
 from petpalooza.utils.email_service import send_welcome_email
 from django.contrib.auth.decorators import login_required
 from cart.models import Order
+import random
 
 def login_view(request):
 
@@ -177,3 +178,60 @@ def account_dashboard(request):
     return render(request,"accounts/account_dashboard.html",{
         "orders":orders
     })
+
+def forgot_password(request):
+
+    if request.method == "POST":
+        email = request.POST.get("email")
+
+        if User.objects.filter(email=email).exists():
+
+            otp = random.randint(100000,999999)
+
+            request.session['reset_email'] = email
+            request.session['reset_otp'] = otp
+
+            send_mail(
+                "PetPalooza Password Reset OTP",
+                f"Your OTP to reset password is: {otp}",
+                settings.DEFAULT_FROM_EMAIL,
+                [email],
+                fail_silently=False,
+            )
+
+            messages.success(request,"OTP sent to your email.")
+            return redirect("accounts:verify_otp")
+
+        else:
+            messages.error(request,"Email not found.")
+
+    return render(request,"accounts/forgot_password.html")
+
+def verify_otp(request):
+
+    if request.method == "POST":
+        entered_otp = request.POST.get("otp")
+        session_otp = request.session.get("reset_otp")
+
+        if str(entered_otp) == str(session_otp):
+            return redirect("accounts:reset_password")
+        else:
+            messages.error(request,"Invalid OTP")
+
+    return render(request,"accounts/verify_otp.html")
+
+def reset_password(request):
+
+    email = request.session.get("reset_email")
+
+    if request.method == "POST":
+        password = request.POST.get("password")
+
+        user = User.objects.get(email=email)
+        user.set_password(password)
+        user.save()
+
+        messages.success(request,"Password reset successfully")
+        return redirect("accounts:login")
+
+    return render(request,"accounts/reset_password.html")
