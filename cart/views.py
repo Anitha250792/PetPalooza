@@ -7,7 +7,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from petpalooza.utils.email_service import send_order_confirmation, send_admin_order_notification
 from .models import OrderItem
-
+from django.contrib.auth.decorators import login_required
 # ---------------- CART ---------------- #
 
 def add_to_cart(request, product_id):
@@ -239,3 +239,19 @@ def remove_service_item(request, service_id):
     )
     item.delete()
     return redirect('cart_page')
+
+@login_required
+def track_order(request, order_id):
+
+    order = get_object_or_404(
+        Order,
+        id=order_id,
+        user=request.user
+    )
+
+    items = order.items.all()
+
+    return render(request, "track_order.html", {
+        "order": order,
+        "items": items
+    })

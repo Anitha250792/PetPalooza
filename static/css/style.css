@@ -5,10 +5,23 @@ body {
     font-weight: 400;
     font-size: 15px;
     color: #1a1a1a;
+    overflow-x: hidden;
 }
 h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
 }
+/* ================= GLOBAL LAYOUT FIX ================= */
+
+.container{
+max-width:1200px;
+margin:auto;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 
 .nav-link,
 .nav-link-custom {
@@ -133,6 +146,38 @@ h1, h2, h3, h4, h5, h6 {
     color: #ffd700;
 }
 
+/* ================= NAVBAR MOBILE ================= */
+
+@media (max-width: 768px) {
+
+.main-navbar .container{
+flex-direction:column;
+gap:10px;
+}
+
+.navbar-brand img{
+height:70px;
+}
+
+.search-bar{
+width:100%;
+}
+
+.search-bar input{
+width:100%;
+}
+
+.nav-link-custom{
+font-size:14px;
+margin-left:10px;
+}
+
+.nav-icon{
+font-size:14px;
+}
+
+}
+
 /* ================= MEGA MENU ================= */
 
 
@@ -165,9 +210,7 @@ h1, h2, h3, h4, h5, h6 {
     color:#000;
 }
 
-.category-menu {
-    position: relative;
-}
+
 .category-menu > .container > ul > li > a {
     color: white;
 }
@@ -226,6 +269,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Category */
 .category-menu {
+    position: relative;
     background-color: #1e40af;
     padding: 10px 0;
 }
@@ -537,10 +581,10 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     /* Footer full stack */
-    .footer-section .row {
-        flex-direction: column;
-      .nav-item  text-align: center;
-    }
+   .footer-section .row{
+flex-direction:column;
+text-align:center;
+}
 
     .footer-logo {
         height: 80px;
@@ -584,4 +628,219 @@ h1, h2, h3, h4, h5, h6 {
     .subscribe-button {
         font-size: 14px;
     }
+}
+
+
+/* ================= MOBILE RESPONSIVE LOGIN ================= */
+
+@media (max-width:992px){
+
+.account-section{
+padding:10px;
+}
+
+.customer-strip .col-md-6{
+padding:15px;
+}
+
+}
+
+
+@media (max-width:768px){
+
+.account-content{
+flex-direction:column;
+}
+
+.register-side{
+margin-top:20px;
+}
+
+.customer-strip{
+flex-direction:column;
+}
+
+.customer-strip .col-md-6{
+border-bottom:1px solid #eee;
+}
+
+.toggle-password{
+right:15px;
+top:38px;
+}
+
+}
+
+
+@media (max-width:480px){
+
+.account-section h2{
+font-size:22px;
+}
+
+.customer-strip h5{
+font-size:16px;
+}
+
+.form-control{
+font-size:14px;
+}
+
+.btn{
+font-size:14px;
+}
+
+}
+
+/* ================= CATEGORY MENU MOBILE ================= */
+
+@media (max-width:768px){
+
+.category-menu ul{
+flex-direction:column !important;
+align-items:flex-start;
+padding-left:20px;
+}
+
+.category-menu .nav-link{
+padding:8px 0;
+}
+.mega-menu{
+position:absolute;
+top:100%;
+left:0;
+width:100%;
+border:none;
+border-radius:0;
+background:#f4f4f4;
+z-index:9999;
+}
+
+.mega-menu .row{
+flex-direction:column;
+}
+
+.mega-menu .col-md-2,
+.mega-menu .col-md-3{
+width:100%;
+margin-bottom:10px;
+}
+
+}
+
+/* ================= FOOTER RESPONSIVE ================= */
+
+@media (max-width:768px){
+
+.footer-container{
+text-align:center;
+}
+
+.footer-headings .col-md-3,
+.footer-headings .col-md-2{
+margin-bottom:20px;
+}
+
+.footer-content .col-md-3,
+.footer-content .col-md-2{
+margin-bottom:20px;
+}
+
+.social-icons{
+display:flex;
+justify-content:center;
+}
+
+.subscribe-input{
+margin-top:10px;
+}
+
+}
+
+/* ================= SEARCH PAGE ================= */
+
+.product-card{
+background:#fff;
+border:1px solid #eee;
+border-radius:10px;
+padding:20px;
+transition:0.3s;
+}
+
+.product-card:hover{
+transform:translateY(-5px);
+box-shadow:0 10px 20px rgba(0,0,0,0.08);
+}
+
+.product-img{
+width:100%;
+height:220px;
+object-fit:contain;
+margin-bottom:15px;
+}
+
+.product-title{
+font-size:18px;
+margin-bottom:10px;
+}
+
+.star{
+color:#ccc;
+font-size:18px;
+}
+
+.star.filled{
+color:gold;
+}
+
+.price{
+font-size:20px;
+font-weight:600;
+margin:10px 0;
+}
+
+.add-btn{
+display:inline-block;
+padding:8px 20px;
+background:#1e40af;
+color:white;
+border-radius:6px;
+text-decoration:none;
+}
+
+.add-btn:hover{
+background:#142d8b;
+}
+
+/* ================= SEARCH MOBILE ================= */
+
+@media (max-width:768px){
+
+.product-card{
+padding:15px;
+}
+
+.product-img{
+height:180px;
+}
+
+.product-title{
+font-size:16px;
+}
+
+.price{
+font-size:18px;
+}
+
+}
+
+@media (max-width:480px){
+
+.cart-badge{
+font-size:10px;
+padding:2px 4px;
+top:-6px;
+right:-8px;
+}
+
 }

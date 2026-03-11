@@ -114,6 +114,11 @@ class Order(models.Model):
 
     address = models.TextField(blank=True, null=True)
 
+    # 🚚 SHIPPING TRACKING
+    tracking_id = models.CharField(max_length=200, blank=True, null=True)
+    courier_name = models.CharField(max_length=200, blank=True, null=True)
+    estimated_delivery = models.DateField(blank=True, null=True)
+
     total_amount = models.DecimalField(max_digits=10, decimal_places=2)
 
     is_paid = models.BooleanField(default=False)
@@ -157,11 +162,12 @@ class OrderItem(models.Model):
     status = models.CharField(
         max_length=50,
         choices=[
-            ("Pending", "Pending"),
+            ("Order Placed", "Order Placed"),
+            ("Packed", "Packed"),
             ("Shipped", "Shipped"),
             ("Delivered", "Delivered"),
         ],
-        default="Pending"
+        default="Order Placed"
     )
 
     def subtotal(self):

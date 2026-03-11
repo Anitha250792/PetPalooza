@@ -24,6 +24,8 @@ class OrderAdmin(admin.ModelAdmin):
         "email",
         "total_amount",
         "is_paid",
+        "courier_name",
+        "tracking_id",
         "created_at"
     )
 

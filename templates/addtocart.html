@@ -99,6 +99,66 @@ table th {
 table td {
     vertical-align: middle;
 }
+
+/* ================= CART MOBILE ================= */
+
+@media (max-width: 992px){
+
+.cart-box{
+margin-bottom:20px;
+}
+
+}
+
+@media (max-width: 768px){
+
+table thead{
+display:none;
+}
+
+table tr{
+display:block;
+margin-bottom:15px;
+border-bottom:1px solid #ddd;
+}
+
+table td{
+display:flex;
+justify-content:space-between;
+padding:10px 0;
+}
+
+.qty-wrapper{
+transform:scale(0.9);
+}
+
+.checkout-btn{
+font-size:15px;
+padding:12px;
+}
+
+.payment-icons img{
+height:32px;
+}
+
+}
+
+@media (max-width: 480px){
+
+.cart-box{
+padding:20px;
+}
+
+.qty-btn{
+width:30px;
+height:30px;
+}
+
+.qty-number{
+width:35px;
+}
+
+}
 </style>
 
 <div class="container mt-5">

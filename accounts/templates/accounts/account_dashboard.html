@@ -90,6 +90,16 @@
 </div>
 
 </div>
+
+{% if order.tracking_id %}
+<p class="small text-muted mb-2">
+🚚 Courier: <strong>{{ order.courier_name }}</strong> |
+Tracking ID: <strong>{{ order.tracking_id }}</strong>
+</p>
+{% endif %}
+
+{% with status=order.items.first.status %}
+
 <div class="order-tracking">
 
 <div class="step completed">
@@ -98,24 +108,35 @@
 </div>
 
 <div class="step 
-{% if order.items.first.status == 'Shipped' or order.items.first.status == 'Delivered' %}completed{% endif %}">
+{% if status == 'Packed' or status == 'Shipped' or status == 'Delivered' %}
+completed
+{% endif %}
+">
 <span>✓</span>
 <p>Packed</p>
 </div>
 
 <div class="step 
-{% if order.items.first.status == 'Shipped' or order.items.first.status == 'Delivered' %}completed{% endif %}">
+{% if status == 'Shipped' or status == 'Delivered' %}
+completed
+{% endif %}
+">
 <span>✓</span>
 <p>Shipped</p>
 </div>
 
 <div class="step 
-{% if order.items.first.status == 'Delivered' %}completed{% endif %}">
+{% if status == 'Delivered' %}
+completed
+{% endif %}
+">
 <span>✓</span>
 <p>Delivered</p>
 </div>
 
 </div>
+
+{% endwith %}
 
 <!-- PRODUCT LIST -->
 
@@ -183,6 +204,9 @@
 <strong>Total Paid: ₹{{ order.total_amount }}</strong>
 
 </div>
+<a href="{% url 'track_order' order.id %}" class="btn btn-sm btn-outline-primary mt-2">
+Track Order
+</a>
 
 </div>
 
@@ -349,6 +373,124 @@ background:#28a745;
 .step p{
 font-size:12px;
 margin-top:6px;
+}
+/* ================= MOBILE RESPONSIVE ================= */
+
+@media (max-width: 992px){
+
+.profile-card{
+margin-bottom:20px;
+}
+
+.summary-card{
+margin-bottom:15px;
+}
+
+.order-product{
+flex-wrap:wrap;
+}
+
+.product-image img{
+width:60px;
+height:60px;
+}
+
+.product-price{
+width:100%;
+text-align:left;
+margin-top:5px;
+}
+
+.order-total{
+text-align:left;
+}
+
+}
+
+
+/* MOBILE PHONES */
+
+@media (max-width: 768px){
+
+.dashboard-title{
+font-size:22px;
+}
+
+.order-header{
+flex-direction:column;
+align-items:flex-start;
+gap:5px;
+}
+
+.order-tracking{
+flex-direction:column;
+align-items:flex-start;
+gap:20px;
+}
+
+.order-tracking::before{
+display:none;
+}
+
+.step{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.step span{
+width:25px;
+height:25px;
+line-height:25px;
+font-size:12px;
+}
+
+.step p{
+margin:0;
+font-size:13px;
+}
+
+.order-product{
+flex-direction:row;
+gap:15px;
+}
+
+.product-info h6{
+font-size:14px;
+}
+
+}
+
+
+/* SMALL PHONES */
+
+@media (max-width: 480px){
+
+.profile-card{
+padding:20px;
+}
+
+.summary-card{
+padding:15px;
+}
+
+.order-card{
+padding:15px;
+}
+
+.product-image img{
+width:50px;
+height:50px;
+}
+
+.product-info h6{
+font-size:13px;
+}
+
+.order-total{
+font-size:14px;
+}
+
 }
 
 </style>
