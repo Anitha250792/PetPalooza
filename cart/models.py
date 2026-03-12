@@ -6,6 +6,7 @@ from cloudinary.models import CloudinaryField
 # ---------------- PRODUCTS ---------------- #
 
 class Product(models.Model):
+
     name = models.CharField(max_length=200)
 
     price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -17,6 +18,7 @@ class Product(models.Model):
     category = models.CharField(max_length=100, blank=True, null=True)
 
     rating = models.DecimalField(max_digits=3, decimal_places=1, default=0)
+
     review_count = models.IntegerField(default=0)
 
     @property
@@ -30,6 +32,7 @@ class Product(models.Model):
 # ---------------- SERVICES ---------------- #
 
 class Service(models.Model):
+
     name = models.CharField(max_length=200)
 
     price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -114,9 +117,10 @@ class Order(models.Model):
 
     address = models.TextField(blank=True, null=True)
 
-    # 🚚 SHIPPING TRACKING
+    # 🚚 SHIPPING INFORMATION
     tracking_id = models.CharField(max_length=200, blank=True, null=True)
     courier_name = models.CharField(max_length=200, blank=True, null=True)
+
     estimated_delivery = models.DateField(blank=True, null=True)
 
     total_amount = models.DecimalField(max_digits=10, decimal_places=2)
@@ -128,9 +132,18 @@ class Order(models.Model):
     def __str__(self):
         return f"Order #{self.id} - {self.user.username}"
 
+
 # ---------------- ORDER ITEMS ---------------- #
 
 class OrderItem(models.Model):
+
+    STATUS_CHOICES = [
+        ("Order Placed", "Order Placed"),
+        ("Packed", "Packed"),
+        ("Shipped", "Shipped"),
+        ("Out for Delivery", "Out for Delivery"),
+        ("Delivered", "Delivered"),
+    ]
 
     order = models.ForeignKey(
         Order,
@@ -161,24 +174,27 @@ class OrderItem(models.Model):
 
     status = models.CharField(
         max_length=50,
-        choices=[
-            ("Order Placed", "Order Placed"),
-            ("Packed", "Packed"),
-            ("Shipped", "Shipped"),
-            ("Delivered", "Delivered"),
-        ],
-        default="Order Placed"
+        choices=STATUS_CHOICES,
+        default="Order Placed",
+        db_index=True
     )
+
+    current_location = models.CharField(
+        max_length=200,
+        blank=True,
+        null=True
+    )
+
+    latitude = models.FloatField(blank=True, null=True)
+    longitude = models.FloatField(blank=True, null=True)
+
+    updated_at = models.DateTimeField(auto_now=True)
 
     def subtotal(self):
         return self.price * self.quantity
 
     def __str__(self):
-
-        if self.product:
-            return f"{self.product.name} ({self.quantity})"
-
-        if self.service:
-            return f"{self.service.name} ({self.quantity})"
-
-        return "Order Item"
+        item_name = self.product.name if self.product else (
+            self.service.name if self.service else "Order Item"
+        )
+        return f"{item_name} ({self.quantity})"

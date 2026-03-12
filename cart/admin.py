@@ -35,7 +35,6 @@ class OrderAdmin(admin.ModelAdmin):
 
     inlines = [OrderItemInline]
 
-
 @admin.register(OrderItem)
 class OrderItemAdmin(admin.ModelAdmin):
 
@@ -45,5 +44,11 @@ class OrderItemAdmin(admin.ModelAdmin):
         "service",
         "quantity",
         "price",
-        "status"
+        "status",
+        "current_location",
+    )
+
+    list_editable = (
+        "status",
+        "current_location",
     )
