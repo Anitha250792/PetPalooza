@@ -155,6 +155,38 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+
+function toggleMenu(){
+    document.getElementById("mobileMenu").classList.toggle("active");
+}
+
+/* CART ANIMATION */
+
+function animateCart(){
+
+    const cart = document.getElementById("cartIcon");
+
+    cart.classList.add("cart-animate");
+
+    setTimeout(()=>{
+        cart.classList.remove("cart-animate");
+    },500);
+
+}
+
+function togglePassword(id, icon){
+
+const input = document.getElementById(id);
+
+if(input.type === "password"){
+input.type = "text";
+icon.innerHTML = '<i class="bi bi-eye-slash"></i>';
+}else{
+input.type = "password";
+icon.innerHTML = '<i class="bi bi-eye"></i>';
+}
+
+}
 </script>
 
 </body>
