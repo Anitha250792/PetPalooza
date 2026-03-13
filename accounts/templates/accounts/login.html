@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<div class="container mt-5 account-section">
+<div class="account-section mt-5">
 
 <!-- Breadcrumb -->
 <div class="breadcrumb-section mb-3">
@@ -22,10 +22,10 @@
 </div>
 </div>
 
-<div class="row account-content">
+<div class="row account-content align-items-center">
 
 <!-- LOGIN -->
-<div class="col-md-6 login-box">
+<div class="col-md-5 login-box">
 
 <form method="POST">
 {% csrf_token %}
@@ -58,8 +58,21 @@ Forget your password?
 
 </div>
 
-<!-- REGISTER SIDE -->
-<div class="col-md-6 register-box">
+
+<!-- DIVIDER -->
+<div class="col-md-2 text-center divider-area">
+
+<div class="divider-line"></div>
+
+<span class="divider-text">Or</span>
+
+<div class="divider-line"></div>
+
+</div>
+
+
+<!-- REGISTER -->
+<div class="col-md-5 register-box">
 
 <p>
 Register with us for a faster checkout,<br>
