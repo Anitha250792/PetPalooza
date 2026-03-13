@@ -255,3 +255,21 @@ def track_order(request, order_id):
         "order": order,
         "items": items
     })
+
+# ---------------- PRODUCT DETAIL PAGE ---------------- #
+
+def product_detail(request, product_id):
+
+    product = get_object_or_404(Product, id=product_id)
+
+    # similar products
+    related_products = Product.objects.filter(
+        category=product.category
+    ).exclude(id=product.id)[:4]
+
+    context = {
+        "product": product,
+        "related_products": related_products
+    }
+
+    return render(request, "product_detail.html", context)

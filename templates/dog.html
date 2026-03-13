@@ -216,6 +216,15 @@ font-size:13px;
 }
 
 }
+
+.product-title a{
+text-decoration:none;
+color:black;
+}
+
+.product-title a:hover{
+color:#1f4df0;
+}
 </style>
 
 <div class="container mt-5">
@@ -351,19 +360,28 @@ font-size:13px;
         <!-- PRODUCT GRID -->
         <div class="row g-4">
 
-            {% for product in products %}
-            <div class="col-lg-4 col-md-6">
-                <div class="product-card text-center">
+           {% for product in products %}
+<div class="col-lg-4 col-md-6">
 
-                    {% if product.image %}
-                        <img src="{{ product.image.url }}" class="product-img">
-                    {% else %}
-                        <img src="{% static 'images/default-product.png' %}" class="product-img">
-                    {% endif %}
+<div class="product-card text-center">
 
-                    <h5 class="product-title">{{ product.name }}</h5>
+<!-- PRODUCT IMAGE CLICKABLE -->
+<a href="{% url 'product_detail' product.id %}" style="text-decoration:none; color:inherit;">
 
-                    <!-- STAR RATING -->
+{% if product.image %}
+<img src="{{ product.image.url }}" class="product-img">
+{% else %}
+<img src="{% static 'images/default-product.png' %}" class="product-img">
+{% endif %}
+
+</a>
+
+<!-- PRODUCT TITLE CLICKABLE -->
+<h5 class="product-title">
+<a href="{% url 'product_detail' product.id %}" style="text-decoration:none; color:inherit;">
+{{ product.name }}
+</a>
+</h5>
                     <!-- STAR RATING -->
 <div>
     {% for i in "12345"|make_list %}

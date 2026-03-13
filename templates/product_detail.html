@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<div class="row">
+
+<!-- PRODUCT IMAGE -->
+<div class="col-md-6 text-center">
+
+{% if product.image %}
+<img src="{{ product.image.url }}" class="img-fluid product-main-img">
+{% else %}
+<img src="{% static 'images/default-product.png' %}" class="img-fluid">
+{% endif %}
+
+</div>
+
+
+<!-- PRODUCT INFO -->
+<div class="col-md-6">
+
+<h2>{{ product.name }}</h2>
+
+<div class="mb-2">
+
+{% for i in "12345"|make_list %}
+{% if forloop.counter <= product.rating_int %}
+<span class="star filled">★</span>
+{% else %}
+<span class="star">★</span>
+{% endif %}
+{% endfor %}
+
+<span class="review-count">({{ product.review_count }})</span>
+
+</div>
+
+<h3 class="price">₹ {{ product.price }}</h3>
+
+{% if product.weight %}
+<span class="weight-badge">{{ product.weight }}</span>
+{% endif %}
+
+<div class="mt-4">
+
+<a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary add-btn">
+Add to Cart
+</a>
+
+<a href="{% url 'add_to_cart' product.id %}" class="btn btn-dark buy-btn">
+Buy Now
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<hr>
+
+<!-- PRODUCT DESCRIPTION -->
+
+<div class="row mt-5">
+
+<div class="col-md-6">
+
+<h3>Product Description</h3>
+
+<p>
+High quality pet food made with carefully selected ingredients.
+Supports digestion, healthy skin and coat, and improves immunity.
+</p>
+
+</div>
+
+<div class="col-md-6 text-center">
+
+<img src="{% static 'images/dog-food-info.png' %}" class="img-fluid">
+
+</div>
+
+</div>
+
+<hr>
+
+<!-- RELATED PRODUCTS -->
+
+<h3 class="mt-5">You might like</h3>
+
+<div class="row">
+
+{% for item in related_products %}
+
+<div class="col-md-3">
+
+<div class="product-card text-center">
+
+<a href="{% url 'product_detail' item.id %}">
+<img src="{{ item.image.url }}" class="product-img">
+</a>
+
+<h5>{{ item.name }}</h5>
+
+<p>₹ {{ item.price }}</p>
+
+<a href="{% url 'add_to_cart' item.id %}" class="btn btn-primary">
+Add to Cart
+</a>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+<style>
+
+.product-main-img{
+height:420px;
+object-fit:contain;
+}
+
+.star{
+color:#ccc;
+font-size:18px;
+}
+
+.star.filled{
+color:#ffc107;
+}
+
+.price{
+font-weight:700;
+margin:15px 0;
+}
+
+.weight-badge{
+background:black;
+color:white;
+padding:6px 12px;
+border-radius:6px;
+}
+
+.add-btn{
+padding:10px 30px;
+margin-right:10px;
+}
+
+.buy-btn{
+padding:10px 30px;
+}
+
+</style>
+
+{% endblock %}
