@@ -844,3 +844,178 @@ right:-8px;
 }
 
 }
+/* ================= NAVBAR MOBILE FIX ================= */
+
+@media (max-width:768px){
+
+/* Navbar container */
+.main-navbar .container{
+flex-direction:column;
+align-items:center;
+gap:12px;
+}
+
+/* Logo */
+.navbar-brand img{
+height:60px;
+}
+
+/* Search */
+.search-bar{
+width:100%;
+display:flex;
+justify-content:center;
+}
+
+.search-bar input{
+width:100%;
+max-width:100%;
+}
+
+/* Navbar links */
+.nav-link-custom{
+font-size:14px;
+margin-left:8px;
+}
+
+/* Icons */
+.nav-icon{
+font-size:16px;
+}
+
+/* Icon container */
+.nav-icons{
+display:flex;
+gap:15px;
+margin-top:5px;
+}
+
+/* Category menu */
+.category-menu ul{
+flex-direction:column !important;
+align-items:flex-start;
+padding-left:20px;
+gap:8px;
+}
+
+/* Mega menu disable hover on mobile */
+.nav-item.dropdown:hover > .dropdown-menu{
+display:none;
+}
+
+.dropdown-menu{
+position:static;
+width:100%;
+box-shadow:none;
+border:none;
+}
+
+/* Allow click open */
+.dropdown-menu.show{
+display:block;
+}
+
+}
+
+@media (max-width:480px){
+
+/* Logo smaller */
+.navbar-brand img{
+height:50px;
+}
+
+/* Top bar center */
+.top-bar{
+text-align:center;
+font-size:13px;
+}
+
+/* Search spacing */
+.search-bar input{
+padding:8px 12px;
+font-size:14px;
+}
+
+/* Navbar icons smaller */
+.nav-icon{
+font-size:14px;
+}
+
+/* Cart badge adjust */
+.cart-badge{
+font-size:10px;
+padding:2px 4px;
+top:-6px;
+right:-8px;
+}
+
+}
+
+/* ================= FOOTER MOBILE ================= */
+
+@media (max-width:768px){
+
+.footer-section{
+padding:30px 15px;
+}
+
+/* Stack columns */
+.footer-section .row{
+flex-direction:column;
+text-align:center;
+}
+
+/* Footer logo */
+.footer-logo{
+height:80px;
+margin:auto;
+margin-bottom:15px;
+}
+
+/* Footer titles */
+.footer-title{
+margin-top:15px;
+}
+
+/* Footer links */
+.footer-list li{
+margin-bottom:6px;
+}
+
+/* Social icons center */
+.social-icons{
+display:flex;
+justify-content:center;
+gap:15px;
+margin-top:10px;
+}
+
+/* Subscribe */
+.subscribe-input{
+margin-top:10px;
+}
+
+.subscribe-button{
+margin-top:5px;
+}
+
+}
+
+/* Extra small devices */
+
+@media (max-width:480px){
+
+.footer-title{
+font-size:16px;
+}
+
+.footer-list a{
+font-size:14px;
+}
+
+.subscribe-input,
+.subscribe-button{
+font-size:14px;
+}
+
+}
