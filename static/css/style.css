@@ -1,5 +1,7 @@
 /* ================= NAVBAR ================= */
-
+body {
+    font-family: 'Montserrat', sans-serif;
+}
 .main-navbar{
 background:#1e40af;
 padding:15px 0;
