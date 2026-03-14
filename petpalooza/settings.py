@@ -17,9 +17,12 @@ RAZORPAY_KEY_SECRET = os.getenv("RAZORPAY_KEY_SECRET")
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY
-SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-secret-key')
+SECRET_KEY = os.environ['SECRET_KEY']
 
 DEBUG = os.getenv("DEBUG", "False") == "True"
+if not DEBUG:
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
 
 ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
 
@@ -144,7 +147,6 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'
 
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.onrender.com",
