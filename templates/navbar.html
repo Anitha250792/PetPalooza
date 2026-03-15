@@ -19,6 +19,10 @@
     <img src="{% static 'images/logo.png' %}" height="100">
 </a>
 
+<button class="menu-toggle" onclick="toggleMenu()">
+<i class="fas fa-bars"></i>
+</button>
+
         <!-- SEARCH -->
         <form class="d-flex search-bar mx-auto"
       method="GET"
@@ -372,3 +376,9 @@
         </ul>
     </div>
 </div> 
+
+<script>
+function toggleMenu(){
+document.querySelector(".category-menu ul").classList.toggle("active");
+}
+</script>
