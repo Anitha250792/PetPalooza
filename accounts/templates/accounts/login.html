@@ -99,67 +99,71 @@
 <!-- ================= REGISTER MODAL ================= -->
 
 <div class="modal fade" id="registerModal" tabindex="-1">
-<div class="modal-dialog modal-dialog-centered">
-<div class="modal-content register-modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content register-modal">
 
-<div class="register-top">
-<button type="button"
-class="btn-close close-btn"
-data-bs-dismiss="modal"></button>
+            <!-- Green Decorative Top -->
+            <div class="register-top">
+                <button type="button"
+                        class="btn-close close-btn"
+                        data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body p-4">
+
+                <h5 class="text-center mb-4">
+                    Sign up for a free account at Petpalooza.
+                </h5>
+
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label>First Name</label>
+                        <input type="text"
+                               name="first_name"
+                               class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Last Name</label>
+                        <input type="text"
+                               name="last_name"
+                               class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Email</label>
+                        <input type="email"
+                               name="email"
+                               class="form-control">
+                    </div>
+
+                    <div class="mb-4 position-relative">
+    <label>Password</label>
+    <input type="password"
+           name="password"
+           id="registerPassword"
+           class="form-control">
+
+    <span class="toggle-password"
+          onclick="togglePassword('registerPassword', this)">
+        <i class="bi bi-eye"></i>
+    </span>
 </div>
 
-<div class="modal-body register-body">
 
-<h4 class="text-center mb-4">
-Sign up for a free account at Petpalooza.
-</h4>
+                    <button type="submit"
+                            name="register_btn"
+                            class="btn btn-primary w-100">
+                        Create an account
+                    </button>
 
-<form method="POST">
-{% csrf_token %}
+                </form>
 
-<div class="form-group">
-<label>First Name</label>
-<input type="text" name="first_name" class="form-control register-input">
-</div>
-
-<div class="form-group">
-<label>Last Name</label>
-<input type="text" name="last_name" class="form-control register-input">
-</div>
-
-<div class="form-group">
-<label>Email</label>
-<input type="email" name="email" class="form-control register-input">
-</div>
-
-<div class="form-group position-relative">
-<label>Password</label>
-
-<input type="password"
-name="password"
-id="registerPassword"
-class="form-control register-input">
-
-<span class="toggle-password"
-onclick="togglePassword('registerPassword', this)">
-<i class="bi bi-eye"></i>
-</span>
-
-</div>
-
-<button type="submit"
-name="register_btn"
-class="btn register-submit">
-
-Create an account
-
-</button>
-
-</form>
-
-</div>
-</div>
-</div>
+            </div>
+        </div>
+    </div>
 </div>
 <style>
     /* Vertical line */
