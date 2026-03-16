@@ -255,15 +255,32 @@ margin-right:10px;
 
 /* footer mobile */
 
+/* MOBILE FOOTER */
+
 @media(max-width:768px){
 
 .footer-section .row{
-text-align:center;
+display:flex;
+flex-direction:column;
+}
+
+.footer-section .col-md-2,
+.footer-section .col-md-3{
+width:100%;
+margin-bottom:25px;
+}
+
+.footer-title{
+margin-top:15px;
 }
 
 .social-icons{
-justify-content:center;
-display:flex;
+margin-top:10px;
+}
+
+.subscribe-input{
+width:100%;
+margin-bottom:10px;
 }
 
 }
