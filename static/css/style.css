@@ -1,6 +1,8 @@
 /* ================= NAVBAR ================= */
-body {
-    font-family: 'Montserrat', sans-serif;
+body,
+h1,h2,h3,h4,h5,h6,
+p,span,a,button,input,textarea{
+font-family: 'Montserrat', sans-serif !important;
 }
 .main-navbar{
 background:#1e40af;
@@ -201,6 +203,7 @@ transform:scale(1.1);
 
 .menu-toggle{
 display:block;
+margin:10px auto;
 }
 
 .nav-wrapper{
@@ -210,10 +213,49 @@ flex-wrap:wrap;
 .search-bar{
 width:100%;
 order:3;
+margin-top:10px;
 }
 
 .search-bar input{
 width:100%;
+}
+
+.nav-links{
+display:none;
+flex-direction:column;
+width:100%;
+background:#1e40af;
+padding:20px;
+margin-top:10px;
+}
+
+.nav-links.active{
+display:flex;
+}
+
+/* CATEGORY MENU */
+
+.category-menu ul{
+display:none;
+flex-direction:column;
+align-items:center;
+gap:20px;
+padding:20px 0;
+}
+
+.category-menu ul.active{
+display:flex;
+}
+
+/* disable hover mega menu */
+
+.mega-menu{
+position:static;
+opacity:1;
+visibility:visible;
+transform:none;
+}
+
 }
 
 @media(max-width:768px){
@@ -257,7 +299,7 @@ visibility:visible;
 transform:none;
 }
 
-}
+
 
 /* ================= FOOTER ================= */
 
