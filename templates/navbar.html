@@ -106,7 +106,7 @@
 <!-- CATEGORY MENU -->
 <div class="category-menu">
     <div class="container">
-        <ul class="navbar-nav d-flex flex-row justify-content-center gap-4">
+        <ul class="navbar-nav category-list">
 
             <!-- ================= DOG ================= -->
             <li class="nav-item dropdown position-static">
@@ -382,12 +382,7 @@
 
 <script>
 function toggleMenu(){
-    const menu = document.querySelector(".category-menu ul");
-
-    if(menu.classList.contains("active")){
-        menu.classList.remove("active");
-    }else{
-        menu.classList.add("active");
-    }
+const menu = document.querySelector(".category-list");
+menu.classList.toggle("active");
 }
 </script>
