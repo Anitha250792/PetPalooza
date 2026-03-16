@@ -382,6 +382,9 @@
 
 <script>
 function toggleMenu(){
-document.querySelector(".category-menu ul").classList.toggle("active");
+    const menu = document.querySelector(".category-menu ul");
+    if(menu){
+        menu.classList.toggle("active");
+    }
 }
 </script>
