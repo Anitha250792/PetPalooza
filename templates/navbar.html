@@ -19,9 +19,6 @@
     <img src="{% static 'images/logo.png' %}" height="100">
 </a>
 
-<button class="menu-toggle" onclick="toggleMenu()">
-<i class="fas fa-bars"></i>
-</button>
 
         <!-- SEARCH -->
         <form class="d-flex search-bar mx-auto"
@@ -99,7 +96,13 @@
     </div>
 </nav>
 
-<!-- CATEGORY MENU -->
+<!-- CATEGORY TOGGLE (Mobile only) -->
+<div class="category-toggle text-center">
+    <button class="menu-toggle" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </button>
+</div>
+
 <!-- CATEGORY MENU -->
 <div class="category-menu">
     <div class="container">

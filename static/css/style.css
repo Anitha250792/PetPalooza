@@ -87,25 +87,16 @@ animation:cartBounce .5s ease;
 
 /* ================= HAMBURGER ================= */
 
+/* CATEGORY TOGGLE */
+
 .menu-toggle{
 display:none;
 background:none;
 border:none;
-font-size:26px;
+font-size:28px;
 color:white;
-margin-left:10px;
 cursor:pointer;
 }
-
-/* MOBILE ONLY */
-@media (max-width:768px){
-
-.menu-toggle{
-display:block;
-}
-
-}
-
 
 /* CATEGORY MENU */
 
@@ -117,7 +108,7 @@ background:#1e40af;
 display:flex;
 justify-content:center;
 gap:30px;
-padding:10px 0;
+padding:12px 0;
 list-style:none;
 margin:0;
 }
@@ -128,19 +119,26 @@ text-decoration:none;
 font-weight:500;
 }
 
-
-/* ================= MOBILE MENU ================= */
+/* MOBILE */
 
 @media(max-width:768px){
+
+.menu-toggle{
+display:block;
+margin:10px auto;
+}
+
+/* hide category menu initially */
 
 .category-menu ul{
 display:none;
 flex-direction:column;
 align-items:center;
-gap:15px;
-background:#1e40af;
+gap:20px;
 padding:20px 0;
 }
+
+/* show when toggle clicked */
 
 .category-menu ul.active{
 display:flex;
@@ -266,7 +264,7 @@ transform:none;
 .footer-section{
 background:#2e52b7;
 color:white;
-padding:40px 0;
+padding:40px 20px;
 }
 
 .footer-title{
@@ -288,71 +286,28 @@ color:white;
 text-decoration:none;
 }
 
-.footer-list a:hover{
-text-decoration:underline;
-}
-
-.social-icons a{
-color:white;
-font-size:20px;
-margin-right:10px;
-}
-
-/* footer mobile */
+/* MOBILE FOOTER */
 
 @media(max-width:768px){
 
 .footer-section .row{
-text-align:center;
-}
-
-.social-icons{
-justify-content:center;
-display:flex;
-}
-
-}
-
-.footer-content{
-display:grid;
-grid-template-columns: repeat(5,1fr);
-gap:30px;
-}
-
-/* Tablet */
-
-@media(max-width:992px){
-
-.footer-content{
-grid-template-columns: repeat(2,1fr);
-}
-
-}
-
-/* Mobile */
-
-@media(max-width:768px){
-
-.footer-content{
-grid-template-columns:1fr;
-text-align:center;
-}
-
-.footer-section .row{
-flex-direction:column;
-}
-
-.social-icons{
-justify-content:center;
-display:flex;
-}
-
-}
-@media(max-width:768px){
-
-.footer-section img{
-margin:auto;
 display:block;
+text-align:left;
+}
+
+.footer-section .col-md-2,
+.footer-section .col-md-3{
+margin-bottom:25px;
+width:100%;
+}
+
+.social-icons{
+margin-top:10px;
+}
+
+.subscribe-input{
+width:70%;
+margin-bottom:10px;
 }
 
 }
