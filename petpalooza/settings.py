@@ -17,7 +17,7 @@ RAZORPAY_KEY_SECRET = os.getenv("RAZORPAY_KEY_SECRET")
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY
-SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-local-key')
 
 DEBUG = os.getenv("DEBUG", "False") == "True"
 if not DEBUG:
