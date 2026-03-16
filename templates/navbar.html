@@ -95,16 +95,11 @@
     </div>
 </nav>
 
-<!-- MOBILE CATEGORY TOGGLE -->
-<div class="category-toggle text-center">
-    <button class="menu-toggle" onclick="toggleMenu()">
-        ☰
-    </button>
-</div>
+<!-- CATEGORY MENU -->
 <!-- CATEGORY MENU -->
 <div class="category-menu">
     <div class="container">
-        <ul class="navbar-nav category-list">
+        <ul class="navbar-nav d-flex flex-row justify-content-center gap-4">
 
             <!-- ================= DOG ================= -->
             <li class="nav-item dropdown position-static">
@@ -376,11 +371,4 @@
 
         </ul>
     </div>
-</div>
-
-<script>
-function toggleMenu(){
-    const menu = document.querySelector(".category-list");
-    menu.classList.toggle("active");
-}
-</script>
+</div> 
