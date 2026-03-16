@@ -19,7 +19,6 @@
     <img src="{% static 'images/logo.png' %}" height="100">
 </a>
 
-
         <!-- SEARCH -->
         <form class="d-flex search-bar mx-auto"
       method="GET"
@@ -96,17 +95,11 @@
     </div>
 </nav>
 
-<!-- CATEGORY TOGGLE (Mobile only) -->
-<div class="category-toggle text-center">
-    <button class="menu-toggle" onclick="toggleMenu()">
-        <i class="fas fa-bars"></i>
-    </button>
-</div>
-
+<!-- CATEGORY MENU -->
 <!-- CATEGORY MENU -->
 <div class="category-menu">
     <div class="container">
-        <ul class="navbar-nav category-list">
+        <ul class="navbar-nav d-flex flex-row justify-content-center gap-4">
 
             <!-- ================= DOG ================= -->
             <li class="nav-item dropdown position-static">
@@ -379,10 +372,3 @@
         </ul>
     </div>
 </div> 
-
-<script>
-function toggleMenu(){
-const menu = document.querySelector(".category-list");
-menu.classList.toggle("active");
-}
-</script>
