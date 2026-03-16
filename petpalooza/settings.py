@@ -96,19 +96,24 @@ WSGI_APPLICATION = 'petpalooza.wsgi.application'
 # DATABASE
 # ==========================
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": os.environ.get("MYSQLDATABASE"),
-        "USER": os.environ.get("MYSQLUSER"),
-        "PASSWORD": os.environ.get("MYSQLPASSWORD"),
-        "HOST": os.environ.get("MYSQLHOST"),
-        "PORT": os.environ.get("MYSQLPORT", "3306"),
-        "OPTIONS": {
-            "ssl": {"ssl-mode": "REQUIRED"},  # 🔥 IMPORTANT for Railway
-        },
+if os.getenv("MYSQLDATABASE"):
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.mysql",
+            "NAME": os.getenv("MYSQLDATABASE"),
+            "USER": os.getenv("MYSQLUSER"),
+            "PASSWORD": os.getenv("MYSQLPASSWORD"),
+            "HOST": os.getenv("MYSQLHOST"),
+            "PORT": os.getenv("MYSQLPORT", "3306"),
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 # PASSWORD VALIDATION
 AUTH_PASSWORD_VALIDATORS = [
@@ -163,4 +168,6 @@ SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 DEFAULT_FROM_EMAIL = "ntanithasaravanan@gmail.com"
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+SECURE_SSL_REDIRECT = True
 
